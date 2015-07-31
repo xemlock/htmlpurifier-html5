@@ -35,4 +35,12 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($input, $output);
     }
+
+    public function testFigure()
+    {
+        $input = '<figure><img src="image.png" alt="An awesome picture"><figcaption>Fig1. Image</figcaption></figure>';
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($input, $output);
+    }
 }

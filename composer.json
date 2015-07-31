@@ -1,0 +1,21 @@
+{
+    "name": "xemlock/htmlpurifier-html5",
+    "description": "HTML Purifier definitions for HTML5 elements",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xemlock",
+            "email": "xemlock@gmail.com"
+        }
+    ],
+    "require": {
+        "ezyang/htmlpurifier": "^4.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.7.*"
+    },
+    "autoload": {
+        "classmap": ["library/HTMLPurifier/"]
+    }
+}

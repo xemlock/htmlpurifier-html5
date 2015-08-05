@@ -15,7 +15,7 @@ class HTMLPurifier_AttrDef_HTML_Bool2 extends HTMLPurifier_AttrDef_HTML_Bool
      * @param string $string
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return bool|string
+     * @return bool
      */
     public function validate($string, $config, $context)
     {

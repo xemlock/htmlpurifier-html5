@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "ezyang/htmlpurifier": "^4.6"
+        "ezyang/htmlpurifier": "^4.7"
     },
     "require-dev": {
         "phpunit/phpunit": "4.7.*"

@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit backupGlobals="false"
-         colore="true"
+         colors="true"
          verbose="true"
-         bootstrap="tests/bootstrap.php"
->
+         bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="HTMLPurifier-HMLT5 Test Suite">
             <directory suffix=".php">./tests/HTMLPurifier</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./library/HTMLPurifier</directory>
-        </whitelist>
-    </filter>
-
 </phpunit>

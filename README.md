@@ -1,5 +1,7 @@
 # HTML5 Definitions for HTML Purifier
 
+[![Build Status](https://travis-ci.org/xemlock/htmlpurifier-html5.svg?branch=master)](https://travis-ci.org/xemlock/htmlpurifier-html5)
+
 ## Installation
 
 ```

@@ -43,4 +43,20 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($input, $output);
     }
+
+    public function testAudio()
+    {
+        $input = '<audio controls autoplay loop><source src="audio.ogg" type="audio/ogg"></audio>';
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($input, $output);
+    }
+
+    public function testVideo()
+    {
+        $input = '<video width="400" height="400" muted poster="poster.png"><source src="video.mp4" type="video/mp4"></video>';
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($input, $output);
+    }
 }

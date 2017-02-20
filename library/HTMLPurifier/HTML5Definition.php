@@ -33,13 +33,23 @@ class HTMLPurifier_HTML5Definition
 
         // http://developers.whatwg.org/the-video-element.html#the-video-element
         $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
-            'src'      => 'URI',
-            'type'     => 'Text',
-            'width'    => 'Length',
+            'autoplay' => 'Bool',
+            'controls' => 'Bool',
             'height'   => 'Length',
+            'loop'     => 'Bool',
+            'muted'    => 'Bool',
             'poster'   => 'URI',
             'preload'  => 'Enum#auto,metadata,none',
+            'src'      => 'URI',
+            'width'    => 'Length',
+        ));
+        $def->addElement('audio', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
+            'autoplay' => 'Bool',
             'controls' => 'Bool',
+            'loop'     => 'Bool',
+            'muted'    => 'Bool',
+            'preload'  => 'Enum#auto,metadata,none',
+            'src'      => 'URI',
         ));
         $def->addElement('source', 'Block', 'Empty', 'Common', array('src' => 'URI', 'type' => 'Text'));
 

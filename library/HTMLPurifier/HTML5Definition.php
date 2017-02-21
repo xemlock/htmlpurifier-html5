@@ -35,7 +35,6 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
             'autoplay'    => 'Bool',
             'controls'    => 'Bool',
-            'crossorigin' => 'Enum#anonymous,use-credentials',
             'height'      => 'Length',
             'loop'        => 'Bool',
             'mediagroup'  => 'Text',
@@ -49,7 +48,6 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('audio', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
             'autoplay'    => 'Bool',
             'controls'    => 'Bool',
-            'crossorigin' => 'Enum#anonymous,use-credentials',
             'loop'        => 'Bool',
             'mediagroup'  => 'Text',
             'muted'       => 'Bool',

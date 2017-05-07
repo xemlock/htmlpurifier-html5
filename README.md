@@ -5,7 +5,7 @@
 ## Installation
 
 ```
-composer install xemlock/htmlpurifier-html5
+composer require xemlock/htmlpurifier-html5
 ```
 
 ## Usage

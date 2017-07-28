@@ -36,25 +36,61 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($input, $output);
     }
 
-    public function testFigure()
+    public function figureInput()
     {
-        $input = '<figure><img src="image.png" alt="An awesome picture"><figcaption>Fig1. Image</figcaption></figure>';
+        return array(
+            array('<figure><img src="image.png" alt="An awesome picture"><figcaption>Fig1. Image</figcaption></figure>'),
+            array('<figure><p>Something</p><figcaption><cite>Someone</cite></figcaption><p>Something</p></figure>'),
+            array('<figure><figcaption><cite>Someone</cite></figcaption>Something</figure>'),
+            array('<figure></figure>'),
+        );
+    }
+
+    /**
+     * @dataProvider figureInput
+     */
+    public function testFigure($input)
+    {
         $output = $this->getPurifier()->purify($input);
 
         $this->assertEquals($input, $output);
     }
 
-    public function testAudio()
+    public function audioInput()
     {
-        $input = '<audio controls><source src="audio.ogg" type="audio/ogg"></audio>';
+        return array(
+            array('<audio controls><source src="audio.ogg" type="audio/ogg"></audio>'),
+            array('<audio controls src="audio.ogg"></audio>'),
+            array('<audio controls><source src="audio.ogg" type="audio/ogg">Your browser does not support audio</audio>'),
+            array('<audio controls src="audio.ogg">Your browser does not support audio</audio>'),
+        );
+    }
+
+    /**
+     * @dataProvider audioInput
+     */
+    public function testAudio($input)
+    {
         $output = $this->getPurifier()->purify($input);
 
         $this->assertEquals($input, $output);
     }
 
-    public function testVideo()
+    public function videoInput()
     {
-        $input = '<video width="400" height="400" poster="poster.png"><source src="video.mp4" type="video/mp4"></video>';
+        return array(
+            array('<video width="400" height="400" poster="poster.png"><source src="video.mp4" type="video/mp4"></video>'),
+            array('<video width="400" height="400" poster="poster.png" src="video.mp4"></video>'),
+            array('<video width="400" height="400" poster="poster.png"><source src="video.mp4" type="video/mp4">Your browser does not support video</video>'),
+            array('<video width="400" height="400" poster="poster.png" src="video.mp4">Your browser does not support video</video>'),
+        );
+    }
+
+    /**
+     * @dataProvider videoInput
+     */
+    public function testVideo($input)
+    {
         $output = $this->getPurifier()->purify($input);
 
         $this->assertEquals($input, $output);

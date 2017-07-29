@@ -28,11 +28,11 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('hgroup', 'Block', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
         // http://developers.whatwg.org/grouping-content.html
-        $def->addElement('figure', 'Block', 'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow', 'Common');
+        $def->addElement('figure', 'Block', 'Flow', 'Common');
         $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
 
         // http://developers.whatwg.org/the-video-element.html#the-video-element
-        $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
+        $def->addElement('video', 'Block', 'Flow', 'Common', array(
             'controls' => 'Bool',
             'height'   => 'Length',
             'poster'   => 'URI',
@@ -41,7 +41,7 @@ class HTMLPurifier_HTML5Definition
             'width'    => 'Length',
         ));
         // http://developers.whatwg.org/the-video-element.html#the-audio-element
-        $def->addElement('audio', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
+        $def->addElement('audio', 'Block', 'Flow', 'Common', array(
             'controls' => 'Bool',
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => 'URI',

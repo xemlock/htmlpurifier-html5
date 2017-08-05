@@ -10,7 +10,7 @@ class HTMLPurifier_HTML5Config
     public static function create($config = null, HTMLPurifier_ConfigSchema $schema = null)
     {
         if (!$schema instanceof HTMLPurifier_ConfigSchema) {
-            $schema = HTMLPurifier_ConfigSchema::makeFromSerial();
+            $schema = HTMLPurifier_ConfigSchema::instance();
         }
 
         if ($config instanceof HTMLPurifier_Config) {

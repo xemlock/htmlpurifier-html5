@@ -18,5 +18,8 @@
     },
     "autoload": {
         "classmap": ["library/HTMLPurifier/"]
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }

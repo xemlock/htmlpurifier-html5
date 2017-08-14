@@ -19,7 +19,7 @@ class HTMLPurifier_AttrDef_HTML_Bool2 extends HTMLPurifier_AttrDef_HTML_Bool
      */
     public function validate($string, $config, $context)
     {
-        $name = $this->name ? : $context->get('CurrentAttr');
+        $name = strlen($this->name) ? $this->name : $context->get('CurrentAttr');
         // boolean attribute validates if its value is either empty
         // or case-insensitively equal to attribute name
         return $string === '' || strcasecmp($name, $string) === 0;

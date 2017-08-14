@@ -95,4 +95,26 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($input, $output);
     }
+
+    public function boolAttrInput()
+    {
+        return array(
+            array('<audio controls src="audio.ogg"></audio>', '<audio controls src="audio.ogg"></audio>'),
+            array('<audio controls="" src="audio.ogg"></audio>', '<audio controls src="audio.ogg"></audio>'),
+            array('<audio controls="controls" src="audio.ogg"></audio>', '<audio controls src="audio.ogg"></audio>'),
+            array('<audio controls="CoNtRoLs" src="audio.ogg"></audio>', '<audio controls src="audio.ogg"></audio>'),
+            array('<audio controls="bar" src="audio.ogg"></audio>', '<audio src="audio.ogg"></audio>'),
+        );
+    }
+
+    /**
+     * @dataProvider boolAttrInput
+     * @depends testAudio
+     */
+    public function testBoolAttr($input, $expectedOuptut)
+    {
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($expectedOuptut, $output);
+    }
 }

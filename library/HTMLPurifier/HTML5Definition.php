@@ -48,7 +48,7 @@ class HTMLPurifier_HTML5Definition
         ));
         $def->addElement('source', 'Block', 'Empty', 'Common', array('src' => 'URI', 'type' => 'Text'));
         
-        https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element
+        // https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element
         $def->addElement('picture', 'Block', 'Flow', 'Common');
 
         // http://developers.whatwg.org/text-level-semantics.html

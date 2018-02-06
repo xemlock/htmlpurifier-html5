@@ -29,8 +29,14 @@ class HTMLPurifier_HTML5Config
             }
         }
 
-        $def = $configObj->getHTMLDefinition(true); // this finalizes config
+        // Prevent auto-finalization of config when retrieving HTML definition
+        $autoFinalize = $configObj->autoFinalize;
+        $configObj->autoFinalize = false;
+
+        $def = $configObj->getHTMLDefinition(true);
         HTMLPurifier_HTML5Definition::setup($def);
+
+        $configObj->autoFinalize = $autoFinalize;
 
         return $configObj;
     }

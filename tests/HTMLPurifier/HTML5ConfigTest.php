@@ -15,5 +15,10 @@ class HTMLPurifier_HTML5ConfigTest extends PHPUnit_Framework_TestCase
         ));
         $this->assertInstanceOf('HTMLPurifier_Config', $config3);
         $this->assertEquals('iso-8859-1', $config3->get('Core.Encoding'));
+
+        $config4 = HTMLPurifier_HTML5Config::create();
+        $config4->set('Core.Encoding', 'iso-8859-1');
+        $this->assertInstanceOf('HTMLPurifier_Config', $config4);
+        $this->assertEquals('iso-8859-1', $config4->get('Core.Encoding'));
     }
 }

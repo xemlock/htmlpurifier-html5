@@ -6,7 +6,7 @@ class HTMLPurifier_AttrDef_HTML_Bool2Test extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = HTMLPurifier_HTML5Config::create();
+        $this->config = HTMLPurifier_HTML5Config::createDefault();
         $this->context = new HTMLPurifier_Context();
     }
 

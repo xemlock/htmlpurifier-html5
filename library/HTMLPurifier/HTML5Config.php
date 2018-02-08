@@ -7,7 +7,7 @@ class HTMLPurifier_HTML5Config
      * @param  HTMLPurifier_ConfigSchema $schema
      * @return HTMLPurifier_Config
      */
-    public static function create($config = null, HTMLPurifier_ConfigSchema $schema = null)
+    public static function create($config, HTMLPurifier_ConfigSchema $schema = null)
     {
         if (!$schema instanceof HTMLPurifier_ConfigSchema) {
             $schema = HTMLPurifier_ConfigSchema::instance();
@@ -53,5 +53,3 @@ class HTMLPurifier_HTML5Config
         return $config;
     }
 }
-
-// vim: et sw=4 sts=4

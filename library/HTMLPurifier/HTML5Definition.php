@@ -46,7 +46,17 @@ class HTMLPurifier_HTML5Definition
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => 'URI',
         ));
-        $def->addElement('source', 'Block', 'Empty', 'Common', array('src' => 'URI', 'type' => 'Text'));
+        $def->addElement('source', 'Block', 'Empty', 'Common', array(
+            'src' => 'URI',
+            'data-srcset' => 'URI',
+            'srcset' => 'URI',
+            'media' => 'Text',
+            'sizes' => 'Length',
+            'type' => 'Text'
+        ));
+        
+        // https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element
+        $def->addElement('picture', 'Block', 'Flow', 'Common');
 
         // http://developers.whatwg.org/text-level-semantics.html
         $def->addElement('s', 'Inline', 'Inline', 'Common');

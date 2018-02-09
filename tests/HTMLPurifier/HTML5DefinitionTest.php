@@ -117,4 +117,58 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedOuptut, $output);
     }
+
+    public function pictureInput()
+    {
+        return array(
+            array(
+                '<picture><img src="image.png" alt=""></picture>',
+                '<picture><img src="image.png" alt=""></picture>',
+            ),
+            array(
+                '<picture><source src="image.webp" type="image/webp"><img src="image.png" alt=""></picture>',
+                '<picture><source src="image.webp" type="image/webp"><img src="image.png" alt=""></picture>',
+            ),
+            array(
+                // Text not allowed in element picture
+                '<picture>Text before<img src="image.png" alt=""></picture>',
+                '<picture><img src="image.png" alt=""></picture>',
+            ),
+            array(
+                // Text not allowed in element picture
+                '<picture><img src="image.png" alt="">Text after</picture>',
+                '<picture><img src="image.png" alt=""></picture>',
+            ),
+            array(
+                // More than one child element img
+                '<picture><img src="image.png" alt=""><img src="image2.png" alt=""></picture>',
+                '<picture><img src="image.png" alt=""></picture>',
+            ),
+            array(
+                // Child element source must be before child element img
+                '<picture><img src="image.png" alt=""><source src="image.webp" type="image/webp"></picture>',
+                '<picture><img src="image.png" alt=""></picture>',
+            ),
+            array(
+                // Element picture is missing required child element img
+                '<picture></picture>',
+                '',
+            ),
+            array(
+                // Element picture is missing required child element img
+                '<picture><source src="image.webp" type="image/webp"></picture>',
+                '',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider pictureInput
+     */
+    public function testPicture($input, $expectedOuptut)
+    {
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($expectedOuptut, $output);
+    }
 }

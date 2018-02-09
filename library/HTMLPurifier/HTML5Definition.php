@@ -40,13 +40,25 @@ class HTMLPurifier_HTML5Definition
             'src'      => 'URI',
             'width'    => 'Length',
         ));
+
         // http://developers.whatwg.org/the-video-element.html#the-audio-element
         $def->addElement('audio', 'Block', 'Flow', 'Common', array(
             'controls' => 'Bool',
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => 'URI',
         ));
-        $def->addElement('source', 'Block', 'Empty', 'Common', array('src' => 'URI', 'type' => 'Text'));
+
+        // https://html.spec.whatwg.org/dev/embedded-content.html#the-source-element
+        $def->addElement('source', 'Block', 'Empty', 'Common', array(
+            'media'  => 'Text',
+            'sizes'  => 'Text',
+            'src'    => 'URI',
+            'srcset' => 'Text',
+            'type'   => 'Text',
+        ));
+
+        // https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element
+        $def->addElement('picture', 'Block', new HTMLPurifier_ChildDef_Picture(), 'Common');
 
         // http://developers.whatwg.org/text-level-semantics.html
         $def->addElement('s', 'Inline', 'Inline', 'Common');

@@ -82,6 +82,13 @@ class HTMLPurifier_HTML5Definition
         // IFRAME
         $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
 
+        // Interactive elements
+        // https://html.spec.whatwg.org/dev/interactive-elements.html#the-details-element
+        $def->addElement('details', 'Block', new HTMLPurifier_ChildDef_Details(), 'Common', array(
+            'open' => 'Bool',
+        ));
+        $summary = $def->addElement('summary', false, 'Flow', 'Common');
+
         return $def;
     }
 }

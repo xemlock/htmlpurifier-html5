@@ -171,4 +171,52 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedOutput, $output);
     }
+
+    public function detailsInput()
+    {
+        return array(
+            array(
+                '<details><summary>Foo <strong>Bar</strong></summary>Baz <p>Qux</p></details>',
+                '<details><summary>Foo <strong>Bar</strong></summary>Baz <p>Qux</p></details>',
+            ),
+            array(
+                '<details open><summary>Foo</summary>Bar</details>',
+                '<details open><summary>Foo</summary>Bar</details>',
+            ),
+            array(
+                '<details>Foo</details>',
+                '<details><summary></summary>Foo</details>',
+            ),
+            array(
+                '<details><summary>Foo</summary><summary>Bar</summary></details>',
+                '<details><summary>Foo</summary>Bar</details>',
+            ),
+            array(
+                '<details>Foo<summary>Bar</summary>Baz</details>',
+                '<details><summary>Bar</summary>FooBaz</details>',
+            ),
+            array(
+                '<details></details>',
+                '',
+            ),
+            array(
+                '<details> </details>',
+                '',
+            ),
+            array(
+                '<summary>Foo</summary>',
+                'Foo',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider detailsInput
+     */
+    public function testDetails($input, $expectedOutput)
+    {
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($expectedOutput, $output);
+    }
 }

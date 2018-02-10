@@ -4,6 +4,11 @@ class HTMLPurifier_ChildDef_Picture extends HTMLPurifier_ChildDef
 {
     public $type = 'picture';
 
+    public $elements = array(
+        'img'    => true,
+        'source' => true,
+    );
+
     /**
      * @param array $children
      * @param HTMLPurifier_Config $config

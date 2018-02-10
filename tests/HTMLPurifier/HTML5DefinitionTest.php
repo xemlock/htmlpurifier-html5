@@ -111,11 +111,11 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
      * @dataProvider boolAttrInput
      * @depends testAudio
      */
-    public function testBoolAttr($input, $expectedOuptut)
+    public function testBoolAttr($input, $expectedOutput)
     {
         $output = $this->getPurifier()->purify($input);
 
-        $this->assertEquals($expectedOuptut, $output);
+        $this->assertEquals($expectedOutput, $output);
     }
 
     public function pictureInput()
@@ -165,10 +165,10 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider pictureInput
      */
-    public function testPicture($input, $expectedOuptut)
+    public function testPicture($input, $expectedOutput)
     {
         $output = $this->getPurifier()->purify($input);
 
-        $this->assertEquals($expectedOuptut, $output);
+        $this->assertEquals($expectedOutput, $output);
     }
 }

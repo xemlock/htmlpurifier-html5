@@ -31,8 +31,10 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('figure', 'Block', 'Flow', 'Common');
         $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
 
-        // http://developers.whatwg.org/the-video-element.html#the-video-element
-        $def->addElement('video', 'Block', 'Flow', 'Common', array(
+        $mediaContent = new HTMLPurifier_ChildDef_Media();
+
+        // https://html.spec.whatwg.org/dev/media.html#the-video-element
+        $def->addElement('video', 'Block', $mediaContent, 'Common', array(
             'controls' => 'Bool',
             'height'   => 'Length',
             'poster'   => 'URI',
@@ -41,20 +43,29 @@ class HTMLPurifier_HTML5Definition
             'width'    => 'Length',
         ));
 
-        // http://developers.whatwg.org/the-video-element.html#the-audio-element
-        $def->addElement('audio', 'Block', 'Flow', 'Common', array(
+        // https://html.spec.whatwg.org/dev/media.html#the-audio-element
+        $def->addElement('audio', 'Block', $mediaContent, 'Common', array(
             'controls' => 'Bool',
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => 'URI',
         ));
 
         // https://html.spec.whatwg.org/dev/embedded-content.html#the-source-element
-        $def->addElement('source', 'Block', 'Empty', 'Common', array(
+        $def->addElement('source', false, 'Empty', 'Common', array(
             'media'  => 'Text',
             'sizes'  => 'Text',
             'src'    => 'URI',
             'srcset' => 'Text',
             'type'   => 'Text',
+        ));
+
+        // https://html.spec.whatwg.org/dev/media.html#the-track-element
+        $def->addElement('track', false, 'Empty', 'Common', array(
+            'kind'    => 'Enum#captions,chapters,descriptions,metadata,subtitles',
+            'src'     => 'URI',
+            'srclang' => 'Text',
+            'label'   => 'Text',
+            'default' => 'Bool',
         ));
 
         // https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element

@@ -62,7 +62,11 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
             array('<audio controls><source src="audio.ogg" type="audio/ogg"></audio>'),
             array('<audio controls src="audio.ogg"></audio>'),
             array('<audio controls><source src="audio.ogg" type="audio/ogg">Your browser does not support audio</audio>'),
-            array('<audio controls src="audio.ogg">Your browser does not support audio</audio>'),
+            array('<audio controls><source src="audio.ogg" type="audio/ogg"><track kind="subtitles" src="subtitles.vtt">Your browser does not support audio</audio>'),
+            array('<audio controls><track kind="subtitles" src="subtitles.vtt">Your browser does not support audio</audio>'),
+            array('<audio src="audio.ogg">Your browser does not support audio</audio>'),
+            array('<audio src="audio.ogg"><p>Your browser does not support audio</p></audio>'),
+            array('<audio src="audio.ogg"><track kind="subtitles" src="subtitles.vtt"></audio>'),
         );
     }
 
@@ -83,6 +87,13 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
             array('<video width="400" height="400" poster="poster.png" src="video.mp4"></video>'),
             array('<video width="400" height="400" poster="poster.png"><source src="video.mp4" type="video/mp4">Your browser does not support video</video>'),
             array('<video width="400" height="400" poster="poster.png" src="video.mp4">Your browser does not support video</video>'),
+            array('<video src="video.mp4"></video>'),
+            array('<video src="video.mp4">Your browser does not support video</video>'),
+            array('<video src="video.mp4"><p>Your browser does not support video</p></video>'),
+            array('<video src="video.mp4"><track kind="subtitles" src="subtitles.vtt"></video>'),
+            array('<video><source src="video.mp4" type="video/mp4"></video>'),
+            array('<video><track kind="subtitles" src="subtitles.vtt"></video>'),
+            array('<video><source src="video.mp4" type="video/mp4"><track kind="subtitles" src="subtitles.vtt"></video>'),
         );
     }
 

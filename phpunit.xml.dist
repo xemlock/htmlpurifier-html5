@@ -3,10 +3,15 @@
 <phpunit backupGlobals="false"
          colors="true"
          verbose="true"
-         bootstrap="tests/bootstrap.php">
+         bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite name="HTMLPurifier-HMLT5 Test Suite">
+        <testsuite name="HTMLPurifier_HTML5 Test Suite">
             <directory suffix=".php">./tests/HTMLPurifier</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <ini name="display_errors" value="On" />
+        <ini name="display_startup_errors" value="On" />
+        <ini name="error_reporting" value="-1" />
+    </php>
 </phpunit>

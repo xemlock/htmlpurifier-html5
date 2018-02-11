@@ -87,7 +87,7 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('details', 'Block', new HTMLPurifier_ChildDef_Details(), 'Common', array(
             'open' => 'Bool',
         ));
-        $summary = $def->addElement('summary', false, 'Flow', 'Common');
+        $def->addElement('summary', false, 'Flow', 'Common');
 
         return $def;
     }

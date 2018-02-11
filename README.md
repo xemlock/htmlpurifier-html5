@@ -43,6 +43,17 @@ $config->set('HTML.SafeIframe', true);
 $config->set('URI.SafeIframeRegexp', '#^//www\.youtube\.com/embed/#');
 ```
 
+## Supported HTML5 elements
+
+Aside from HTML elements supported originally by HTML Purifier, this library
+adds support for the following HTML5 elements:
+
+article, aside, audio, details, figcaption, figure, footer, header, hgroup, main, nav, picture, section, source, summary, time, track, video
+
+### Elements not (yet) supported
+
+dialog, menu, menuitem, progress
+
 ## License
 
 The MIT License (MIT). See the LICENSE file.

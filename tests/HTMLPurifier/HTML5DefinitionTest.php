@@ -36,6 +36,43 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($input, $output);
     }
 
+    /**
+     * Data provider for {@link testAnchor()}
+     * @return array
+     */
+    public function anchorInput()
+    {
+        return array(
+            array(
+                '<a href="foo" type="video/mp4" hreflang="en"><h1>Heading</h1><p>Description</p></a>',
+            ),
+            array(
+                '<a href="foo" target="_blank" rel="nofollow">Visit</a>',
+                '<a href="foo" target="_blank" rel="nofollow noreferrer noopener">Visit</a>',
+            ),
+            array(
+                '<a href="foo" download>Download</a>',
+                '<a href="foo" download="">Download</a>',
+            ),
+            array(
+                '<a href="foo" download="bar">Download</a>',
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expectedOutput OPTIONAL
+     * @dataProvider anchorInput
+     */
+    public function testAnchor($input, $expectedOutput = null)
+    {
+        $output = $this->getPurifier(array(
+            'Attr.AllowedFrameTargets' => array('_blank'),
+        ))->purify($input);
+        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
+    }
+
     public function figureInput()
     {
         return array(

@@ -87,6 +87,15 @@ class HTMLPurifier_HTML5Definition
         $time = $def->addElement('time', 'Inline', 'Inline', 'Common', array('datetime' => 'Text', 'pubdate' => 'Bool'));
         $time->excludes = array('time' => true);
 
+        // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-a-element
+        $def->addElement('a', 'Flow', 'Flow', 'Common', array(
+            'download' => 'Text',
+            'hreflang' => 'Text',
+            'rel'      => 'Text',
+            'target'   => new HTMLPurifier_AttrDef_HTML_FrameTarget(),
+            'type'     => 'Text',
+        ));
+
         // IMG
         $def->addAttribute('img', 'srcset', 'Text');
 

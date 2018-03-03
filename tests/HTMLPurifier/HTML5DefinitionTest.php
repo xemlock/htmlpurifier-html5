@@ -19,7 +19,7 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
     public function testImg()
     {
-        $input = '<img src="image-src.png" srcset="image-1x.png 1x, image-2x.png 2x, image-3x.png 3x, image-4x.png 4x" alt="">';
+        $input = '<img src="image-src.png" srcset="image-1x.png 1x, image-2x.png 2x, image-3x.png 3x, image-4x.png 4x" sizes="(min-width: 640px) 480px" alt="">';
         $output = $this->getPurifier()->purify($input);
 
         $this->assertEquals($input, $output);

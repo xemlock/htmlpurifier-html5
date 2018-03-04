@@ -27,9 +27,9 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('address', 'Block', 'Flow', 'Common');
         $def->addElement('hgroup', 'Block', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
-        // http://developers.whatwg.org/grouping-content.html
-        $def->addElement('figure', 'Block', 'Flow', 'Common');
-        $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-figure-element
+        $def->addElement('figure', 'Block', new HTMLPurifier_ChildDef_Figure(), 'Common');
+        $def->addElement('figcaption', false, 'Flow', 'Common');
 
         $mediaContent = new HTMLPurifier_ChildDef_Media();
 

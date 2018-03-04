@@ -1,42 +1,38 @@
 <?php
 
-class HTMLPurifier_HTML5Config
+class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
+    const REVISION = 0x000106;
+
     /**
      * @param  string|array|HTMLPurifier_Config $config
      * @param  HTMLPurifier_ConfigSchema $schema
      * @return HTMLPurifier_Config
      */
-    public static function create($config, HTMLPurifier_ConfigSchema $schema = null)
+    public static function create($config, $schema = null)
     {
+        if ($config instanceof HTMLPurifier_Config) {
+            $schema = $config->def;
+            $config = null;
+        }
+
         if (!$schema instanceof HTMLPurifier_ConfigSchema) {
             $schema = HTMLPurifier_ConfigSchema::instance();
         }
 
-        if ($config instanceof HTMLPurifier_Config) {
-            $configObj = $config;
+        $configObj = new self($schema);
+        $configObj->set('Core.Encoding', 'UTF-8');
+        $configObj->set('HTML.Doctype', 'HTML 4.01 Transitional');
 
-        } else {
-            $configObj = new HTMLPurifier_Config($schema);
-            $configObj->set('Core.Encoding', 'UTF-8');
-            $configObj->set('HTML.Doctype', 'HTML 4.01 Transitional');
+        $configObj->set('HTML.DefinitionID', __CLASS__);
+        $configObj->set('HTML.DefinitionRev', self::REVISION);
 
-            if (is_string($config)) {
-                $configObj->loadIni($config);
+        if (is_string($config)) {
+            $configObj->loadIni($config);
 
-            } elseif (is_array($config)) {
-                $configObj->loadArray($config);
-            }
+        } elseif (is_array($config)) {
+            $configObj->loadArray($config);
         }
-
-        // Prevent auto-finalization of config when retrieving HTML definition
-        $autoFinalize = $configObj->autoFinalize;
-        $configObj->autoFinalize = false;
-
-        $def = $configObj->getHTMLDefinition(true);
-        HTMLPurifier_HTML5Definition::setup($def);
-
-        $configObj->autoFinalize = $autoFinalize;
 
         return $configObj;
     }
@@ -51,5 +47,18 @@ class HTMLPurifier_HTML5Config
         $schema = HTMLPurifier_ConfigSchema::instance();
         $config = self::create(null, $schema);
         return $config;
+    }
+
+    public function getDefinition($type, $raw = false, $optimized = false)
+    {
+        // Setting HTML.* keys removes any previously instantiated HTML
+        // definition object, so set up HTML5 definition as late as possible
+        $needSetup = $type === 'HTML' && !isset($this->definitions[$type]);
+        if ($needSetup) {
+            if ($def = parent::getDefinition($type, true, true)) {
+                HTMLPurifier_HTML5Definition::setup($def);
+            }
+        }
+        return parent::getDefinition($type, $raw, $optimized);
     }
 }

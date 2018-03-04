@@ -8,7 +8,7 @@ class HTMLPurifier_HTML5ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('HTMLPurifier_Config', $config);
 
         $config2 = HTMLPurifier_HTML5Config::create($config);
-        $this->assertSame($config, $config2);
+        $this->assertSame($config->def, $config2->def);
 
         $config3 = HTMLPurifier_HTML5Config::create(array(
             'Core.Encoding' => 'iso-8859-1',

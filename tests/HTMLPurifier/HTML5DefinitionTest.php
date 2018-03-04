@@ -76,21 +76,36 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
     public function figureInput()
     {
         return array(
-            array('<figure><img src="image.png" alt="An awesome picture"><figcaption>Fig1. Image</figcaption></figure>'),
-            array('<figure><p>Something</p><figcaption><cite>Someone</cite></figcaption><p>Something</p></figure>'),
-            array('<figure><figcaption><cite>Someone</cite></figcaption>Something</figure>'),
-            array('<figure></figure>'),
+            array(
+                '<figure><img src="image.png" alt="An awesome picture"><figcaption>Fig.1 Image</figcaption></figure>',
+            ),
+            array(
+                '<figure><figcaption><cite>Someone</cite></figcaption>Something</figure>',
+            ),
+            array(
+                '<figure><p>Something</p><figcaption><cite>Someone</cite></figcaption><p>Something</p></figure>',
+                '<figure><p>Something</p><figcaption><cite>Someone</cite></figcaption></figure>',
+            ),
+            array(
+                '<figure><figcaption>Foo</figcaption><figcaption>Bar</figcaption>Baz</figure>',
+                '<figure><figcaption>Foo</figcaption><div>Bar</div>Baz</figure>',
+            ),
+            array(
+                '<figure></figure>',
+                '',
+            ),
         );
     }
 
     /**
+     * @param string $input
+     * @param string $expectedOutput OPTIONAL
      * @dataProvider figureInput
      */
-    public function testFigure($input)
+    public function testFigure($input, $expectedOutput = null)
     {
         $output = $this->getPurifier()->purify($input);
-
-        $this->assertEquals($input, $output);
+        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 
     public function audioInput()

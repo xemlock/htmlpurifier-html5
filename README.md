@@ -1,6 +1,9 @@
 # HTML5 Definitions for HTML Purifier
 
 [![Build Status](https://travis-ci.org/xemlock/htmlpurifier-html5.svg?branch=master)](https://travis-ci.org/xemlock/htmlpurifier-html5)
+[![Latest Stable Version](https://poser.pugx.org/xemlock/htmlpurifier-html5/v/stable)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
+[![Total Downloads](https://poser.pugx.org/xemlock/htmlpurifier-html5/downloads)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
+[![License](https://poser.pugx.org/xemlock/htmlpurifier-html5/license)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 
 This library provides HTML5 element definitions for [HTMLPurifier](http://htmlpurifier.org/).
 

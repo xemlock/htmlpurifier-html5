@@ -94,6 +94,10 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
                 '<figure></figure>',
                 '',
             ),
+            array(
+                '<figure> </figure>',
+                '',
+            ),
         );
     }
 
@@ -215,6 +219,10 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
             array(
                 // Element picture is missing required child element img
                 '<picture></picture>',
+                '',
+            ),
+            array(
+                '<picture> </picture>',
                 '',
             ),
             array(

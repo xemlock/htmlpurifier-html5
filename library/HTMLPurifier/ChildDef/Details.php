@@ -64,7 +64,16 @@ class HTMLPurifier_ChildDef_Details extends HTMLPurifier_ChildDef
             }
         }
 
+        $whitespaceOnly = true;
+        foreach ($result as $node) {
+            $whitespaceOnly = $whitespaceOnly && !empty($node->is_whitespace);
+        }
+
         if (!$summary) {
+            // remove parent node if there are no children or all children are whitespace-only
+            if ($whitespaceOnly) {
+                return false;
+            }
             $summary = new HTMLPurifier_Node_Element('summary');
         }
 

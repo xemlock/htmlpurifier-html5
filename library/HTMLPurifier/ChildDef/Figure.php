@@ -74,8 +74,13 @@ class HTMLPurifier_ChildDef_Figure extends HTMLPurifier_ChildDef
             $result[] = $node;
         }
 
-        // if there are no children remove parent node
-        if (empty($result)) {
+        $whitespaceOnly = true;
+        foreach ($result as $node) {
+            $whitespaceOnly = $whitespaceOnly && !empty($node->is_whitespace);
+        }
+
+        // remove parent node if there are no children or all children are whitespace-only
+        if (empty($result) || $whitespaceOnly) {
             return false;
         }
 

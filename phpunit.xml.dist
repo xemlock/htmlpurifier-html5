@@ -3,7 +3,7 @@
 <phpunit backupGlobals="false"
          colors="true"
          verbose="true"
-         bootstrap="vendor/autoload.php">
+         bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="HTMLPurifier_HTML5 Test Suite">
             <directory suffix=".php">./tests/HTMLPurifier</directory>

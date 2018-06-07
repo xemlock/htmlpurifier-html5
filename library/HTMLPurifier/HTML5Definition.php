@@ -34,7 +34,7 @@ class HTMLPurifier_HTML5Definition
         $mediaContent = new HTMLPurifier_ChildDef_Media();
 
         // https://html.spec.whatwg.org/dev/media.html#the-video-element
-        $def->addElement('video', 'Block', $mediaContent, 'Common', array(
+        $def->addElement('video', 'Flow', $mediaContent, 'Common', array(
             'controls' => 'Bool',
             'height'   => 'Length',
             'poster'   => 'URI',
@@ -42,13 +42,15 @@ class HTMLPurifier_HTML5Definition
             'src'      => 'URI',
             'width'    => 'Length',
         ));
+        $def->getAnonymousModule()->addElementToContentSet('video', 'Inline');
 
         // https://html.spec.whatwg.org/dev/media.html#the-audio-element
-        $def->addElement('audio', 'Block', $mediaContent, 'Common', array(
+        $def->addElement('audio', 'Flow', $mediaContent, 'Common', array(
             'controls' => 'Bool',
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => 'URI',
         ));
+        $def->getAnonymousModule()->addElementToContentSet('audio', 'Inline');
 
         // https://html.spec.whatwg.org/dev/embedded-content.html#the-source-element
         $def->addElement('source', false, 'Empty', 'Common', array(

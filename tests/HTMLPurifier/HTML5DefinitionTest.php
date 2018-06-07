@@ -123,10 +123,15 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
             array('<audio src="audio.ogg">Your browser does not support audio</audio>'),
             array('<audio src="audio.ogg"><p>Your browser does not support audio</p></audio>'),
             array('<audio src="audio.ogg"><track kind="subtitles" src="subtitles.vtt"></audio>'),
+            array(
+                // <audio> is a phrasing content element
+                '<strong><audio controls><source type="audio/mp3" src="audio.mp3"></audio></strong>',
+            ),
         );
     }
 
     /**
+     * @param string $input
      * @dataProvider audioInput
      */
     public function testAudio($input)
@@ -150,10 +155,15 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
             array('<video><source src="video.mp4" type="video/mp4"></video>'),
             array('<video><track kind="subtitles" src="subtitles.vtt"></video>'),
             array('<video><source src="video.mp4" type="video/mp4"><track kind="subtitles" src="subtitles.vtt"></video>'),
+            array(
+                // <video> is a phrasing content element
+                '<em><video><source src="video.mp4" type="video/mp4"></video></em>',
+            ),
         );
     }
 
     /**
+     * @param string $input
      * @dataProvider videoInput
      */
     public function testVideo($input)

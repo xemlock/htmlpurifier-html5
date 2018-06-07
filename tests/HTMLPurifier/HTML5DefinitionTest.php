@@ -5,6 +5,7 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
     public function getPurifier($config = null)
     {
         $config = HTMLPurifier_HTML5Config::create($config);
+        $config->set('Cache.DefinitionImpl', null);
         $purifier = new HTMLPurifier($config);
         return $purifier;
     }
@@ -240,17 +241,23 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
                 '<picture><source src="image.webp" type="image/webp"></picture>',
                 '',
             ),
+            array(
+                // <picture> is a phrasing content element
+                '<span><picture><img src="image.png" alt=""></picture></span>',
+            ),
         );
     }
 
     /**
+     * @param string $input
+     * @param string $expectedOutput OPTIONAL
      * @dataProvider pictureInput
      */
-    public function testPicture($input, $expectedOutput)
+    public function testPicture($input, $expectedOutput = null)
     {
         $output = $this->getPurifier()->purify($input);
 
-        $this->assertEquals($expectedOutput, $output);
+        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 
     public function detailsInput()

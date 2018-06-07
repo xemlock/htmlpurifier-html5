@@ -49,6 +49,17 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         return $config;
     }
 
+    /**
+     * Creates a new config object that inherits from a previous one
+     *
+     * @param  HTMLPurifier_Config $config
+     * @return HTMLPurifier_Config
+     */
+    public static function inherit(HTMLPurifier_Config $config)
+    {
+        return new self($config->def, $config->plist);
+    }
+
     public function getDefinition($type, $raw = false, $optimized = false)
     {
         // Setting HTML.* keys removes any previously instantiated HTML

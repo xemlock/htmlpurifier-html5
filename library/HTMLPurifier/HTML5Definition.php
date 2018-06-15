@@ -14,6 +14,9 @@ class HTMLPurifier_HTML5Definition
         // one provided with 4.6.0
         $def->manager->attrTypes->set('Bool', new HTMLPurifier_AttrDef_HTML_Bool2());
 
+        // add support for Floating point number attributes
+        $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
+
         // http://developers.whatwg.org/sections.html
         $def->addElement('section', 'Block', 'Flow', 'Common');
         $def->addElement('nav', 'Block', 'Flow', 'Common');

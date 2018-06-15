@@ -116,6 +116,14 @@ class HTMLPurifier_HTML5Definition
         ));
         $def->addElement('summary', false, 'Flow', 'Common');
 
+        // https://html.spec.whatwg.org/dev/form-elements.html#the-progress-element
+        $def->manager->attrTypes->set('ProgressValue', new HTMLPurifier_AttrDef_HTML_ProgressValue());
+        $def->addElement('progress', 'Flow', new HTMLPurifier_ChildDef_Progress(), 'Common', array(
+            'value' => 'ProgressValue',
+            'max'   => 'Float#min:0',
+        ));
+        $def->getAnonymousModule()->addElementToContentSet('progress', 'Inline');
+
         return $def;
     }
 }

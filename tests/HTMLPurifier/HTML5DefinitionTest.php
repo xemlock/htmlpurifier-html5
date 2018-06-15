@@ -307,4 +307,59 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedOutput, $output);
     }
+
+    public function progressInput()
+    {
+        return array(
+            array(
+                '<progress></progress>',
+            ),
+            array(
+                '<progress value="1" max="100"></progress>',
+            ),
+            array(
+                '<progress value=".1"></progress>',
+            ),
+            array(
+                // Bad numeric value for attribute value on element progress
+                // Bad numeric value for attribute max on element progress
+                '<progress value="0x01" max="0x02"></progress>',
+                '<progress></progress>',
+            ),
+            array(
+                // The value of the 'value' attribute must be less than or
+                // equal to one when the max attribute is absent.
+                '<progress value="10"></progress>',
+                '<progress></progress>',
+            ),
+            array(
+                // No nested <progress> elements
+                '<progress><progress></progress></progress>',
+                '<progress></progress>',
+            ),
+            array(
+                // Phrasing content, but there must be no <progress> element among its descendants.
+                '<progress><em><progress>Foo</progress></em></progress>',
+                '<progress><em>Foo</em></progress>',
+            ),
+            array(
+                // Phrasing content only
+                '<progress><div>Foo</div></progress>',
+                '<progress></progress><div>Foo</div>',
+            ),
+        );
+
+    }
+
+    /**
+     * @param string $input
+     * @param string $expectedOutput OPTIONAL
+     * @dataProvider progressInput
+     */
+    public function testProgress($input, $expectedOutput = null)
+    {
+        $output = $this->getPurifier()->purify($input);
+
+        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
+    }
 }

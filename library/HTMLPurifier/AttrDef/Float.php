@@ -65,7 +65,9 @@ class HTMLPurifier_AttrDef_Float extends HTMLPurifier_AttrDef
             return false;
         }
 
-        if (!is_numeric($number)) {
+        // Up to PHP 5.6 is_numeric() returns TRUE for hex strings
+        // http://php.net/manual/en/function.is-numeric.php
+        if (!preg_match('/^[-+.0-9Ee]+$/', $number) || !is_numeric($number)) {
             return false;
         }
 

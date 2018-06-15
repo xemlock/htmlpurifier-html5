@@ -36,6 +36,9 @@ class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validateAttr($attr, 'foo'));
         $this->assertFalse($this->validateAttr($attr, 'bar'));
+        $this->assertFalse($this->validateAttr($attr, '0xcafe'));
+        $this->assertFalse($this->validateAttr($attr, '0b0101'));
+        $this->assertFalse($this->validateAttr($attr, '0.01.1'));
     }
 
     public function testValidateOptions()

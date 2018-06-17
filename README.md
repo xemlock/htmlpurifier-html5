@@ -1,6 +1,7 @@
 # HTML5 Definitions for HTML Purifier
 
 [![Build Status](https://travis-ci.org/xemlock/htmlpurifier-html5.svg?branch=master)](https://travis-ci.org/xemlock/htmlpurifier-html5)
+[![Coverage Status](https://coveralls.io/repos/github/xemlock/htmlpurifier-html5/badge.svg?branch=master)](https://coveralls.io/github/xemlock/htmlpurifier-html5?branch=master)
 [![Latest Stable Version](https://img.shields.io/packagist/v/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 [![Total Downloads](https://img.shields.io/packagist/dt/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 [![License](https://img.shields.io/packagist/l/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)

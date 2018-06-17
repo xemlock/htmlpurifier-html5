@@ -4,14 +4,22 @@
          colors="true"
          verbose="true"
          bootstrap="tests/bootstrap.php">
-    <testsuites>
-        <testsuite name="HTMLPurifier_HTML5 Test Suite">
-            <directory suffix=".php">./tests/HTMLPurifier</directory>
-        </testsuite>
-    </testsuites>
     <php>
         <ini name="display_errors" value="On" />
         <ini name="display_startup_errors" value="On" />
         <ini name="error_reporting" value="-1" />
     </php>
+    <testsuites>
+        <testsuite name="HTMLPurifier_HTML5 Test Suite">
+            <directory suffix=".php">./tests/HTMLPurifier</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./library</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="build/coverage" lowUpperBound="35" highLowerBound="70" />
+    </logging>
 </phpunit>

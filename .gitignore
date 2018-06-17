@@ -1,6 +1,7 @@
 composer.phar
 composer.lock
 vendor/
+build/
 *.swp
 *.swo
 .idea

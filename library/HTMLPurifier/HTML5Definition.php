@@ -117,11 +117,11 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('summary', false, 'Flow', 'Common');
 
         // https://html.spec.whatwg.org/dev/form-elements.html#the-progress-element
-        $def->manager->attrTypes->set('ProgressValue', new HTMLPurifier_AttrDef_HTML_ProgressValue());
-        $def->addElement('progress', 'Flow', new HTMLPurifier_ChildDef_Progress(), 'Common', array(
-            'value' => 'ProgressValue',
+        $progress = $def->addElement('progress', 'Flow', new HTMLPurifier_ChildDef_Progress(), 'Common', array(
+            'value' => 'Float#min:0',
             'max'   => 'Float#min:0',
         ));
+        $progress->attr_transform_post[] = new HTMLPurifier_AttrTransform_Progress();
         $def->getAnonymousModule()->addElementToContentSet('progress', 'Inline');
 
         return $def;

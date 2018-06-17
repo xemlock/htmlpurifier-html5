@@ -55,7 +55,7 @@ article, aside, audio, details, figcaption, figure, footer, header, hgroup, main
 
 ### Elements not (yet) supported
 
-dialog, menu, menuitem
+dialog
 
 ## License
 

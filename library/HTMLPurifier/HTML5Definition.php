@@ -17,6 +17,9 @@ class HTMLPurifier_HTML5Definition
         // add support for Floating point number attributes
         $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
 
+        // add support for Ruby markup
+        $def->manager->addModule('HTML5_Ruby');
+
         // http://developers.whatwg.org/sections.html
         $def->addElement('section', 'Block', 'Flow', 'Common');
         $def->addElement('nav', 'Block', 'Flow', 'Common');

@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 $configFile = __DIR__ . '/../library/HTMLPurifier/HTML5Config.php';

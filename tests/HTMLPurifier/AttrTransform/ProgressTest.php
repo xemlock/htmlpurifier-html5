@@ -24,20 +24,55 @@ class HTMLPurifier_AttrTransform_ProgressTest extends PHPUnit_Framework_TestCase
         $this->progress = new HTMLPurifier_AttrTransform_Progress();
     }
 
-    protected function assertTransform($expected, array $input)
+    public function transformInput()
     {
-        $this->assertEquals($expected, $this->progress->transform($input, $this->config, $this->context));
+        return array(
+            array(
+                array(),
+                array(),
+            ),
+            array(
+                array('value' => 0),
+                array('value' => 0),
+            ),
+            array(
+                array('value' => 1),
+                array('value' => 1),
+            ),
+            array(
+                array('value' => 10),
+                array('value' => 1),
+            ),
+            array(
+                array('value' => '.1'),
+                array('value' => '.1'),
+            ),
+            array(
+                array('value' => -1),
+                array(),
+            ),
+            array(
+                array('value' => 10, 'max' => 10),
+                array('value' => 10, 'max' => 10),
+            ),
+            array(
+                array('value' => 100, 'max' => 10),
+                array('value' => 10, 'max' => 10),
+            ),
+            array(
+                array('max' => 0),
+                array(),
+            ),
+        );
     }
 
-    public function testTransform()
+    /**
+     * @param array $input
+     * @param array $expected
+     * @dataProvider transformInput
+     */
+    public function testTransform($input, $expected)
     {
-        $this->assertTransform(array(), array());
-        $this->assertTransform(array('value' => 0), array('value' => 0));
-        $this->assertTransform(array('value' => 1), array('value' => 1));
-        $this->assertTransform(array(), array('value' => 10));
-        $this->assertTransform(array(), array('value' => -1));
-
-        $this->assertTransform(array('value' => 10, 'max' => 10), array('value' => 10, 'max' => 10));
-        $this->assertTransform(array('max' => 10), array('value' => 100, 'max' => 10));
+        $this->assertEquals($expected, $this->progress->transform($input, $this->config, $this->context));
     }
 }

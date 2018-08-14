@@ -330,6 +330,18 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
                 // The value of the 'value' attribute must be less than or
                 // equal to one when the max attribute is absent.
                 '<progress value="10"></progress>',
+                '<progress value="1"></progress>',
+            ),
+            array(
+                '<progress value="-1"></progress>',
+                '<progress></progress>',
+            ),
+            array(
+                '<progress value=".5" max=".25"></progress>',
+                '<progress value=".25" max=".25"></progress>',
+            ),
+            array(
+                '<progress max="0"></progress>',
                 '<progress></progress>',
             ),
             array(

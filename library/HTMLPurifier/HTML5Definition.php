@@ -8,8 +8,29 @@ class HTMLPurifier_HTML5Definition
      * @param  HTMLPurifier_HTMLDefinition $def
      * @return HTMLPurifier_HTMLDefinition
      */
-    public static function setup(HTMLPurifier_HTMLDefinition $def)
+    public static function setupDefinition(HTMLPurifier_HTMLDefinition $def)
     {
+        // Register 'HTML5' doctype, use 'HTML 4.01 Transitional' as base
+        $common = array(
+            'CommonAttributes', 'Text', 'Hypertext', 'List',
+            'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
+            'StyleAttribute',
+            // Unsafe:
+            'Scripting', 'Object', 'Forms',
+            // Sorta legacy, but present in strict:
+            'Name',
+        );
+        $transitional = array('Legacy', 'Target', 'Iframe');
+        $non_xml = array('NonXMLCommonAttributes');
+
+        $def->manager->doctypes->register(
+            'HTML5',
+            false,
+            array_merge($common, $transitional, $non_xml),
+            array('Tidy_Transitional', 'Tidy_Proprietary'),
+            array()
+        );
+
         // use fixed implementation of Boolean attributes, instead of a buggy
         // one provided with 4.6.0
         $def->manager->attrTypes->set('Bool', new HTMLPurifier_AttrDef_HTML_Bool2());
@@ -128,5 +149,15 @@ class HTMLPurifier_HTML5Definition
         $def->getAnonymousModule()->addElementToContentSet('progress', 'Inline');
 
         return $def;
+    }
+
+    /**
+     * @deprecated Use {@link setupDefinition()} instead
+     * @param  HTMLPurifier_HTMLDefinition $def
+     * @return HTMLPurifier_HTMLDefinition
+     */
+    public static function setup(HTMLPurifier_HTMLDefinition $def)
+    {
+        return self::setupDefinition($def);
     }
 }

@@ -21,7 +21,6 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         }
 
         $configObj = new self($schema);
-        $configObj->set('Core.Encoding', 'UTF-8');
         $configObj->set('HTML.DefinitionID', __CLASS__);
         $configObj->set('HTML.DefinitionRev', self::REVISION);
 
@@ -73,7 +72,9 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         }
 
         parent::__construct($schema, $parent);
+
         $this->set('HTML.Doctype', 'HTML5');
+        $this->set('Attr.ID.HTML5', true);
     }
 
     public function getDefinition($type, $raw = false, $optimized = false)

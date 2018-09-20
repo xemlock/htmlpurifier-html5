@@ -1,6 +1,7 @@
 {
     "name": "xemlock/htmlpurifier-html5",
     "description": "HTML Purifier definitions for HTML5 elements",
+    "keywords": ["HtmlPurifier", "html", "html5", "purifier", "security", "xss"],
     "type": "library",
     "license": "MIT",
     "authors": [

@@ -33,4 +33,4 @@ script:
     - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-    - php vendor/bin/coveralls
+    - if [ -f "vendor/bin/php-coveralls" ]; then php vendor/bin/php-coveralls; else vendor/bin/coveralls; fi

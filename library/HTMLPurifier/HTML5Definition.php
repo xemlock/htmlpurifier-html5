@@ -152,6 +152,7 @@ class HTMLPurifier_HTML5Definition
     }
 
     /**
+     * @codeCoverageIgnore
      * @deprecated Use {@link setupDefinition()} instead
      * @param  HTMLPurifier_HTMLDefinition $def
      * @return HTMLPurifier_HTMLDefinition

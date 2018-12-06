@@ -31,6 +31,7 @@ class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
         // "+1e10" == "1E10" // true
         $this->assertSame('0', $this->validateAttr($attr, '0'));
         $this->assertSame('1', $this->validateAttr($attr, '1'));
+        $this->assertSame('1', $this->validateAttr($attr, ' 1'));
         $this->assertSame('1E10', $this->validateAttr($attr, '1E10'));
         $this->assertSame('1E10', $this->validateAttr($attr, '+1E10'));
 
@@ -39,6 +40,8 @@ class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->validateAttr($attr, '0xcafe'));
         $this->assertFalse($this->validateAttr($attr, '0b0101'));
         $this->assertFalse($this->validateAttr($attr, '0.01.1'));
+        $this->assertFalse($this->validateAttr($attr, ''));
+        $this->assertFalse($this->validateAttr($attr, ' '));
     }
 
     public function testValidateOptions()

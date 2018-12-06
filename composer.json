@@ -22,6 +22,6 @@
         "classmap": ["library/HTMLPurifier/"]
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit --coverage-html build/coverage"
     }
 }

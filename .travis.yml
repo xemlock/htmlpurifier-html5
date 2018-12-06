@@ -36,4 +36,4 @@ after_script:
     - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
     - export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
     - export CI_BRANCH="$TRAVIS_BRANCH"
-    - if [ -f "vendor/bin/php-coveralls" ]; then php vendor/bin/php-coveralls; else vendor/bin/coveralls; fi
+    - if [ -f "vendor/bin/php-coveralls" ]; then php vendor/bin/php-coveralls -v; else vendor/bin/coveralls -v; fi

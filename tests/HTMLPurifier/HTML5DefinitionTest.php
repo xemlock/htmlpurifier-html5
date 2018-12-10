@@ -128,18 +128,27 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
                 // <audio> is a phrasing content element
                 '<strong><audio controls><source type="audio/mp3" src="audio.mp3"></audio></strong>',
             ),
+            array(
+                // Media elements are not allowed as child elements of non-media elements
+                '<audio><p><source type="audio/mp3" src="audio.mp3"></p></audio>',
+                '<audio><p></p></audio>',
+            ),
+            array(
+                '<audio></audio>',
+                '',
+            ),
         );
     }
 
     /**
      * @param string $input
+     * @param string $expectedOutput OPTIONAL
      * @dataProvider audioInput
      */
-    public function testAudio($input)
+    public function testAudio($input, $expectedOutput = null)
     {
         $output = $this->getPurifier()->purify($input);
-
-        $this->assertEquals($input, $output);
+        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 
     public function videoInput()
@@ -160,18 +169,27 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
                 // <video> is a phrasing content element
                 '<em><video><source src="video.mp4" type="video/mp4"></video></em>',
             ),
+            array(
+                // Media elements are not allowed as child elements of non-media elements
+                '<video><p><source src="video.mp4" type="video/mp4"</p></video>',
+                '<video><p></p></video>',
+            ),
+            array(
+                '<video></video>',
+                '',
+            ),
         );
     }
 
     /**
      * @param string $input
+     * @param string $expectedOutput OPTIONAL
      * @dataProvider videoInput
      */
-    public function testVideo($input)
+    public function testVideo($input, $expectedOutput = null)
     {
         $output = $this->getPurifier()->purify($input);
-
-        $this->assertEquals($input, $output);
+        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 
     public function boolAttrInput()

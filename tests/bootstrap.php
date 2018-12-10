@@ -2,4 +2,15 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// PHPUnit >= 6.0 compatibility
+if (!class_exists('PHPUnit_Framework_TestSuite') && class_exists('PHPUnit\Framework\TestSuite')) {
+    /** @noinspection PhpIgnoredClassAliasDeclaration */
+    class_alias('PHPUnit\Framework\TestSuite', 'PHPUnit_Framework_TestSuite');
+}
+
+if (!class_exists('PHPUnit_Framework_TestCase') && class_exists('PHPUnit\Framework\TestCase')) {
+    /** @noinspection PhpIgnoredClassAliasDeclaration */
+    class_alias('PHPUnit\Framework\TestCase', 'PHPUnit_Framework_TestCase');
+}
+
 echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";

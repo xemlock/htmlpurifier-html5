@@ -33,14 +33,16 @@ class HTMLPurifier_ChildDef_Details extends HTMLPurifier_ChildDef
      * @param array $children
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return array
+     * @return array|false
      */
     public function validateChildren($children, $config, $context)
     {
+        // if there are no tokens, delete parent node
         if (empty($children)) {
             return false;
         }
 
+        // if summary is not allowed, delete parent node
         if (!isset($config->getHTMLDefinition()->info['summary'])) {
             trigger_error("Cannot allow details without allowing summary", E_USER_WARNING);
             return false;

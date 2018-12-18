@@ -13,4 +13,6 @@ if (!class_exists('PHPUnit_Framework_TestCase') && class_exists('PHPUnit\Framewo
     class_alias('PHPUnit\Framework\TestCase', 'PHPUnit_Framework_TestCase');
 }
 
+require_once __DIR__ . '/BaseTestCase.php';
+
 echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";

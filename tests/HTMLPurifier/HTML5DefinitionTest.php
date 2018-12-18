@@ -1,6 +1,6 @@
 <?php
 
-class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
+class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
 {
     public function getPurifier($config = null)
     {
@@ -327,6 +327,15 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
         $output = $this->getPurifier()->purify($input);
 
         $this->assertEquals($expectedOutput, $output);
+    }
+
+    public function testDetailsWithForbiddenSummary()
+    {
+        $purifier = $this->getPurifier(array(
+            'HTML.ForbiddenElements' => array('summary'),
+        ));
+        $this->assertEquals('', $purifier->purify('<details><summary>Foo</summary>Bar</summary>'));
+        $this->assertWarning('Cannot allow details without allowing summary');
     }
 
     public function progressInput()

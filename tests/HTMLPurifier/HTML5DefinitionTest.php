@@ -89,7 +89,10 @@ class HTMLPurifier_HTML5DefinitionTest extends PHPUnit_Framework_TestCase
             ),
             array(
                 '<figure><figcaption>Foo</figcaption><figcaption>Bar</figcaption>Baz</figure>',
-                '<figure><figcaption>Foo</figcaption><div>Bar</div>Baz</figure>',
+                '<figure><figcaption>Foo</figcaption>Baz</figure>',
+            ),
+            array(
+                '<figure><img src="image.png" alt=""><figure><figcaption>Foo</figcaption></figure><figcaption>Bar</figcaption></figure>',
             ),
             array(
                 '<figure></figure>',

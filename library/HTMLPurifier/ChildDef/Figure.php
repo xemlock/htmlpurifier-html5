@@ -33,11 +33,10 @@ class HTMLPurifier_ChildDef_Figure extends HTMLPurifier_ChildDef
      * @param array $children
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return array
+     * @return array|false
      */
     public function validateChildren($children, $config, $context)
     {
-        $allowFigcaption = isset($config->getHTMLDefinition()->info['figcaption']);
         $hasFigcaption = false;
         $figcaptionPos = -1;
 
@@ -48,20 +47,14 @@ class HTMLPurifier_ChildDef_Figure extends HTMLPurifier_ChildDef
         // Or: flow content followed by one figcaption element.
         // Or: flow content.
 
-        // Scan through children, accept at most one figcaption. If additional
-        // figcaption appears replace it with div
+        // Scan through children, accept at most one figcaption.
         foreach ($children as $node) {
             if ($node->name === 'figcaption') {
-                if ($allowFigcaption && !$hasFigcaption) {
+                if (!$hasFigcaption) {
                     $hasFigcaption = true;
                     $figcaptionPos = count($result);
                     $result[] = $node;
-                    continue;
                 }
-
-                $div = new HTMLPurifier_Node_Element('div', $node->attr);
-                $div->children = $node->children;
-                $result[] = $div;
                 continue;
             }
 

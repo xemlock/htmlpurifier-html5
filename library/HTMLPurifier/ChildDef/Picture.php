@@ -13,7 +13,7 @@ class HTMLPurifier_ChildDef_Picture extends HTMLPurifier_ChildDef
      * @param array $children
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return array
+     * @return array|false
      */
     public function validateChildren($children, $config, $context)
     {
@@ -27,16 +27,14 @@ class HTMLPurifier_ChildDef_Picture extends HTMLPurifier_ChildDef
             return false;
         }
 
-        $allowSource = isset($config->getHTMLDefinition()->info['source']);
         $hasImg = false;
-
         $result = array();
 
         // Content model:
         // Zero or more source elements, followed by one img element, optionally intermixed with script-supporting elements.
         // https://html.spec.whatwg.org/multipage/embedded-content.html#the-picture-element
         foreach ($children as $node) {
-            if (($allowSource && $node->name === 'source') || $node->name === 'img') {
+            if ($node->name === 'source' || $node->name === 'img') {
                 $result[] = $node;
             }
             if ($node->name === 'img') {

@@ -281,6 +281,15 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
         $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 
+    public function testPictureWithForbiddenImg()
+    {
+        $purifier = $this->getPurifier(array('HTML.ForbiddenElements' => array('img')));
+        $output = $purifier->purify('<picture><source src="image.webp" type="image/webp"><img src="image.png" alt=""></picture>');
+
+        $this->assertWarning('Cannot allow picture without allowing img');
+        $this->assertEquals('', $output);
+    }
+
     public function detailsInput()
     {
         return array(

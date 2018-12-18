@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @deprecated
+ * @codeCoverageIgnore
+ */
 class HTMLPurifier_AttrDef_Regexp extends HTMLPurifier_AttrDef
 {
     /**

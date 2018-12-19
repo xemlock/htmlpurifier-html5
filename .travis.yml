@@ -27,13 +27,14 @@ install:
     # Last released version of htmlpurifier (4.10.0) is broken on HHVM
     # https://github.com/ezyang/htmlpurifier/issues/169
     - if [ "${TRAVIS_PHP_VERSION}" == "hhvm" ]; then composer require 'ezyang/htmlpurifier:dev-master#89b3fe4'; fi
+    # PHPUnit 6+ is incompatible with HHVM because of
+    # Uncaught Error: array_creation_expression is not allowed in write context
+    # in vendor/phpunit/phpunit/src/Framework/TestCase.php:1273
+    - if [ "${TRAVIS_PHP_VERSION}" == "hhvm" ]; then composer require 'phpunit/phpunit:5.7.*'; fi
 
 script:
     - mkdir -p build/logs
     - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-    - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
-    - export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
-    - export CI_BRANCH="$TRAVIS_BRANCH"
     - if [ -f "vendor/bin/php-coveralls" ]; then php vendor/bin/php-coveralls -v; else vendor/bin/coveralls -v; fi

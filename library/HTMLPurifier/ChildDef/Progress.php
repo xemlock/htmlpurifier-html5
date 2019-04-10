@@ -8,6 +8,10 @@ class HTMLPurifier_ChildDef_Progress extends HTMLPurifier_ChildDef
 
     protected $allowedElements;
 
+    /**
+     * @param HTMLPurifier_Config $config
+     * @return array
+     */
     public function getAllowedElements($config)
     {
         if (null === $this->allowedElements) {
@@ -31,32 +35,6 @@ class HTMLPurifier_ChildDef_Progress extends HTMLPurifier_ChildDef
         // Permitted content: Phrasing content, but there must be no
         // <progress> element among its descendants.
         // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
-        return $this->removeProgressElements($children);
-    }
-
-    /**
-     * Helper method for recursive 'progress' element removal.
-     *
-     * @param HTMLPurifier_Node[] $children
-     * @return HTMLPurifier_Node[]
-     */
-    protected function removeProgressElements($children)
-    {
-        $result = array();
-        foreach ($children as $child) {
-            if ($child instanceof HTMLPurifier_Node_Element) {
-                $filteredChildren = $this->removeProgressElements($child->children);
-                if ($child->name === 'progress') {
-                    // don't add <progress> element, only its children
-                    foreach ($filteredChildren as $c) {
-                        $result[] = $c;
-                    }
-                    continue;
-                }
-                $child->children = $filteredChildren;
-            }
-            $result[] = $child;
-        }
-        return $result;
+        return HTMLPurifier_ChildDef_HTML5::filterOutElements($children, 'progress');
     }
 }

@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5/stats)
 [![License](https://img.shields.io/packagist/l/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 
-This library provides HTML5 element definitions for [HTMLPurifier](http://htmlpurifier.org/).
+This library provides HTML5 element definitions for [HTMLPurifier](https://github.com/ezyang/htmlpurifier).
 
 ## Installation
 

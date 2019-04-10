@@ -75,11 +75,18 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
             'basic' => array(
                 '<noscript>Foo</noscript>',
             ),
+            'empty' => array(
+                '<noscript></noscript>',
+                ''
+            ),
             'in block element' => array(
                 '<div><noscript>Foo</noscript></div>',
             ),
             'in inline element' => array(
                 '<span><noscript>Foo</noscript></span>',
+            ),
+            'with content' => array(
+                '<noscript><h1>Foo</h1><div>Bar</div><p>Baz</p><span>Qux</span></noscript>',
             ),
             'nested' => array(
                 '<noscript>Foo<noscript>Bar</noscript>Baz</noscript>',

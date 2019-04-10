@@ -1,7 +1,17 @@
-composer.phar
+# dependencies
 composer.lock
+composer.phar
 vendor/
+
+# test results
 build/
+
+# IDEs and editors
 *.swp
 *.swo
 .idea
+
+# system files
+.DS_Store
+Thumbs.db
+desktop.ini

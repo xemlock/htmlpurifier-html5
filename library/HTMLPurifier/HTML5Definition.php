@@ -16,7 +16,7 @@ class HTMLPurifier_HTML5Definition
             'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
             'StyleAttribute',
             // Unsafe:
-            'Scripting', 'Object', 'Forms',
+            'HTML5_Scripting', 'Object', 'Forms',
             // Sorta legacy, but present in strict:
             'Name',
         );
@@ -30,6 +30,13 @@ class HTMLPurifier_HTML5Definition
             array('Tidy_Transitional', 'Tidy_Proprietary'),
             array()
         );
+
+        // override default SafeScripting module
+        // Because how the built-in SafeScripting module is enabled in ModuleManager,
+        // to override it exactly the same name must be provided (without HTML5_ prefix)
+        $safeScripting = new HTMLPurifier_HTMLModule_HTML5_SafeScripting();
+        $safeScripting->name = 'SafeScripting';
+        $def->manager->registerModule($safeScripting);
 
         // use fixed implementation of Boolean attributes, instead of a buggy
         // one provided with 4.6.0

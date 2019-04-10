@@ -33,7 +33,7 @@ class HTMLPurifier_ChildDef_Figure extends HTMLPurifier_ChildDef
      * @param array $children
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return array|false
+     * @return array|bool
      */
     public function validateChildren($children, $config, $context)
     {

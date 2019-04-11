@@ -14,7 +14,7 @@ class HTMLPurifier_HTML5Definition
         $common = array(
             'CommonAttributes', 'Text', 'Hypertext', 'List',
             'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
-            'StyleAttribute',
+            'StyleAttribute', 'HTML5_Media',
             // Unsafe:
             'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'Forms',
             // Sorta legacy, but present in strict:
@@ -65,49 +65,6 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('figure', 'Block', new HTMLPurifier_ChildDef_Figure(), 'Common');
         $def->addElement('figcaption', false, 'Flow', 'Common');
 
-        $mediaContent = new HTMLPurifier_ChildDef_Media();
-
-        // https://html.spec.whatwg.org/dev/media.html#the-video-element
-        $def->addElement('video', 'Flow', $mediaContent, 'Common', array(
-            'controls' => 'Bool',
-            'height'   => 'Length',
-            'poster'   => 'URI',
-            'preload'  => 'Enum#auto,metadata,none',
-            'src'      => 'URI',
-            'width'    => 'Length',
-        ));
-        $def->getAnonymousModule()->addElementToContentSet('video', 'Inline');
-
-        // https://html.spec.whatwg.org/dev/media.html#the-audio-element
-        $def->addElement('audio', 'Flow', $mediaContent, 'Common', array(
-            'controls' => 'Bool',
-            'preload'  => 'Enum#auto,metadata,none',
-            'src'      => 'URI',
-        ));
-        $def->getAnonymousModule()->addElementToContentSet('audio', 'Inline');
-
-        // https://html.spec.whatwg.org/dev/embedded-content.html#the-source-element
-        $def->addElement('source', false, 'Empty', 'Common', array(
-            'media'  => 'Text',
-            'sizes'  => 'Text',
-            'src'    => 'URI',
-            'srcset' => 'Text',
-            'type'   => 'Text',
-        ));
-
-        // https://html.spec.whatwg.org/dev/media.html#the-track-element
-        $def->addElement('track', false, 'Empty', 'Common', array(
-            'kind'    => 'Enum#captions,chapters,descriptions,metadata,subtitles',
-            'src'     => 'URI',
-            'srclang' => 'Text',
-            'label'   => 'Text',
-            'default' => 'Bool',
-        ));
-
-        // https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element
-        $def->addElement('picture', 'Flow', new HTMLPurifier_ChildDef_Picture(), 'Common');
-        $def->getAnonymousModule()->addElementToContentSet('picture', 'Inline');
-
         // http://developers.whatwg.org/text-level-semantics.html
         $def->addElement('s', 'Inline', 'Inline', 'Common');
         $def->addElement('var', 'Inline', 'Inline', 'Common');
@@ -132,10 +89,6 @@ class HTMLPurifier_HTML5Definition
             'target'   => new HTMLPurifier_AttrDef_HTML_FrameTarget(),
             'type'     => 'Text',
         ));
-
-        // IMG
-        $def->addAttribute('img', 'srcset', 'Text');
-        $def->addAttribute('img', 'sizes', 'Text');
 
         // IFRAME
         $def->addAttribute('iframe', 'allowfullscreen', 'Bool');

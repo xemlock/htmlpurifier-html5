@@ -2,11 +2,6 @@
 
 class HTMLPurifier_HTMLModule_HTML5_InteractiveTest extends BaseTestCase
 {
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * @param string $input
      * @param string $expected OPTIONAL

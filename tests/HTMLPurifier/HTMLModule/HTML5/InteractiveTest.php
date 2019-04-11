@@ -45,11 +45,7 @@ class HTMLPurifier_HTMLModule_HTML5_InteractiveTest extends BaseTestCase
             ),
             array(
                 '<details></details>',
-                '',
-            ),
-            array(
-                '<details> </details>',
-                '',
+                '<details><summary></summary></details>',
             ),
             array(
                 '<summary>Foo</summary>',

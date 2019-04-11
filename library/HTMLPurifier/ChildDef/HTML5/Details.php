@@ -37,11 +37,6 @@ class HTMLPurifier_ChildDef_HTML5_Details extends HTMLPurifier_ChildDef
      */
     public function validateChildren($children, $config, $context)
     {
-        // if there are no tokens, delete parent node
-        if (empty($children)) {
-            return false;
-        }
-
         // if summary is not allowed, delete parent node
         if (!isset($config->getHTMLDefinition()->info['summary'])) {
             trigger_error("Cannot allow details without allowing summary", E_USER_WARNING);
@@ -66,16 +61,7 @@ class HTMLPurifier_ChildDef_HTML5_Details extends HTMLPurifier_ChildDef
             }
         }
 
-        $whitespaceOnly = true;
-        foreach ($result as $node) {
-            $whitespaceOnly = $whitespaceOnly && !empty($node->is_whitespace);
-        }
-
         if (!$summary) {
-            // remove parent node if there are no children or all children are whitespace-only
-            if ($whitespaceOnly) {
-                return false;
-            }
             $summary = new HTMLPurifier_Node_Element('summary');
         }
 

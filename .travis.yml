@@ -10,7 +10,7 @@ php:
     - 7.0
     - 7.1
     - 7.2
-    - hhvm
+    - hhvm-3.30
 
 matrix:
     allow_failures:
@@ -24,7 +24,7 @@ before_install:
 
 install:
     - |
-      if [ "${TRAVIS_PHP_VERSION}" == "hhvm" ]; then
+      if [[ "${TRAVIS_PHP_VERSION}" = hhvm* ]]; then
         # PHPUnit 6.0 is incompatible with HHVM because of
         # Uncaught Error: array_creation_expression is not allowed in write context
         # in vendor/phpunit/phpunit/src/Framework/TestCase.php:1273

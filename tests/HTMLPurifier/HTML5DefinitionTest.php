@@ -290,63 +290,6 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
         $this->assertEquals('', $output);
     }
 
-    public function detailsInput()
-    {
-        return array(
-            array(
-                '<details><summary>Foo <strong>Bar</strong></summary>Baz <p>Qux</p></details>',
-                '<details><summary>Foo <strong>Bar</strong></summary>Baz <p>Qux</p></details>',
-            ),
-            array(
-                '<details open><summary>Foo</summary>Bar</details>',
-                '<details open><summary>Foo</summary>Bar</details>',
-            ),
-            array(
-                '<details>Foo</details>',
-                '<details><summary></summary>Foo</details>',
-            ),
-            array(
-                '<details><summary>Foo</summary><summary>Bar</summary></details>',
-                '<details><summary>Foo</summary>Bar</details>',
-            ),
-            array(
-                '<details>Foo<summary>Bar</summary>Baz</details>',
-                '<details><summary>Bar</summary>FooBaz</details>',
-            ),
-            array(
-                '<details></details>',
-                '',
-            ),
-            array(
-                '<details> </details>',
-                '',
-            ),
-            array(
-                '<summary>Foo</summary>',
-                'Foo',
-            ),
-        );
-    }
-
-    /**
-     * @dataProvider detailsInput
-     */
-    public function testDetails($input, $expectedOutput)
-    {
-        $output = $this->getPurifier()->purify($input);
-
-        $this->assertEquals($expectedOutput, $output);
-    }
-
-    public function testDetailsWithForbiddenSummary()
-    {
-        $purifier = $this->getPurifier(array(
-            'HTML.ForbiddenElements' => array('summary'),
-        ));
-        $this->assertEquals('', $purifier->purify('<details><summary>Foo</summary>Bar</summary>'));
-        $this->assertWarning('Cannot allow details without allowing summary');
-    }
-
     public function progressInput()
     {
         return array(

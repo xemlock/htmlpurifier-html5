@@ -16,7 +16,7 @@ class HTMLPurifier_HTML5Definition
             'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
             'StyleAttribute',
             // Unsafe:
-            'HTML5_Scripting', 'Object', 'Forms',
+            'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'Forms',
             // Sorta legacy, but present in strict:
             'Name',
         );
@@ -139,13 +139,6 @@ class HTMLPurifier_HTML5Definition
 
         // IFRAME
         $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
-
-        // Interactive elements
-        // https://html.spec.whatwg.org/dev/interactive-elements.html#the-details-element
-        $def->addElement('details', 'Block', new HTMLPurifier_ChildDef_Details(), 'Common', array(
-            'open' => 'Bool',
-        ));
-        $def->addElement('summary', false, 'Flow', 'Common');
 
         // https://html.spec.whatwg.org/dev/form-elements.html#the-progress-element
         $progress = $def->addElement('progress', 'Flow', new HTMLPurifier_ChildDef_Progress(), 'Common', array(

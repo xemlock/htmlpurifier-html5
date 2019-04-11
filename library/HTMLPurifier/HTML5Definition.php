@@ -16,7 +16,7 @@ class HTMLPurifier_HTML5Definition
             'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
             'StyleAttribute', 'HTML5_Media',
             // Unsafe:
-            'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'Forms',
+            'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
             // Sorta legacy, but present in strict:
             'Name',
         );
@@ -92,14 +92,6 @@ class HTMLPurifier_HTML5Definition
 
         // IFRAME
         $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
-
-        // https://html.spec.whatwg.org/dev/form-elements.html#the-progress-element
-        $progress = $def->addElement('progress', 'Flow', new HTMLPurifier_ChildDef_Progress(), 'Common', array(
-            'value' => 'Float#min:0',
-            'max'   => 'Float#min:0',
-        ));
-        $progress->attr_transform_post[] = new HTMLPurifier_AttrTransform_Progress();
-        $def->getAnonymousModule()->addElementToContentSet('progress', 'Inline');
 
         return $def;
     }

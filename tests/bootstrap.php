@@ -16,3 +16,4 @@ if (!class_exists('PHPUnit_Framework_TestCase') && class_exists('PHPUnit\Framewo
 require_once __DIR__ . '/BaseTestCase.php';
 
 echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";
+echo "libxml version: ", constant('LIBXML_DOTTED_VERSION'), "\n";

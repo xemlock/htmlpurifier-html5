@@ -3,7 +3,7 @@
 /**
  * HTML5 additions to built-in Forms module
  *
- * This module is marked as safe to support static elements, like <progress>,
+ * This module is marked as safe to support static elements like <progress>
  * out of the box. Only elements inherited from parent module are unsafe,
  * and enabled conditionally with 'HTML.Trusted' config flag.
  */
@@ -20,6 +20,18 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
     {
         if ($config->get('HTML.Trusted')) {
             parent::setup($config);
+
+            $this->addElement(
+                'fieldset',
+                'Form',
+                new HTMLPurifier_ChildDef_HTML5_Fieldset(),
+                'Common',
+                array(
+                    'name'     => 'CDATA',
+                    'disabled' => 'Bool#disabled',
+                    // 'form' => 'IDREF', // IDREF not implemented, cannot allow
+                )
+            );
         }
 
         // https://html.spec.whatwg.org/dev/form-elements.html#the-progress-element

@@ -69,6 +69,10 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
             '<fieldset>  <div>Foo</div><legend>Bar</legend></fieldset>',
             '<fieldset>  <legend>Bar</legend><div>Foo</div></fieldset>'
         );
+        $this->assertPurification(
+            '<fieldset>  Foo<legend>Bar</legend></fieldset>',
+            '<fieldset><legend>Bar</legend>  Foo</fieldset>'
+        );
     }
 
     /**

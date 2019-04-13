@@ -40,12 +40,33 @@ class HTMLPurifier_HTMLModule_HTML5_InteractiveTest extends BaseTestCase
             ),
             array(
                 '<details></details>',
-                '<details><summary></summary></details>',
+                '',
             ),
             array(
                 '<summary>Foo</summary>',
                 'Foo',
             ),
+        );
+    }
+
+    public function testDetailsWithWhitespace()
+    {
+        // depending on libxml version present whitespace handling by DOMLex
+        // lexer may differ, so for testing input with whitespaces we switch
+        // to more reliable lexer implementation
+        $this->config->set('Core.LexerImpl', 'DirectLex');
+
+        $this->assertPurification(
+            '<details>  </details>',
+            ''
+        );
+        $this->assertPurification(
+            '<details>  <div>Foo</div></details>',
+            '<details>  <summary></summary><div>Foo</div></details>'
+        );
+        $this->assertPurification(
+            '<details>  Foo</details>',
+            '<details><summary></summary>  Foo</details>'
         );
     }
 

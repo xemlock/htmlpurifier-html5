@@ -43,30 +43,43 @@ class HTMLPurifier_ChildDef_HTML5_Details extends HTMLPurifier_ChildDef
             return false;
         }
 
-        $summary = null;
-        $result = array();
+        $summary = array();
+        $spaces = array();
+        $others = array();
+
+        while ($children) {
+            $child = reset($children);
+            if ($child instanceof HTMLPurifier_Node_Text && $child->is_whitespace) {
+                $spaces[] = array_shift($children);
+            } else {
+                break;
+            }
+        }
 
         // Content model:
         // One summary element followed by flow content
         foreach ($children as $node) {
             if (!$summary && $node->name === 'summary') {
-                $summary = $node;
+                $summary[] = $node;
                 continue;
             }
             if ($node->name === 'summary') {
                 // duplicated summary, add only its children
-                $result = array_merge($result, (array) $node->children);
+                $others = array_merge($others, (array) $node->children);
             } else {
-                $result[] = $node;
+                $others[] = $node;
             }
         }
 
         if (!$summary) {
-            $summary = new HTMLPurifier_Node_Element('summary');
+            // remove empty <details> without <summary>
+            if (!$others) {
+                return false;
+            }
+
+            $summary[] = new HTMLPurifier_Node_Element('summary');
         }
 
-        array_unshift($result, $summary);
-
-        return $result;
+        return array_merge($spaces, $summary, $others);
     }
 }

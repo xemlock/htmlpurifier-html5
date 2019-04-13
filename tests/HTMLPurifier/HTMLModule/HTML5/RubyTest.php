@@ -1,16 +1,18 @@
 <?php
 
-class HTMLPurifier_HTMLModule_HTML5_RubyTest extends PHPUnit_Framework_TestCase
+class HTMLPurifier_HTMLModule_HTML5_RubyTest extends BaseTestCase
 {
-    public function getPurifier($config = null)
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider rubyDataProvider
+     */
+    public function testRuby($input, $expected = null)
     {
-        $config = HTMLPurifier_HTML5Config::create($config);
-        $config->set('Cache.DefinitionImpl', null);
-        $purifier = new HTMLPurifier($config);
-        return $purifier;
+        $this->assertPurification($input, $expected);
     }
 
-    public function rubyInput()
+    public function rubyDataProvider()
     {
         return array(
             array(
@@ -132,16 +134,5 @@ class HTMLPurifier_HTMLModule_HTML5_RubyTest extends PHPUnit_Framework_TestCase
                 '<ruby><rtc><ruby>Foo<rt></rt></ruby><rt><ruby>Bar<rt></rt></ruby></rt></rtc></ruby>',
             ),
         );
-    }
-
-    /**
-     * @param string $input
-     * @param string $expectedOutput OPTIONAL
-     * @dataProvider rubyInput
-     */
-    public function testRuby($input, $expectedOutput = null)
-    {
-        $output = $this->getPurifier()->purify($input);
-        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 }

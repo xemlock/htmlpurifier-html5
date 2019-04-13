@@ -12,7 +12,7 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
     public function testDefaultRemoval()
     {
         $this->config->set('HTML.Trusted', false);
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript">foo();</script>',
             ''
         );
@@ -20,35 +20,35 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
 
     public function testPreserve()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript">foo();</script>'
         );
     }
 
     public function testAllAttributes()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script defer src="test.js" type="text/javascript" charset="utf-8" async></script>'
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<script defer src="" type="text/javascript">PCDATA</script>',
             '<script defer type="text/javascript">PCDATA</script>'
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<script defer src="script.js" type="text/javascript">PCDATA</script>',
             '<script defer src="script.js" type="text/javascript"></script>'
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<p><script>document.write("Foo")</script></p>'
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<span><script>document.write("Foo")</script></span>'
         );
     }
 
     public function testUnsupportedAttributes()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" crossorigin="use-credentials">PCDATA</script>',
             '<script type="text/javascript">PCDATA</script>'
         );
@@ -61,7 +61,7 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
      */
     public function testNoscript($input, $expectedOutput = null)
     {
-        $this->assertResult($input, $expectedOutput);
+        $this->assertPurification($input, $expectedOutput);
     }
 
     /**
@@ -105,14 +105,14 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
 
         // PHP DOM parser fails at parsing <noscript> in <p>, which affects
         // the default HTMLPurifier lexer (DOMLex)
-        $this->assertResult(
+        $this->assertPurification(
             '<p><noscript>Foo</noscript></p>',
             '<p></p><noscript>Foo</noscript>'
         );
 
         // PH5P lexer properly handles <noscript> in <p> elements
         $this->config->set('Core.LexerImpl', 'PH5P');
-        $this->assertResult(
+        $this->assertPurification(
             '<p><noscript>Foo</noscript></p>'
         );
 

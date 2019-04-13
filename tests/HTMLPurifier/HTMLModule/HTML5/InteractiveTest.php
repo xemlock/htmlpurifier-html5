@@ -9,7 +9,7 @@ class HTMLPurifier_HTMLModule_HTML5_InteractiveTest extends BaseTestCase
      */
     public function testDetails($input, $expected = null)
     {
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function detailsInputProvider()
@@ -53,7 +53,7 @@ class HTMLPurifier_HTMLModule_HTML5_InteractiveTest extends BaseTestCase
     {
         $this->config->set('HTML.ForbiddenElements', array('summary'));
 
-        $this->assertResult('<details><summary>Foo</summary>Bar</summary>', '');
+        $this->assertPurification('<details><summary>Foo</summary>Bar</summary>', '');
         $this->assertWarning('Cannot allow details without allowing summary');
     }
 
@@ -64,7 +64,7 @@ class HTMLPurifier_HTMLModule_HTML5_InteractiveTest extends BaseTestCase
      */
     public function testDialog($input, $expected = null)
     {
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function dialogDataProvider()

@@ -18,7 +18,6 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-
         $mediaContent = new HTMLPurifier_ChildDef_HTML5_Media();
 
         // https://html.spec.whatwg.org/dev/media.html#the-video-element

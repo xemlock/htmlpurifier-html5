@@ -11,7 +11,7 @@ class HTMLPurifier_HTMLModule_HTML5_SafeScriptingTest extends BaseTestCase
 
     public function testMinimal()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script></script>',
             ''
         );
@@ -19,14 +19,14 @@ class HTMLPurifier_HTMLModule_HTML5_SafeScriptingTest extends BaseTestCase
 
     public function testGood()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="https://localhost/foo.js" async defer charset="utf-8"></script>'
         );
     }
 
     public function testGoodWithAutoclosedTag()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="https://localhost/foo.js" async defer charset="utf-8"/>',
             '<script type="text/javascript" src="https://localhost/foo.js" async defer charset="utf-8"></script>'
         );
@@ -34,11 +34,11 @@ class HTMLPurifier_HTMLModule_HTML5_SafeScriptingTest extends BaseTestCase
 
     public function testBad()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="https://localhost/foobar.js" />',
             ''
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="https://localhost/FOO.JS" />',
             ''
         );
@@ -46,15 +46,15 @@ class HTMLPurifier_HTMLModule_HTML5_SafeScriptingTest extends BaseTestCase
 
     public function testBadWithContent()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="">Foo</script>',
             ''
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="https://localhost/foo.js">Foo</script>',
             '<script type="text/javascript" src="https://localhost/foo.js"></script>'
         );
-        $this->assertResult(
+        $this->assertPurification(
             '<script type="text/javascript" src="https://localhost/foobar.js">Foo</script>',
             ''
         );

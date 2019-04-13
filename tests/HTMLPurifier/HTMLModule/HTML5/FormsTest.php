@@ -11,7 +11,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
     {
         $this->config->set('HTML.Trusted', true);
 
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function fieldsetDataProvider()
@@ -53,7 +53,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
         $this->config->set('Core.LexerImpl', 'DirectLex');
         $this->config->set('HTML.Trusted', true);
 
-        $this->assertResult('
+        $this->assertPurification('
             <form action="foo">
                 <fieldset disabled name="bar">
                     <legend>Personal Information</legend>
@@ -65,7 +65,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
         ');
 
         // legend not first
-        $this->assertResult(
+        $this->assertPurification(
             '<fieldset>  <div>Foo</div><legend>Bar</legend></fieldset>',
             '<fieldset>  <legend>Bar</legend><div>Foo</div></fieldset>'
         );
@@ -80,7 +80,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
     {
         $this->config->set('HTML.Trusted', true);
 
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function legendDataProvider()
@@ -108,7 +108,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
      */
     public function testProgress($input, $expected = null)
     {
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function progressDataProvider()

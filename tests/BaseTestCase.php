@@ -34,7 +34,7 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
      * @param string $input
      * @param string $expect OPTIONAL
      */
-    public function assertResult($input, $expect = null)
+    public function assertPurification($input, $expect = null)
     {
         $purifier = new HTMLPurifier($this->config);
         $output = $purifier->purify($input);

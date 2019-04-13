@@ -4,7 +4,7 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
 {
     public function testImg()
     {
-        $this->assertResult(
+        $this->assertPurification(
             '<img src="image-src.png" srcset="image-1x.png 1x, image-2x.png 2x" sizes="(min-width: 640px) 480px" alt="">'
         );
     }
@@ -16,7 +16,7 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
      */
     public function testPicture($input, $expected = null)
     {
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function pictureDataProvider()
@@ -75,7 +75,7 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
     {
         $this->config->set('HTML.ForbiddenElements', array('img'));
 
-        $this->assertResult(
+        $this->assertPurification(
             '<picture><source src="image.webp" type="image/webp"><img src="image.png" alt=""></picture>',
             ''
         );
@@ -89,7 +89,7 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
      */
     public function testAudio($input, $expected = null)
     {
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function audioDataProvider()
@@ -126,7 +126,7 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
      */
     public function testVideo($input, $expected = null)
     {
-        $this->assertResult($input, $expected);
+        $this->assertPurification($input, $expected);
     }
 
     public function videoDataProvider()

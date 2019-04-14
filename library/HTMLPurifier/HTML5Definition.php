@@ -13,7 +13,7 @@ class HTMLPurifier_HTML5Definition
         // Register 'HTML5' doctype, use 'HTML 4.01 Transitional' as base
         $common = array(
             'CommonAttributes', 'Text', 'Hypertext', 'List',
-            'Presentation', 'Edit', 'HTML5_Bdo', 'Tables', 'Image',
+            'Presentation', 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
             'StyleAttribute', 'HTML5_Media',
             // Unsafe:
             'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
@@ -72,10 +72,6 @@ class HTMLPurifier_HTML5Definition
         $def->addElement('sup', 'Inline', 'Inline', 'Common');
         $def->addElement('mark', 'Inline', 'Inline', 'Common');
         $def->addElement('wbr', 'Inline', 'Empty', 'Core');
-
-        // http://developers.whatwg.org/edits.html
-        $def->addElement('ins', 'Block', 'Flow', 'Common', array('cite' => 'URI', 'datetime' => 'Text'));
-        $def->addElement('del', 'Block', 'Flow', 'Common', array('cite' => 'URI', 'datetime' => 'Text'));
 
         // TIME
         $time = $def->addElement('time', 'Inline', 'Inline', 'Common', array('datetime' => 'Text', 'pubdate' => 'Bool'));

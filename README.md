@@ -7,7 +7,10 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5/stats)
 [![License](https://img.shields.io/packagist/l/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 
-This library provides HTML5 element definitions for [HTMLPurifier](https://github.com/ezyang/htmlpurifier).
+This library provides HTML5 element definitions for [HTML Purifier](https://github.com/ezyang/htmlpurifier).
+
+It is the most complete HTML5-compliant solution among all based on HTML Purifier. Apart from providing the most extensive set of element definitions, it provides tidy/sanitization rules for transforming the input into a valid HTML5 output.
+
 
 ## Installation
 
@@ -16,6 +19,7 @@ Install with [Composer](https://getcomposer.org/) by running the following comma
 ```
 composer require xemlock/htmlpurifier-html5
 ```
+
 
 ## Usage
 
@@ -45,15 +49,20 @@ or equivalently:
 ```php
 $config = HTMLPurifier_HTML5Config::createDefault();
 $config->set('HTML.SafeIframe', true);
-$config->set('URI.SafeIframeRegexp', '#^//www\.youtube\.com/embed/#');
+$config->set('URI.SafeIframeRegexp', '%^//www\.youtube\.com/embed/%');
 ```
+
 
 ## Supported HTML5 elements
 
 Aside from HTML elements supported originally by HTML Purifier, this library
 adds support for the following HTML5 elements:
 
-article, aside, audio, details, dialog, figcaption, figure, footer, header, hgroup, main, nav, picture, progress, section, source, summary, time, track, video
+`<article>`, `<aside>`, `<audio>`, `<bdi>`, `<details>`, `<dialog>`, `<figcaption>`, `<figure>`, `<footer>`, `<header>`, `<hgroup>`, `<main>`, `<mark>`, `<nav>`, `<picture>`, `<progress>`, `<section>`, `<source>`, `<summary>`, `<time>`, `<track>`, `<video>`, `<wbr>`
+
+as well as HTML5 attributes added to existing HTML elements, such as:
+
+`<a>`, `<del>`, `<fieldset>`, `<ins>`, `<script>`
 
 
 ## License

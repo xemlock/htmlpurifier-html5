@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2019041403;
+    const REVISION = 2019041404;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -41,9 +41,7 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
      */
     public static function createDefault()
     {
-        $schema = HTMLPurifier_ConfigSchema::instance();
-        $config = self::create(null, $schema);
-        return $config;
+        return self::create(null);
     }
 
     /**

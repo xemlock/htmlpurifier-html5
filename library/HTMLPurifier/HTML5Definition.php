@@ -12,9 +12,9 @@ class HTMLPurifier_HTML5Definition
     {
         // Register 'HTML5' doctype, use 'HTML 4.01 Transitional' as base
         $common = array(
-            'CommonAttributes', 'Text', 'Hypertext', 'List',
+            'CommonAttributes', 'HTML5_Text', 'Hypertext', 'List',
             'Presentation', 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
-            'StyleAttribute', 'HTML5_Media',
+            'StyleAttribute', 'HTML5_Media', 'HTML5_Ruby',
             // Unsafe:
             'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
             // Sorta legacy, but present in strict:
@@ -44,38 +44,6 @@ class HTMLPurifier_HTML5Definition
 
         // add support for Floating point number attributes
         $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
-
-        // add support for Ruby markup
-        $def->manager->addModule('HTML5_Ruby');
-
-        // http://developers.whatwg.org/sections.html
-        $def->addElement('section', 'Block', 'Flow', 'Common');
-        $def->addElement('nav', 'Block', 'Flow', 'Common');
-        $def->addElement('article', 'Block', 'Flow', 'Common');
-        $def->addElement('aside', 'Block', 'Flow', 'Common');
-        $def->addElement('header', 'Block', 'Flow', 'Common');
-        $def->addElement('footer', 'Block', 'Flow', 'Common');
-        $def->addElement('main', 'Block', 'Flow', 'Common');
-
-        // Content model actually excludes several tags, not modelled here
-        $def->addElement('address', 'Block', 'Flow', 'Common');
-        $def->addElement('hgroup', 'Block', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
-
-        // https://html.spec.whatwg.org/dev/grouping-content.html#the-figure-element
-        $def->addElement('figure', 'Block', new HTMLPurifier_ChildDef_Figure(), 'Common');
-        $def->addElement('figcaption', false, 'Flow', 'Common');
-
-        // http://developers.whatwg.org/text-level-semantics.html
-        $def->addElement('s', 'Inline', 'Inline', 'Common');
-        $def->addElement('var', 'Inline', 'Inline', 'Common');
-        $def->addElement('sub', 'Inline', 'Inline', 'Common');
-        $def->addElement('sup', 'Inline', 'Inline', 'Common');
-        $def->addElement('mark', 'Inline', 'Inline', 'Common');
-        $def->addElement('wbr', 'Inline', 'Empty', 'Core');
-
-        // TIME
-        $time = $def->addElement('time', 'Inline', 'Inline', 'Common', array('datetime' => 'Text', 'pubdate' => 'Bool'));
-        $time->excludes = array('time' => true);
 
         // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-a-element
         $def->addElement('a', 'Flow', 'Flow', 'Common', array(

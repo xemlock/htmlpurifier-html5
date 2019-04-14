@@ -2,33 +2,6 @@
 
 class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
 {
-    public function getPurifier($config = null)
-    {
-        $config = HTMLPurifier_HTML5Config::create($config);
-        $config->set('Cache.DefinitionImpl', null);
-        $purifier = new HTMLPurifier($config);
-        return $purifier;
-    }
-
-    public function testTime()
-    {
-        $input = '<p>This book was published <time datetime="2014-10" pubdate><em>last</em> month</time></p>';
-        $output = $this->getPurifier()->purify($input);
-
-        $this->assertEquals($input, $output);
-    }
-
-    public function testIframe()
-    {
-        $input = '<iframe width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>';
-        $output = $this->getPurifier(array(
-            'HTML.SafeIframe' => true,
-            'URI.SafeIframeRegexp' => '%^(http:|https:)?//(www.youtube(?:-nocookie)?.com/embed/)%',
-        ))->purify($input);
-
-        $this->assertEquals($input, $output);
-    }
-
     /**
      * Data provider for {@link testAnchor()}
      * @return array
@@ -55,57 +28,24 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
 
     /**
      * @param string $input
-     * @param string $expectedOutput OPTIONAL
+     * @param string $expected OPTIONAL
      * @dataProvider anchorInput
      */
-    public function testAnchor($input, $expectedOutput = null)
+    public function testAnchor($input, $expected = null)
     {
-        $output = $this->getPurifier(array(
-            'Attr.AllowedFrameTargets' => array('_blank'),
-        ))->purify($input);
-        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
+        $this->config->set('Attr.AllowedFrameTargets', array('_blank'));
+
+        $this->assertPurification($input, $expected);
     }
 
-    public function figureInput()
+    public function testIframe()
     {
-        return array(
-            array(
-                '<figure><img src="image.png" alt="An awesome picture"><figcaption>Fig.1 Image</figcaption></figure>',
-            ),
-            array(
-                '<figure><figcaption><cite>Someone</cite></figcaption>Something</figure>',
-            ),
-            array(
-                '<figure><p>Something</p><figcaption><cite>Someone</cite></figcaption><p>Something</p></figure>',
-                '<figure><p>Something</p><figcaption><cite>Someone</cite></figcaption></figure>',
-            ),
-            array(
-                '<figure><figcaption>Foo</figcaption><figcaption>Bar</figcaption>Baz</figure>',
-                '<figure><figcaption>Foo</figcaption>Baz</figure>',
-            ),
-            array(
-                '<figure><img src="image.png" alt=""><figure><figcaption>Foo</figcaption></figure><figcaption>Bar</figcaption></figure>',
-            ),
-            array(
-                '<figure></figure>',
-                '',
-            ),
-            array(
-                '<figure> </figure>',
-                '',
-            ),
+        $this->config->set('HTML.SafeIframe', true);
+        $this->config->set('URI.SafeIframeRegexp', '%^(http:|https:)?//(www.youtube(?:-nocookie)?.com/embed/)%');
+
+        $this->assertPurification(
+            '<iframe width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>'
         );
-    }
-
-    /**
-     * @param string $input
-     * @param string $expectedOutput OPTIONAL
-     * @dataProvider figureInput
-     */
-    public function testFigure($input, $expectedOutput = null)
-    {
-        $output = $this->getPurifier()->purify($input);
-        $this->assertEquals($expectedOutput !== null ? $expectedOutput : $input, $output);
     }
 
     public function boolAttrInput()
@@ -120,12 +60,12 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
     }
 
     /**
+     * @param string $input
+     * @param string $expected OPTIONAL
      * @dataProvider boolAttrInput
      */
-    public function testBoolAttr($input, $expectedOutput)
+    public function testBoolAttr($input, $expected = null)
     {
-        $output = $this->getPurifier()->purify($input);
-
-        $this->assertEquals($expectedOutput, $output);
+        $this->assertPurification($input, $expected);
     }
 }

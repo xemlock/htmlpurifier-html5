@@ -13,7 +13,7 @@ class HTMLPurifier_HTML5Definition
         // Register 'HTML5' doctype, use 'HTML 4.01 Transitional' as base
         $common = array(
             'CommonAttributes', 'Text', 'Hypertext', 'List',
-            'Presentation', 'Edit', 'Bdo', 'Tables', 'Image',
+            'Presentation', 'Edit', 'HTML5_Bdo', 'Tables', 'Image',
             'StyleAttribute', 'HTML5_Media',
             // Unsafe:
             'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',

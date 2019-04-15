@@ -32,7 +32,7 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('hgroup', 'Block', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
         // https://html.spec.whatwg.org/dev/grouping-content.html#the-figure-element
-        $this->addElement('figure', 'Block', new HTMLPurifier_ChildDef_Figure(), 'Common');
+        $this->addElement('figure', 'Block', new HTMLPurifier_ChildDef_HTML5_Figure(), 'Common');
         $this->addElement('figcaption', false, 'Flow', 'Common');
 
         // http://developers.whatwg.org/text-level-semantics.html

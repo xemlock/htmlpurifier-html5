@@ -47,6 +47,6 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
         );
         $this->addElementToContentSet('progress', 'Inline');
 
-        $progress->attr_transform_post[] = new HTMLPurifier_AttrTransform_Progress();
+        $progress->attr_transform_post[] = new HTMLPurifier_AttrTransform_HTML5_Progress();
     }
 }

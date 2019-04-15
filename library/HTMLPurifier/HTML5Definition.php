@@ -12,7 +12,7 @@ class HTMLPurifier_HTML5Definition
     {
         // Register 'HTML5' doctype, use 'HTML 4.01 Transitional' as base
         $common = array(
-            'CommonAttributes', 'HTML5_Text', 'Hypertext', 'List',
+            'CommonAttributes', 'HTML5_Text', 'HTML5_Hypertext', 'List',
             'Presentation', 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
             'StyleAttribute', 'HTML5_Media', 'HTML5_Ruby',
             // Unsafe:
@@ -44,15 +44,6 @@ class HTMLPurifier_HTML5Definition
 
         // add support for Floating point number attributes
         $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
-
-        // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-a-element
-        $def->addElement('a', 'Flow', 'Flow', 'Common', array(
-            'download' => 'Text',
-            'hreflang' => 'Text',
-            'rel'      => 'Text',
-            'target'   => new HTMLPurifier_AttrDef_HTML_FrameTarget(),
-            'type'     => 'Text',
-        ));
 
         // IFRAME
         $def->addAttribute('iframe', 'allowfullscreen', 'Bool');

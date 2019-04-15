@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Extension to {@link HTMLPurifier_HTMLModule_Text} defining HTML5 text-level
+ * and grouping elements.
+ */
 class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
 {
     /**
@@ -39,8 +43,11 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('mark', 'Inline', 'Inline', 'Common');
         $this->addElement('wbr', 'Inline', 'Empty', 'Core');
 
-        // TIME
-        $time = $this->addElement('time', 'Inline', 'Inline', 'Common', array('datetime' => 'Text', 'pubdate' => 'Bool'));
+        // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-time-element
+        $time = $this->addElement('time', 'Inline', 'Inline', 'Common', array(
+            'datetime' => 'Text',
+            'pubdate'  => 'Bool',
+        ));
         $time->excludes = array('time' => true);
     }
 }

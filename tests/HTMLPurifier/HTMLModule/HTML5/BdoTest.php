@@ -22,4 +22,12 @@ class HTMLPurifier_HTMLModule_HTML5_BdoTest extends BaseTestCase
         $this->assertPurification('<div><bdi>Foo</bdi></div>');
         $this->assertPurification('<bdi><div>Foo</div></bdi>', '<bdi></bdi><div>Foo</div>');
     }
+
+    public function testDirAttr()
+    {
+        $this->assertPurification('<div dir="auto">Foo</div>');
+        $this->assertPurification('<span dir="ltr">Foo</span>');
+        $this->assertPurification('<p dir="rtl">Foo</p>');
+        $this->assertPurification('<p dir="foo">Foo</p>', '<p>Foo</p>');
+    }
 }

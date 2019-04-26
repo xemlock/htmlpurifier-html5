@@ -25,6 +25,7 @@ class HTMLPurifier_HTMLModule_HTML5_Hypertext extends HTMLPurifier_HTMLModule
             'target'   => new HTMLPurifier_AttrDef_HTML_FrameTarget(),
             'type'     => 'Text',
         ));
+        $this->addElementToContentSet('a', 'Inline');
         $a->excludes = array('a' => true);
     }
 }

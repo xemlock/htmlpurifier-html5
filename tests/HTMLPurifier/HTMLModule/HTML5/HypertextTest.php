@@ -23,6 +23,13 @@ class HTMLPurifier_HTMLModule_HTML5_HypertextTest extends BaseTestCase
             array(
                 '<a href="foo" download="bar">Download</a>',
             ),
+            array(
+                '<p>Foo <a href="foo">foo</a> bar</p>'
+            ),
+            array(
+                '<a href="foo"><p>Foo <a href="foo">foo</a></p></a>',
+                '<a href="foo"><p>Foo </p></a>',
+            ),
         );
     }
 

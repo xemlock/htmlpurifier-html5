@@ -1,27 +1,115 @@
 <?php
 
-/**
- * Utility class for HTML5 ChildDef classes
- */
-abstract class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
+class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
 {
+    /**
+     * Whether empty children should be accepted
+     * @var bool
+     */
+    public $allow_empty = true;
+
+    /**
+     * Lookup table with content sets to be included in allowed elements
+     * @var array
+     */
+    public $content_sets = array();
+
+    /**
+     * Lookup table with excluded of excluded descendant tags
+     * @var array
+     */
+    public $excludes = array();
+
+    /**
+     * @var array
+     */
+    protected $allowedElements = array();
+
+    /**
+     * @var boolean
+     */
+    protected $init = false;
+
+    /**
+     * @param HTMLPurifier_Config $config
+     * @return array
+     */
+    public function getAllowedElements($config)
+    {
+        $this->init($config);
+        return $this->allowedElements;
+    }
+
+    /**
+     * @param HTMLPurifier_Node[] $children
+     * @param HTMLPurifier_Config $config
+     * @param HTMLPurifier_Context $context
+     * @return HTMLPurifier_Node[]|bool
+     */
+    public function validateChildren($children, $config, $context)
+    {
+        $this->init($config);
+
+        if ($this->excludes) {
+            $children = self::filterOutElements($children, $this->excludes);
+        }
+
+        if (empty($children) && !$this->allow_empty) {
+            return false;
+        }
+
+        return $children;
+    }
+
+    /**
+     * @param HTMLPurifier_Config $config
+     */
+    protected function init(HTMLPurifier_Config $config)
+    {
+        if ($this->init) {
+            return;
+        }
+
+        if ($this->content_sets) {
+            $def = $config->getHTMLDefinition();
+
+            $this->allowedElements = $this->elements;
+            foreach ($this->content_sets as $name) {
+                if (isset($def->info_content_sets[$name])) {
+                    $this->allowedElements = array_merge($this->allowedElements, $def->info_content_sets[$name]);
+                }
+            }
+        }
+
+        $this->init = true;
+    }
+
     /**
      * Helper method for recursive elements removal
      *
      * @param HTMLPurifier_Node[] $children
-     * @param string|string[] $elements
+     * @param string|string[] $lookup
      * @return HTMLPurifier_Node[]
      */
-    public static function filterOutElements($children, $elements)
+    public static function filterOutElements($children, $lookup)
     {
-        if (!is_array($elements)) {
-            $elements = array($elements);
+        if (!is_array($lookup)) {
+            $lookup = array($lookup => true);
         }
+
+        // backward compatibility - ensure provided array is a lookup
+        foreach ($lookup as $key => $value) {
+            if (!is_string($key)) {
+                unset($lookup[$key]);
+                $lookup[$value] = true;
+            }
+        }
+
         $result = array();
         foreach ((array) $children as $child) {
             if ($child instanceof HTMLPurifier_Node_Element) {
-                $filteredChildren = self::filterOutElements($child->children, $elements);
-                if (in_array($child->name, $elements, true)) {
+                $filteredChildren = self::filterOutElements($child->children, $lookup);
+                if (isset($lookup[$child->name])) {
                     // don't add removed element, only its children
                     foreach ($filteredChildren as $c) {
                         $result[] = $c;
@@ -32,6 +120,7 @@ abstract class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
             }
             $result[] = $child;
         }
+
         return $result;
     }
 }

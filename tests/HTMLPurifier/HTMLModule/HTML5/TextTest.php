@@ -26,16 +26,11 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
                 '<figure><figcaption>Foo</figcaption><figcaption>Bar</figcaption>Baz</figure>',
                 '<figure><figcaption>Foo</figcaption>Baz</figure>',
             ),
-            array(
+            'nested figure' => array(
                 '<figure><img src="image.png" alt=""><figure><figcaption>Foo</figcaption></figure><figcaption>Bar</figcaption></figure>',
             ),
-            array(
+            'empty figure' => array(
                 '<figure></figure>',
-                '',
-            ),
-            array(
-                '<figure> </figure>',
-                '',
             ),
         );
     }

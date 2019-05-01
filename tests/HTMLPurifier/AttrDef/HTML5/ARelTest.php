@@ -23,8 +23,12 @@ class HTMLPurifier_AttrDef_HTML5_ARelTest extends BaseTestCase
     public function testDefault()
     {
         $this->assertSame(
-            false,
+            'nofollow',
             $this->attr->validate('nofollow', $this->config, $this->context)
+        );
+        $this->assertSame(
+            false,
+            $this->attr->validate('stylesheet', $this->config, $this->context)
         );
     }
 
@@ -35,6 +39,10 @@ class HTMLPurifier_AttrDef_HTML5_ARelTest extends BaseTestCase
         $this->assertSame(
             'nofollow',
             $this->attr->validate('nofollow', $this->config, $this->context)
+        );
+        $this->assertSame(
+            false,
+            $this->attr->validate('canonical', $this->config, $this->context)
         );
     }
 

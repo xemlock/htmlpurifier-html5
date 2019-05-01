@@ -3,6 +3,10 @@
 /**
  * Validates 'rel' attribute on <a> and <area> elements, as defined by the
  * HTML5 spec and the MicroFormats link type extensions tables.
+ *
+ * By default all rel values defined by the spec are allowed. To allow only
+ * a subset of the allowed values, specify them in 'Attr.AllowedRel' config
+ * setting.
  */
 class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
 {
@@ -118,10 +122,13 @@ class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
     public function validate($string, $config, $context)
     {
         if ($this->allowed === null) {
-            $allowed = array_intersect_key(
-                (array) $config->get('Attr.AllowedRel'),
-                self::$values
-            );
+            $allowedRel = (array) $config->get('Attr.AllowedRel');
+            if (empty($allowedRel)) {
+                $allowed = self::$values;
+            } else {
+                $allowed = array_intersect_key($allowedRel, self::$values);
+            }
+            $this->allowed = $allowed;
         }
 
         $string = $this->parseCDATA($string);
@@ -130,7 +137,7 @@ class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
         $result = array();
         foreach ($parts as $part) {
             $part = strtolower(trim($part));
-            if (!isset($allowed[$part])) {
+            if (!isset($this->allowed[$part])) {
                 continue;
             }
             $result[$part] = true;

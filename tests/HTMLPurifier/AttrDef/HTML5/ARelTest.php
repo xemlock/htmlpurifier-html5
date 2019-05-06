@@ -1,62 +1,36 @@
 <?php
 
-class HTMLPurifier_AttrDef_HTML5_ARelTest extends BaseTestCase
+/**
+ * @property HTMLPurifier_AttrDef_HTML5_ARel $attr
+ */
+class HTMLPurifier_AttrDef_HTML5_ARelTest extends AttrDefTestCase
 {
-    /**
-     * @var HTMLPurifier_Context
-     */
-    protected $context;
-
-    /**
-     * @var HTMLPurifier_AttrDef_HTML5_ARel
-     */
-    protected $attr;
-
     protected function setUp()
     {
         parent::setUp();
 
-        $this->context = new HTMLPurifier_Context();
         $this->attr = new HTMLPurifier_AttrDef_HTML5_ARel();
     }
 
     public function testDefault()
     {
-        $this->assertSame(
-            'nofollow',
-            $this->attr->validate('nofollow', $this->config, $this->context)
-        );
-        $this->assertSame(
-            false,
-            $this->attr->validate('stylesheet', $this->config, $this->context)
-        );
+        $this->assertValidate('nofollow');
+        $this->assertValidate('stylesheet', false);
     }
 
     public function testAllowed()
     {
         $this->config->set('Attr.AllowedRel', array('nofollow'));
 
-        $this->assertSame(
-            'nofollow',
-            $this->attr->validate('nofollow', $this->config, $this->context)
-        );
-        $this->assertSame(
-            false,
-            $this->attr->validate('canonical', $this->config, $this->context)
-        );
+        $this->assertValidate('nofollow');
+        $this->assertValidate('canonical', false);
     }
 
     public function testInvalid()
     {
         $this->config->set('Attr.AllowedRel', array('nofollow', 'foo'));
 
-        $this->assertSame(
-            false,
-            $this->attr->validate('foo', $this->config, $this->context)
-        );
-        $this->assertSame(
-            'nofollow',
-            $this->attr->validate('foo nofollow', $this->config, $this->context)
-        );
+        $this->assertValidate('foo', false);
+        $this->assertValidate('foo nofollow', 'nofollow');
     }
 }

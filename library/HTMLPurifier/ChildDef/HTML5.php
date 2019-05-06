@@ -3,7 +3,7 @@
 class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
 {
     /**
-     * Whether empty children should be accepted
+     * Whether element with no children should be accepted
      * @var bool
      */
     public $allow_empty = true;
@@ -33,6 +33,7 @@ class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
     /**
      * @param HTMLPurifier_Config $config
      * @return array
+     * @throws HTMLPurifier_Exception
      */
     public function getAllowedElements($config)
     {
@@ -45,6 +46,7 @@ class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
      * @return HTMLPurifier_Node[]|bool
+     * @throws HTMLPurifier_Exception
      */
     public function validateChildren($children, $config, $context)
     {
@@ -63,11 +65,19 @@ class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
 
     /**
      * @param HTMLPurifier_Config $config
+     * @throws HTMLPurifier_Exception
      */
     protected function init(HTMLPurifier_Config $config)
     {
         if ($this->init) {
             return;
+        }
+
+        // Ensure that the type property is not empty, otherwise the element
+        // will be treated as having an Empty content model (closing tag will
+        // be omitted) if no children are present.
+        if (empty($this->type)) {
+            throw new HTMLPurifier_Exception("The 'type' property is not initialized");
         }
 
         if ($this->content_sets) {

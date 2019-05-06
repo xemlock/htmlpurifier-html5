@@ -1,13 +1,18 @@
 <?php
 
+/** @noinspection PhpDocMissingThrowsInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+
 class HTMLPurifier_ChildDef_HTML5Test extends BaseTestCase
 {
     public function testValidateChildrenAllowEmpty()
     {
-        $childDef = new HTMLPurifier_ChildDef_HTML5();
         $context = new HTMLPurifier_Context();
 
+        $childDef = new HTMLPurifier_ChildDef_HTML5();
+        $childDef->type = 'type';
         $childDef->allow_empty = true;
+
         $this->assertEquals(
             array(),
             $childDef->validateChildren(array(), $this->config, $context)
@@ -18,6 +23,18 @@ class HTMLPurifier_ChildDef_HTML5Test extends BaseTestCase
             false,
             $childDef->validateChildren(array(), $this->config, $context)
         );
+    }
+
+    /**
+     * @expectedException HTMLPurifier_Exception
+     * @expectedExceptionMessage property is not initialized
+     */
+    public function testValidateChildrenNoType()
+    {
+        $context = new HTMLPurifier_Context();
+
+        $childDef = new HTMLPurifier_ChildDef_HTML5();
+        $childDef->validateChildren(array(), $this->config, $context);
     }
 
     public function testFilterOutElements()

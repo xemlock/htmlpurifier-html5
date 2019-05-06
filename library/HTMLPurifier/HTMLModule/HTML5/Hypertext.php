@@ -17,6 +17,7 @@ class HTMLPurifier_HTMLModule_HTML5_Hypertext extends HTMLPurifier_HTMLModule
     public function setup($config)
     {
         $aContents = new HTMLPurifier_ChildDef_HTML5();
+        $aContents->type = 'a';
         $aContents->excludes = array('a' => true);
         $aContents->content_sets = array('Flow');
 

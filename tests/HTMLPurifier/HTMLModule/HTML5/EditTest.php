@@ -5,8 +5,12 @@ class HTMLPurifier_HTMLModule_HTML5_EditTest extends BaseTestCase
     public function testInsDel()
     {
         $this->assertPurification('<p>This was <del>deleted</del> <ins>added</ins>.</p>');
+
         $this->assertPurification('<del><p>This paragraph has been deleted.</p></del>');
+        $this->assertPurification('<del></del>');
+
         $this->assertPurification('<ins><p>This paragraph has been added.</p></ins>');
+        $this->assertPurification('<ins></ins>');
     }
 
     public function testInsDelAttrs()

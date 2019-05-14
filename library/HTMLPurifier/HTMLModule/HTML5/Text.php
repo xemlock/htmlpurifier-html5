@@ -13,6 +13,7 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
 
     /**
      * @param HTMLPurifier_Config $config
+     * @throws HTMLPurifier_Exception
      */
     public function setup($config)
     {
@@ -44,10 +45,17 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('wbr', 'Inline', 'Empty', 'Core');
 
         // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-time-element
-        $time = $this->addElement('time', 'Inline', 'Inline', 'Common', array(
-            'datetime' => 'Text',
-            'pubdate'  => 'Bool',
+        // https://w3c.github.io/html-reference/datatypes.html#common.data.time-datetime-def
+        // Composite attr def is sufficiently general to be used in non-CSS contexts
+        $timeDatetime = new HTMLPurifier_AttrDef_CSS_Composite(array(
+            new HTMLPurifier_AttrDef_HTML5_Datetime(),
+            new HTMLPurifier_AttrDef_HTML5_YearlessDate(),
+            new HTMLPurifier_AttrDef_HTML5_Week(),
+            new HTMLPurifier_AttrDef_HTML5_Duration(),
         ));
-        $time->excludes = array('time' => true);
+        $timeContents = new HTMLPurifier_ChildDef_HTML5_Time();
+        $this->addElement('time', 'Inline', $timeContents, 'Common', array(
+            'datetime' => $timeDatetime,
+        ));
     }
 }

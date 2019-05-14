@@ -7,6 +7,7 @@ class HTMLPurifier_HTML5Definition
      *
      * @param  HTMLPurifier_HTMLDefinition $def
      * @return HTMLPurifier_HTMLDefinition
+     * @throws HTMLPurifier_Exception
      */
     public static function setupDefinition(HTMLPurifier_HTMLDefinition $def)
     {
@@ -45,6 +46,8 @@ class HTMLPurifier_HTML5Definition
         // add support for Floating point number attributes
         $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
 
+        $def->manager->attrTypes->set('Datetime', new HTMLPurifier_AttrDef_HTML5_Datetime());
+
         // IFRAME
         $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
 
@@ -56,6 +59,7 @@ class HTMLPurifier_HTML5Definition
      * @deprecated Use {@link setupDefinition()} instead
      * @param  HTMLPurifier_HTMLDefinition $def
      * @return HTMLPurifier_HTMLDefinition
+     * @throws HTMLPurifier_Exception
      */
     public static function setup(HTMLPurifier_HTMLDefinition $def)
     {

@@ -83,6 +83,7 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         $needSetup = $type === 'HTML' && !isset($this->definitions[$type]);
         if ($needSetup) {
             if ($def = parent::getDefinition($type, true, true)) {
+                /** @var HTMLPurifier_HTMLDefinition $def */
                 HTMLPurifier_HTML5Definition::setupDefinition($def);
             }
         }

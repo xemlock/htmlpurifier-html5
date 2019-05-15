@@ -56,6 +56,15 @@ class HTMLPurifier_AttrDef_HTML5DurationTest extends AttrDefTestCase
             array('4.010s', '4.01s'),
             array('4.001s', '4.001s'),
 
+            // zero pad
+            array('08h 41m 04s', '8h 41m 4s'),
+
+            // spaces between values and units
+            array('8 h 41 m 4 s', '8h 41m 4s'),
+
+            // no spaces between parts
+            array('8h41m4s', '8h 41m 4s'),
+
             // case sensitivity
             array('1W 2D 3M 4S', '1w 2d 3m 4s'),
             array('1W 2d 3M 4s', '1w 2d 3m 4s'),

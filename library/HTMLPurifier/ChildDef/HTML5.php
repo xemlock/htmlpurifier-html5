@@ -15,7 +15,17 @@ class HTMLPurifier_ChildDef_HTML5 extends HTMLPurifier_ChildDef
     public $content_sets = array();
 
     /**
-     * Lookup table with excluded of excluded descendant tags
+     * Lookup table with excluded of excluded descendant tags.
+     *
+     * When {@link HTMLPurifier_Strategy_MakeWellFormed MakeWellFormed strategy}
+     * encounters a matching element that is a direct child of the currently
+     * analyzed element, then the parent element will be closed, and the
+     * offending child will become parent's sibling.
+     *
+     * Matching elements that are deeper in the subtree will be removed by
+     * {@link validateChildren()}, but their descendants will be retained,
+     * as long as they are not present in the lookup table.
+     *
      * @var array
      */
     public $excludes = array();

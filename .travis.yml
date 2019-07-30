@@ -38,6 +38,12 @@ install:
         # https://github.com/ezyang/htmlpurifier/issues/169
         composer require --no-update 'ezyang/htmlpurifier:dev-master#89b3fe4'
       fi
+    - |
+      if [[ "${TRAVIS_PHP_VERSION}" = 5.3 ]]; then
+        # htmlpurifier 4.11.0 is incompatible with PHP < 5.4
+        # https://github.com/ezyang/htmlpurifier/pull/225
+        composer require --no-update 'ezyang/htmlpurifier:4.10.0'
+      fi
     - composer install
 
 script:

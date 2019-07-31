@@ -38,8 +38,16 @@ class HTMLPurifier_HTMLModule_HTML5_HypertextTest extends BaseTestCase
                 '<a href="foo"></a>',
             ),
             array(
-                '<a href="foo"><a href="bar">Bar</a></a>',
-                '<a href="foo"></a><a href="bar">Bar</a>',
+                // Autoclosing of the first <a> is done automatically by lexers,
+                // tested with DOMLex and PH5P. It's also exactly how browsers do this.
+                '<a href="foo">Foo<a href="bar">Bar</a></a>',
+                '<a href="foo">Foo</a><a href="bar">Bar</a>',
+            ),
+            array(
+                '<span><a href="foo">foo</a></span>',
+            ),
+            array(
+                '<div><a href="foo">foo</a></div>',
             ),
         );
     }

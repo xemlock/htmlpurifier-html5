@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2019042601;
+    const REVISION = 2019073101;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config

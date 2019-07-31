@@ -2,6 +2,68 @@
 
 class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
 {
+    /**
+     * Data provider for {@link testAddress()}
+     * @return array
+     */
+    public function addressInput()
+    {
+        return array(
+            array(
+                '<address><a href="mailto:jim@rock.com">jim@rock.com</a><p><small>© Copyright 2019 ACME Inc.</small></p></address>',
+            ),
+            array(
+                '<address><p>Foo</p></address>',
+            ),
+            array(
+                '<address><span>Foo</span></address>',
+            ),
+            array(
+                '<address><div>Foo</div></address>',
+            ),
+            array(
+                '<address><main>Foo</main></address>',
+            ),
+            array(
+                '<address><div><address><p>Foo</p></address></div></address>',
+                '<address><div><p>Foo</p></div></address>',
+            ),
+            array(
+                '<address><h1>Foo</h1></address>',
+                '<address>Foo</address>',
+            ),
+            array(
+                '<address><header>Foo</header></address>',
+                '<address>Foo</address>',
+            ),
+            array(
+                '<address>Foo<address><span>Bar</span></address></address>',
+                '<address>Foo<span>Bar</span></address>',
+            ),
+            array(
+                '<section><address>Foo</address></section>',
+            ),
+            array(
+                '<p><address>Foo</address></p>',
+                '<p></p><address>Foo</address>',
+            ),
+            array(
+                '<span><address>Foo</address></span>',
+                '<span></span><address>Foo</address>',
+            ),
+        );
+    }
+
+     /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider addressInput
+     */
+    public function testAddress($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
     public function figureInput()
     {
         return array(

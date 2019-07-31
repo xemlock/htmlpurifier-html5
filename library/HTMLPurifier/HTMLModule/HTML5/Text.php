@@ -28,8 +28,22 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('footer', 'Block', 'Flow', 'Common');
         $this->addElement('main', 'Block', 'Flow', 'Common');
 
-        // Content model actually excludes several tags, not modelled here
-        $this->addElement('address', 'Block', 'Flow', 'Common');
+        // https://html.spec.whatwg.org/dev/sections.html#the-address-element
+        $addressContents = new HTMLPurifier_ChildDef_HTML5();
+        $addressContents->type = 'address';
+        $addressContents->excludes = $this->makeLookup(
+            // no heading content
+            // https://html.spec.whatwg.org/dev/dom.html#heading-content
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hgroup',
+            // no sectioning content
+            // https://html.spec.whatwg.org/dev/dom.html#sectioning-content
+            'article', 'aside', 'nav', 'section',
+            // no header, footer and address
+            'address', 'footer', 'header'
+        );
+        $addressContents->content_sets = array('Flow');
+        $this->addElement('address', 'Block', $addressContents, 'Common');
+
         $this->addElement('hgroup', 'Block', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
         // https://html.spec.whatwg.org/dev/grouping-content.html#the-figure-element

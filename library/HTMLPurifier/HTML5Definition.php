@@ -27,7 +27,9 @@ class HTMLPurifier_HTML5Definition
         $def->manager->doctypes->register(
             'HTML5',
             false,
-            array_merge($common, $transitional, $non_xml),
+            // Order of modules is important - the latter ones override the former.
+            // Place common HTML5 modules at the end of the list
+            array_merge($non_xml, $transitional, $common),
             array('Tidy_Transitional', 'Tidy_Proprietary'),
             array()
         );

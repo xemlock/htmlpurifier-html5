@@ -11,6 +11,10 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
      */
     public $name = 'HTML5_Text';
 
+    public $content_sets = array(
+        'Flow' => 'Heading | Block | Inline | Sectioning'
+    );
+
     /**
      * @param HTMLPurifier_Config $config
      * @throws HTMLPurifier_Exception
@@ -20,10 +24,11 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         parent::setup($config);
 
         // http://developers.whatwg.org/sections.html
-        $this->addElement('section', 'Block', 'Flow', 'Common');
-        $this->addElement('nav', 'Block', 'Flow', 'Common');
-        $this->addElement('article', 'Block', 'Flow', 'Common');
-        $this->addElement('aside', 'Block', 'Flow', 'Common');
+        $this->addElement('section', 'Sectioning', 'Flow', 'Common');
+        $this->addElement('nav', 'Sectioning', 'Flow', 'Common');
+        $this->addElement('article', 'Sectioning', 'Flow', 'Common');
+        $this->addElement('aside', 'Sectioning', 'Flow', 'Common');
+
         $this->addElement('header', 'Block', 'Flow', 'Common');
         $this->addElement('footer', 'Block', 'Flow', 'Common');
         $this->addElement('main', 'Block', 'Flow', 'Common');

@@ -3,6 +3,63 @@
 class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
 {
     /**
+     * Data provider for {@link testSectioningContent()}
+     *
+     * @return array
+     */
+    public function sectioningContentInput()
+    {
+        return array(
+            array(
+                '<aside><p>Foo</p></aside>',
+            ),
+            array(
+                '<p><aside></aside></p>',
+                '<p></p><aside></aside>',
+            ),
+            array(
+                '<article><p>Foo</p><aside><p>Bar</p></aside><p>Baz</p></article>',
+            ),
+            array(
+                '<nav><ol><li><a href="foo">Foo</a></li></ol></nav>',
+            ),
+            array(
+                '<div><nav>Foo</nav></div>',
+            ),
+            array(
+                // Element nav not allowed as child of element span
+                '<span><nav>Foo</nav></span>',
+                '<span></span><nav>Foo</nav>',
+            ),
+            array(
+                '<div><nav><ol><li><a href="foo">Foo</a></li></ol></nav></div>',
+            ),
+            array(
+                '<section><nav><ol><li><a href="foo">Foo</a></li></ol></nav></section>',
+            ),
+            array(
+                '<section><h1>Heading</h1><p>Content</p></section>',
+            ),
+            array(
+                '<div><section><h1>Heading</h1><p>Content</p></section></div>',
+            ),
+            array(
+                '<section></section>Foo',
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider sectioningContentInput
+     */
+    public function testSectioningContent($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
+    /**
      * Data provider for {@link testAddress()}
      * @return array
      */
@@ -11,6 +68,9 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
         return array(
             array(
                 '<address><a href="mailto:jim@rock.com">jim@rock.com</a><p><small>© Copyright 2019 ACME Inc.</small></p></address>',
+            ),
+            array(
+                '<address></address>Foo',
             ),
             array(
                 '<address><p>Foo</p></address>',

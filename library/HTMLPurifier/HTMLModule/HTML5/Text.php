@@ -49,7 +49,7 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $addressContents->content_sets = array('Flow');
         $this->addElement('address', 'Block', $addressContents, 'Common');
 
-        $this->addElement('hgroup', 'Block', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
+        $this->addElement('hgroup', 'Heading', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
         // https://html.spec.whatwg.org/dev/grouping-content.html#the-figure-element
         $this->addElement('figure', 'Block', new HTMLPurifier_ChildDef_HTML5_Figure(), 'Common');

@@ -3,8 +3,51 @@
 class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
 {
     /**
+     * Data provider for {@link testHeadingContent()}
+     * @return array
+     */
+    public function headingContentInput()
+    {
+        /** @noinspection HtmlDeprecatedTag */
+        return array(
+            array(
+                '<hgroup><h1>Foo</h1></hgroup>',
+            ),
+            array(
+                '<div><hgroup><h1>Foo</h1></hgroup></div>',
+            ),
+            array(
+                '<span><hgroup><h1>Foo</h1></hgroup></span>',
+                '<span></span><hgroup><h1>Foo</h1></hgroup>',
+            ),
+            array(
+                '<section><hgroup><h1>Foo</h1></hgroup></section>',
+            ),
+            array(
+                // Element hgroup is missing a required instance of one or more
+                // of the following child elements: h1, h2, h3, h4, h5, h6.
+                '<hgroup></hgroup>',
+                '',
+            ),
+            array(
+                '<hgroup>Foo</hgroup>',
+                '',
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider headingContentInput
+     */
+    public function testHeadingContent($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
+    /**
      * Data provider for {@link testSectioningContent()}
-     *
      * @return array
      */
     public function sectioningContentInput()

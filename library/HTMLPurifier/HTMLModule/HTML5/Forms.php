@@ -38,13 +38,14 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
         $progress = $this->addElement(
             'progress',
             'Flow',
-            new HTMLPurifier_ChildDef_HTML5_Progress(),
+            'Inline',
             'Common',
             array(
                 'value' => 'Float#min:0',
                 'max'   => 'Float#min:0',
             )
         );
+        $progress->excludes = array('progress' => true);
         $this->addElementToContentSet('progress', 'Inline');
 
         $progress->attr_transform_post[] = new HTMLPurifier_AttrTransform_HTML5_Progress();

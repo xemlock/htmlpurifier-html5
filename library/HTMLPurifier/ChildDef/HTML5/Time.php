@@ -8,16 +8,14 @@
  *
  * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-time-element
  */
-class HTMLPurifier_ChildDef_HTML5_Time extends HTMLPurifier_ChildDef_HTML5
+class HTMLPurifier_ChildDef_HTML5_Time extends HTMLPurifier_ChildDef_HTML5_Abstract
 {
     public $type = 'time';
 
-    public $excludes = array(
-        'time' => true,
-    );
+    public $allow_empty = true;
 
-    public $content_sets = array(
-        'Inline',
+    public $elements = array(
+        'Inline' => true,
     );
 
     /**
@@ -25,11 +23,9 @@ class HTMLPurifier_ChildDef_HTML5_Time extends HTMLPurifier_ChildDef_HTML5
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
      * @return bool|HTMLPurifier_Node[]
-     * @throws HTMLPurifier_Exception
      */
     public function validateChildren($children, $config, $context)
     {
-        $children = parent::validateChildren($children, $config, $context);
         $currentNode = $context->get('CurrentNode', true);
 
         if ($currentNode instanceof HTMLPurifier_Node_Element) {

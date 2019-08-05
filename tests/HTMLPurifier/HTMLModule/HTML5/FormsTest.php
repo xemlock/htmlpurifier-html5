@@ -122,6 +122,9 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
                 '<progress></progress>',
             ),
             array(
+                '<progress>Foo</progress>',
+            ),
+            array(
                 '<progress value="1" max="100"></progress>',
             ),
             array(
@@ -159,7 +162,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
             array(
                 // Phrasing content, but there must be no <progress> element among its descendants.
                 '<progress><em><progress>Foo</progress></em></progress>',
-                '<progress><em>Foo</em></progress>',
+                '<progress><em></em></progress>',
             ),
             array(
                 // Phrasing content only

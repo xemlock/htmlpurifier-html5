@@ -34,9 +34,8 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('main', 'Block', 'Flow', 'Common');
 
         // https://html.spec.whatwg.org/dev/sections.html#the-address-element
-        $addressContents = new HTMLPurifier_ChildDef_HTML5();
-        $addressContents->type = 'address';
-        $addressContents->excludes = $this->makeLookup(
+        $address = $this->addElement('address', 'Block', 'Flow', 'Common');
+        $address->excludes = $this->makeLookup(
             // no heading content
             // https://html.spec.whatwg.org/dev/dom.html#heading-content
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hgroup',
@@ -46,8 +45,6 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
             // no header, footer and address
             'address', 'footer', 'header'
         );
-        $addressContents->content_sets = array('Flow');
-        $this->addElement('address', 'Block', $addressContents, 'Common');
 
         $this->addElement('hgroup', 'Heading', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 

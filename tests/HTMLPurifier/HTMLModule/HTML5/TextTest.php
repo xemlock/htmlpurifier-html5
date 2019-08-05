@@ -129,19 +129,19 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
             ),
             array(
                 '<address><div><address><p>Foo</p></address></div></address>',
-                '<address><div><p>Foo</p></div></address>',
+                '<address><div></div></address>',
             ),
             array(
                 '<address><h1>Foo</h1></address>',
-                '<address>Foo</address>',
+                '<address></address>',
             ),
             array(
                 '<address><header>Foo</header></address>',
-                '<address>Foo</address>',
+                '<address></address>',
             ),
             array(
                 '<address>Foo<address><span>Bar</span></address></address>',
-                '<address>Foo<span>Bar</span></address>',
+                '<address>Foo</address>',
             ),
             array(
                 '<section><address>Foo</address></section>',
@@ -292,7 +292,10 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
             array('<time></time>', '<time datetime="1970-01-01"></time>'),
             array('<time>Foo</time>', '<time datetime="1970-01-01">Foo</time>'),
             array('<time><i>Foo</i></time>', '<time datetime="1970-01-01"><i>Foo</i></time>'),
-            array('<time><time>Foo</time></time>', '<time datetime="1970-01-01">Foo</time>'),
+            array(
+                '<time><time>Foo</time></time>',
+                '<time datetime="1970-01-01"><time datetime="1970-01-01">Foo</time></time>',
+            ),
 
             // inline
             array('<p>This book was published <time datetime="2014-10"><em>last</em> month</time></p>'),

@@ -90,11 +90,11 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
             ),
             'nested' => array(
                 '<noscript>Foo<noscript>Bar</noscript>Baz</noscript>',
-                '<noscript>Foo</noscript><noscript>Bar</noscript>Baz',
+                '<noscript>FooBaz</noscript>',
             ),
             'deeply nested' => array(
                 '<noscript>Foo<span><noscript>Bar</noscript></span></noscript>',
-                '<noscript>Foo<span>Bar</span></noscript>',
+                '<noscript>Foo<span></span></noscript>',
             ),
         );
     }

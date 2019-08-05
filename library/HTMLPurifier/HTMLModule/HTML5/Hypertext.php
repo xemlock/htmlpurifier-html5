@@ -16,13 +16,8 @@ class HTMLPurifier_HTMLModule_HTML5_Hypertext extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        $aContents = new HTMLPurifier_ChildDef_HTML5();
-        $aContents->type = 'a';
-        $aContents->excludes = array('a' => true);
-        $aContents->content_sets = array('Flow');
-
         // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-a-element
-        $this->addElement('a', 'Flow', $aContents, 'Common', array(
+        $a = $this->addElement('a', 'Flow', 'Flow', 'Common', array(
             'download' => 'Text',
             'href'     => 'URI',
             'hreflang' => 'Text', // 'LanguageCode',
@@ -30,6 +25,7 @@ class HTMLPurifier_HTMLModule_HTML5_Hypertext extends HTMLPurifier_HTMLModule
             'target'   => new HTMLPurifier_AttrDef_HTML_FrameTarget(),
             'type'     => 'Text',
         ));
+        $a->excludes = array('a' => true);
         $this->addElementToContentSet('a', 'Inline');
     }
 }

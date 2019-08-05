@@ -25,8 +25,8 @@ class HTMLPurifier_HTMLModule_HTML5_Scripting extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        $noscriptContents = new HTMLPurifier_ChildDef_HTML5_Noscript();
-        $this->addElement('noscript', 'Flow', $noscriptContents, 'Common');
+        $noscript = $this->addElement('noscript', 'Flow', 'Required: Flow | #PCDATA', 'Common');
+        $noscript->excludes = array('noscript' => true);
         $this->addElementToContentSet('noscript', 'Inline');
 
         $scriptContents = new HTMLPurifier_ChildDef_HTML5_Script();

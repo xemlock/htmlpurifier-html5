@@ -21,7 +21,7 @@ class HTMLPurifier_AttrTransform_ProgressTest extends PHPUnit_Framework_TestCase
     {
         $this->config = HTMLPurifier_HTML5Config::createDefault();
         $this->context = new HTMLPurifier_Context();
-        $this->progress = new HTMLPurifier_AttrTransform_Progress();
+        $this->progress = new HTMLPurifier_AttrTransform_HTML5_Progress();
     }
 
     public function transformInput()

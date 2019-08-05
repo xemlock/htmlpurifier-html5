@@ -3,6 +3,156 @@
 class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
 {
     /**
+     * Data provider for {@link testHeaderFooter()}
+     * @return array
+     */
+    public function headerFooterInput()
+    {
+        return array(
+            // Header
+            array(
+                '<header></header>',
+            ),
+            array(
+                '<header>Foo</header>',
+            ),
+            array(
+                '<header><h1>Foo</h1></header>',
+            ),
+            array(
+                '<div><header></header></div>',
+            ),
+            array(
+                '<span><header></header></span>',
+                '<span></span><header></header>',
+            ),
+            array(
+                '<main><header></header></main>',
+            ),
+            array(
+                '<header>Foo<header>Bar</header></header>',
+                '<header>Foo</header>',
+            ),
+            array(
+                '<header>Foo<footer>Bar</footer></header>',
+                '<header>Foo</header>',
+            ),
+            array(
+                '<header><section>Foo</section></header>',
+            ),
+            array(
+                '<section><header>Foo</header></section>',
+            ),
+
+            // Footer
+            array(
+                '<footer></footer>',
+            ),
+            array(
+                '<footer>Foo</footer>',
+            ),
+            array(
+                '<footer><h1>Foo</h1></footer>',
+            ),
+            array(
+                '<div><footer></footer></div>',
+            ),
+            array(
+                '<span><footer></footer></span>',
+                '<span></span><footer></footer>',
+            ),
+            array(
+                '<main><footer></footer></main>',
+            ),
+            array(
+                '<footer>Foo<footer>Bar</footer></footer>',
+                '<footer>Foo</footer>',
+            ),
+            array(
+                '<footer>Foo<header>Bar</header></footer>',
+                '<footer>Foo</footer>',
+            ),
+            array(
+                '<footer><section>Foo</section></footer>',
+            ),
+            array(
+                '<section><footer>Foo</footer></section>',
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider headerFooterInput
+     */
+    public function testHeaderFooter($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
+    /**
+     * Data provider for {@link testMain()}
+     * @return array
+     */
+    public function mainInput()
+    {
+        return array(
+            array(
+                '<main></main>',
+            ),
+            array(
+                '<main><main>Foo</main></main>',
+            ),
+            // Block content
+            array(
+                '<div><main>Foo</main></div>',
+            ),
+            // Heading content
+            array(
+                '<h1><main>Foo</main></h1>',
+                '<h1></h1><main>Foo</main>',
+            ),
+            // Inline content
+            array(
+                '<span><main>Foo</main></span>',
+                '<span></span><main>Foo</main>'
+            ),
+            // Sectioning content
+            array(
+                '<section><main>Foo</main></section>',
+            ),
+            array(
+                '<main><section></section></main>',
+            ),
+            array(
+                '<address><main>Foo</main></address>',
+            ),
+            // Header and footer
+            array(
+                '<header><main>Foo</main></header>',
+                '<header></header>',
+            ),
+            array(
+                '<main><header>Foo</header></main>',
+            ),
+            array(
+                '<main><footer>Foo</footer></main>',
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider mainInput
+     */
+    public function testMain($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
+    /**
      * Data provider for {@link testHeadingContent()}
      * @return array
      */
@@ -12,6 +162,9 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
         return array(
             array(
                 '<hgroup><h1>Foo</h1></hgroup>',
+            ),
+            array(
+                '<hgroup><h1></h1></hgroup>',
             ),
             array(
                 '<div><hgroup><h1>Foo</h1></hgroup></div>',

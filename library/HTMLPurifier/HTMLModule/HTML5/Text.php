@@ -29,9 +29,13 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('article', 'Sectioning', 'Flow', 'Common');
         $this->addElement('aside', 'Sectioning', 'Flow', 'Common');
 
-        $this->addElement('header', 'Block', 'Flow', 'Common');
-        $this->addElement('footer', 'Block', 'Flow', 'Common');
-        $this->addElement('main', 'Block', 'Flow', 'Common');
+        // https://html.spec.whatwg.org/dev/sections.html#the-header-element
+        $header = $this->addElement('header', 'Block', 'Flow', 'Common');
+        $header->excludes = $this->makeLookup('header', 'footer', 'main');
+
+        // https://html.spec.whatwg.org/dev/sections.html#the-footer-element
+        $footer = $this->addElement('footer', 'Block', 'Flow', 'Common');
+        $footer->excludes = $this->makeLookup('header', 'footer', 'main');
 
         // https://html.spec.whatwg.org/dev/sections.html#the-address-element
         $address = $this->addElement('address', 'Block', 'Flow', 'Common');
@@ -46,7 +50,11 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
             'address', 'footer', 'header'
         );
 
+        // https://html.spec.whatwg.org/dev/sections.html#the-hgroup-element
         $this->addElement('hgroup', 'Heading', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
+
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-main-element
+        $this->addElement('main', 'Block', 'Flow', 'Common');
 
         // https://html.spec.whatwg.org/dev/grouping-content.html#the-figure-element
         $this->addElement('figure', 'Block', new HTMLPurifier_ChildDef_HTML5_Figure(), 'Common');

@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2019080501;
+    const REVISION = 2019080601;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -67,6 +67,10 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         if (empty($doctypeConfig->allowed['HTML5'])) {
             $allowed = array_merge($doctypeConfig->allowed, array('HTML5' => true));
             $schema->addAllowedValues('HTML.Doctype', $allowed);
+        }
+
+        if (empty($schema->info['HTML.IframeAllowFullscreen'])) {
+            $schema->add('HTML.IframeAllowFullscreen', false, 'bool', false);
         }
 
         parent::__construct($schema, $parent);

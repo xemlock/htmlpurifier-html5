@@ -52,6 +52,18 @@ $config->set('HTML.SafeIframe', true);
 $config->set('URI.SafeIframeRegexp', '%^//www\.youtube\.com/embed/%');
 ```
 
+## Configuration
+
+Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifier.org/live/configdoc/plain.html), the following new directives are also supported:
+
+* __HTML.IframeAllowFullscreen__
+
+  Version added: 0.1.11\
+  Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
+  Default: `false`
+
+  Whether or not to permit `allowfullscreen` attribute on `iframe` tags. It requires either [%HTML.SafeIframe](http://htmlpurifier.org/live/configdoc/plain.html#HTML.SafeIframe) or [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) to be enabled.
+
 
 ## Supported HTML5 elements
 

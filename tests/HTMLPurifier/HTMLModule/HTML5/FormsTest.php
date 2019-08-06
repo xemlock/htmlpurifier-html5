@@ -3,6 +3,45 @@
 class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
 {
     /**
+     * Data provider for {@link testForm()}
+     * @return array
+     */
+    public function formInput()
+    {
+        return array(
+            array(
+                '<form>Foo</form>',
+            ),
+            array(
+                '<form enctype="text/plain">Foo</form>',
+            ),
+            array(
+                '<form><section><h1>Foo</h1></section></form>',
+            ),
+            array(
+                '<form><nav>Foo</nav></form>'
+            ),
+            array(
+                '<form><form>Foo</form></form>',
+                // DOMLex output
+                '<form></form><form>Foo</form>',
+                // DirectLex outputs '<form></form>'
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider formInput
+     */
+    public function testForm($input, $expected = null)
+    {
+        $this->config->set('HTML.Trusted', true);
+        $this->assertPurification($input, $expected);
+    }
+
+    /**
      * @param string $input
      * @param string $expected OPTIONAL
      * @dataProvider fieldsetDataProvider

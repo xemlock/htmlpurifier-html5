@@ -60,6 +60,11 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('figure', 'Block', new HTMLPurifier_ChildDef_HTML5_Figure(), 'Common');
         $this->addElement('figcaption', false, 'Flow', 'Common');
 
+        // https://html.spec.whatwg.org/multipage/grouping-content.html#the-blockquote-element
+        $this->addElement('blockquote', 'Block', 'Flow', 'Common', array(
+            'cite' => 'URI',
+        ));
+
         // http://developers.whatwg.org/text-level-semantics.html
         $this->addElement('s', 'Inline', 'Inline', 'Common');
         $this->addElement('var', 'Inline', 'Inline', 'Common');

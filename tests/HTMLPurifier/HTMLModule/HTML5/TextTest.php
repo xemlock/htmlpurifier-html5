@@ -256,6 +256,47 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
     }
 
     /**
+     * Data provider for {@link testBlockquote()}
+     * @return array
+     */
+    public function blockquoteInput()
+    {
+        return array(
+            array(
+                '<blockquote>Foo</blockquote>',
+            ),
+            array(
+                '<blockquote></blockquote>',
+            ),
+            array(
+                '<blockquote><section>Foo</section></blockquote>',
+            ),
+            array(
+                '<blockquote><nav>Foo</nav></blockquote>',
+            ),
+            array(
+                '<blockquote><h1>Foo</h1></blockquote>',
+            ),
+            array(
+                '<blockquote><p>Foo</p></blockquote>',
+            ),
+            array(
+                '<blockquote><blockquote>Foo</blockquote></blockquote>',
+            ),
+        );
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider blockquoteInput
+     */
+    public function testBlockquote($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
+    /**
      * Data provider for {@link testAddress()}
      * @return array
      */

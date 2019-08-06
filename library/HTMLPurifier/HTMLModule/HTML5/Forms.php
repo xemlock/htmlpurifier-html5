@@ -5,7 +5,7 @@
  *
  * This module is marked as safe to support static elements like <progress>
  * out of the box. Only elements inherited from parent module are unsafe,
- * and enabled conditionally with 'HTML.Trusted' config flag.
+ * and enabled conditionally with %HTML.Trusted flag.
  */
 class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
 {
@@ -20,6 +20,21 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
     {
         if ($config->get('HTML.Trusted')) {
             parent::setup($config);
+
+            // https://html.spec.whatwg.org/multipage/forms.html#the-form-element
+            $form = $this->addElement(
+                'form',
+                'Form',
+                'Flow',
+                'Common',
+                array(
+                    'accept-charset' => 'Charsets',
+                    'action'  => 'URI',
+                    'method'  => 'Enum#get,post',
+                    'enctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data,text/plain',
+                )
+            );
+            $form->excludes = array('form' => true);
 
             $this->addElement(
                 'fieldset',

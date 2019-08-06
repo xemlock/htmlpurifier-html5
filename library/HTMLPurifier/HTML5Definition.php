@@ -21,7 +21,7 @@ class HTMLPurifier_HTML5Definition
             // Sorta legacy, but present in strict:
             'Name',
         );
-        $transitional = array('Legacy', 'Target', 'Iframe');
+        $transitional = array('Legacy', 'Target', 'HTML5_Iframe');
         $non_xml = array('NonXMLCommonAttributes');
 
         $def->manager->doctypes->register(
@@ -49,9 +49,6 @@ class HTMLPurifier_HTML5Definition
         $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
 
         $def->manager->attrTypes->set('Datetime', new HTMLPurifier_AttrDef_HTML5_Datetime());
-
-        // IFRAME
-        $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
 
         return $def;
     }

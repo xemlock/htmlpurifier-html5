@@ -51,10 +51,9 @@ class HTMLPurifier_HTMLModule_HTML5_Iframe extends HTMLPurifier_HTMLModule
             )
         );
 
-        if ($config->get('HTML.Trusted') || (
-            $config->get('HTML.SafeIframe') &&
-            isset($config->def->info['HTML.IframeAllowFullscreen']) && $config->get('HTML.IframeAllowFullscreen')
-        )) {
+        if (isset($config->def->info['HTML.IframeAllowFullscreen']) &&
+            $config->get('HTML.IframeAllowFullscreen')
+        ) {
             $iframe->attr['allowfullscreen'] = 'Bool#allowfullscreen';
         }
     }

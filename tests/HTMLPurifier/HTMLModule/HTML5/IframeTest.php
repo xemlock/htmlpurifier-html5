@@ -42,7 +42,14 @@ class HTMLPurifier_HTMLModule_HTML5_IframeTest extends BaseTestCase
     public function testIframeInTrustedMode()
     {
         $this->config->set('HTML.Trusted', true);
+        $this->config->autoFinalize = false;
 
+        $this->assertPurification(
+            '<iframe width="640" height="360" src="foobar" allowfullscreen></iframe>',
+            '<iframe width="640" height="360" src="foobar"></iframe>'
+        );
+
+        $this->config->set('HTML.IframeAllowFullscreen', true);
         $this->assertPurification(
             '<iframe width="640" height="360" src="foobar" allowfullscreen></iframe>'
         );

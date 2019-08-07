@@ -31,7 +31,7 @@ class HTMLPurifier_HTMLModule_HTML5_Iframe extends HTMLPurifier_HTMLModule
         // - https://www.w3.org/TR/html52/semantics-embedded-content.html#the-iframe-element
         // - https://www.w3.org/TR/html50/embedded-content-0.html#the-iframe-element
 
-        // contents must not be 'empty', otherwise <iframe> won't have closing tag
+        // type must not be 'empty', otherwise <iframe> will not have an end tag
         $iframeContents = new HTMLPurifier_ChildDef_Empty();
         $iframeContents->type = 'iframe';
 

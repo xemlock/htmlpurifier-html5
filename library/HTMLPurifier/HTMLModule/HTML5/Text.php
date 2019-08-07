@@ -67,6 +67,7 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
 
         // http://developers.whatwg.org/text-level-semantics.html
         $this->addElement('s', 'Inline', 'Inline', 'Common');
+        $this->addElement('u', 'Inline', 'Inline', 'Common');
         $this->addElement('var', 'Inline', 'Inline', 'Common');
         $this->addElement('sub', 'Inline', 'Inline', 'Common');
         $this->addElement('sup', 'Inline', 'Inline', 'Common');

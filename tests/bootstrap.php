@@ -17,4 +17,6 @@ require_once __DIR__ . '/BaseTestCase.php';
 require_once __DIR__ . '/AttrDefTestCase.php';
 
 echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";
-echo "libxml version: ", constant('LIBXML_DOTTED_VERSION'), "\n";
+echo "libxml version:       ", constant('LIBXML_DOTTED_VERSION'), "\n";
+echo "PHP memory limit:     ", ini_get('memory_limit'), "\n";
+echo "\n";

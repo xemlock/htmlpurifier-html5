@@ -13,7 +13,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
                 '<form>Foo</form>',
             ),
             array(
-                '<form enctype="text/plain">Foo</form>',
+                '<form target="_blank" enctype="text/plain">Foo</form>',
             ),
             array(
                 '<form><section><h1>Foo</h1></section></form>',
@@ -38,6 +38,7 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
     public function testForm($input, $expected = null)
     {
         $this->config->set('HTML.Trusted', true);
+        $this->config->set('Attr.AllowedFrameTargets', array('_blank'));
         $this->assertPurification($input, $expected);
     }
 

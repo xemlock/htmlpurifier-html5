@@ -384,6 +384,10 @@ class HTMLPurifier_HTMLModule_HTML5_TextTest extends BaseTestCase
             'empty figure' => array(
                 '<figure></figure>',
             ),
+            'deep figcaption' => array(
+                '<figure><div><div><figcaption>Foo</figcaption></div></div></figure>',
+                '<figure><div><div></div></div><figcaption>Foo</figcaption></figure>',
+            ),
         );
     }
 

@@ -14,7 +14,7 @@ class HTMLPurifier_AttrDef_HTML5_ARelTest extends AttrDefTestCase
 
     public function testDefault()
     {
-        $this->assertValidate('nofollow');
+        $this->assertValidate('nofollow', false);
         $this->assertValidate('stylesheet', false);
     }
 

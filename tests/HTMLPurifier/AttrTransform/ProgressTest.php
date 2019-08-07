@@ -13,7 +13,7 @@ class HTMLPurifier_AttrTransform_ProgressTest extends PHPUnit_Framework_TestCase
     protected $context;
 
     /**
-     * @var HTMLPurifier_AttrTransform_Progress
+     * @var HTMLPurifier_AttrTransform_HTML5_Progress
      */
     protected $progress;
 

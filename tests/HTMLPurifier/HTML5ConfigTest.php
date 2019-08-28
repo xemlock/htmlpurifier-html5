@@ -49,4 +49,13 @@ class HTMLPurifier_HTML5ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('iso-8859-2', $config->get('Core.Encoding'));
         $this->assertTrue($config->get('HTML.Trusted'));
     }
+
+    public function testDoctype()
+    {
+        $config = HTMLPurifier_HTML5Config::create(null);
+        $this->assertEquals('HTML5', $config->get('HTML.Doctype'));
+
+        $config = HTMLPurifier_HTML5Config::create(array('HTML.Doctype' => 'HTML 4.01 Transitional'));
+        $this->assertEquals('HTML 4.01 Transitional', $config->get('HTML.Doctype'));
+    }
 }

@@ -34,7 +34,7 @@ install:
         # function, added in PHP 7.1.0 and absent in HHVM
         composer require --no-update 'symfony/console:^3.0'
 
-        # Last released version of htmlpurifier (4.10.0) is broken on HHVM
+        # htmlpurifier 4.10.0 is broken on HHVM
         # https://github.com/ezyang/htmlpurifier/issues/169
         composer require --no-update 'ezyang/htmlpurifier:dev-master#89b3fe4'
       fi

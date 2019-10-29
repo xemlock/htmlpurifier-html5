@@ -6,6 +6,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 [![Total Downloads](https://img.shields.io/packagist/dt/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5/stats)
 [![License](https://img.shields.io/packagist/l/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5?ref=badge_shield)
 
 This library provides HTML5 element definitions for [HTML Purifier](https://github.com/ezyang/htmlpurifier).
 
@@ -80,3 +81,6 @@ as well as HTML5 attributes added to existing HTML elements, such as:
 ## License
 
 The MIT License (MIT). See the LICENSE file.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5?ref=badge_large)

@@ -81,6 +81,3 @@ as well as HTML5 attributes added to existing HTML elements, such as:
 ## License
 
 The MIT License (MIT). See the LICENSE file.
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5?ref=badge_large)

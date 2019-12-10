@@ -65,4 +65,22 @@ class HTMLPurifier_HTMLModule_HTML5_HypertextTest extends BaseTestCase
 
         $this->assertPurification($input, $expected);
     }
+
+    /**
+     * @see https://github.com/xemlock/htmlpurifier-html5/issues/51
+     */
+    public function testIssue51()
+    {
+        $this->config->autoFinalize = false;
+
+        $this->assertPurification(
+            '<a><table><tr><td>Foo</td></tr></table></a>',
+            '<a></a><table><tr><td>Foo</td></tr></table>'
+        );
+
+        $this->config->set('Core.LexerImpl', 'DirectLex');
+        $this->assertPurification(
+            '<a><table><tr><td>Foo</td></tr></table></a>'
+        );
+    }
 }

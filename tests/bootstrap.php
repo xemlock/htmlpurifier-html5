@@ -20,3 +20,8 @@ echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";
 echo "libxml version:       ", constant('LIBXML_DOTTED_VERSION'), "\n";
 echo "PHP memory limit:     ", ini_get('memory_limit'), "\n";
 echo "\n";
+
+if (getenv('TRAVIS_PHP_VERSION')) {
+    // Fixes /home/travis/.travis/functions: line 109:  4773 Segmentation fault (core dumped)
+    gc_disable();
+}

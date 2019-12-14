@@ -25,7 +25,7 @@ class HTMLPurifier_Lexer_HTML5 extends HTMLPurifier_Lexer_DOMLex
         $html = $this->wrapHTML($html, $config, $context, false);
 
         // Parse the document. $dom is a DOMDocument.
-        $html5 = new \Masterminds\HTML5(['disable_html_ns' => true]);
+        $html5 = new \Masterminds\HTML5(array('disable_html_ns' => true));
         $doc = $html5->loadHTML($html);
 
         $body = $doc->getElementsByTagName('html')->item(0) // <html>

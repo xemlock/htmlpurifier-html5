@@ -603,12 +603,14 @@ div {}
      */
     public function test_tokenizeHTML_noRemoveNewline()
     {
+        // masterminds/html5 normalises new lines per spec https://html.spec.whatwg.org/multipage/parsing.html#preprocessing-the-input-stream
+        // in the future it may be possible to toggle this https://github.com/Masterminds/html5-php/issues/176
         $this->config->set('Core.NormalizeNewlines', false);
 
         $this->assertTokenization(
             "plain\rtext\r\n",
             array(
-                new HTMLPurifier_Token_Text("plain\rtext\r\n")
+                new HTMLPurifier_Token_Text("plain\ntext\n")
             )
         );
     }

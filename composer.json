@@ -36,6 +36,6 @@
         "test": "phpunit --coverage-html build/coverage"
     },
     "suggest": {
-        "masterminds/html5": "Required to use HTML5Lex."
+        "masterminds/html5": "Required to use HTMLPurifier_Lexer_HTML5."
     }
 }

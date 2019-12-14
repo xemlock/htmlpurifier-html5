@@ -1,6 +1,6 @@
 <?php
 
-class Html5LexTest extends BaseTestCase
+class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
 {
     /**
      * @var HTMLPurifier_Context
@@ -27,11 +27,11 @@ class Html5LexTest extends BaseTestCase
      */
     public function test_create_objectLexerImpl()
     {
-        $this->config->set('Core.LexerImpl', new HTMLPurifier_Lexer_Html5Lex);
+        $this->config->set('Core.LexerImpl', new HTMLPurifier_Lexer_HTML5);
 
         $lexer = HTMLPurifier_Lexer::create($this->config);
 
-        $this->assertInstanceOf(HTMLPurifier_Lexer_Html5Lex::class, $lexer);
+        $this->assertInstanceOf(HTMLPurifier_Lexer_HTML5::class, $lexer);
     }
 
     /**
@@ -672,13 +672,13 @@ div {}
     /**
      * Assert tokenization generates an expected output.
      *
-     * @param  string  $input
-     * @param  array  $expect
+     * @param  string                $input
+     * @param  HTMLPurifier_Token[]  $expect
      * @return void
      */
     protected function assertTokenization($input, $expect)
     {
-        $lexer = new HTMLPurifier_Lexer_Html5Lex;
+        $lexer = new HTMLPurifier_Lexer_HTML5;
 
         $result = $lexer->tokenizeHTML($input, $this->config, $this->context);
 
@@ -693,8 +693,8 @@ div {}
     /**
      * Print an array of HTMLPurifier_Token's to console.
      *
-     * @param  array  $tokens
-     * @param  int    $index
+     * @param  HTMLPurifier_Token[]  $tokens
+     * @param  int                   $index
      * @return void
      */
     protected function printTokens($tokens, $index = null)

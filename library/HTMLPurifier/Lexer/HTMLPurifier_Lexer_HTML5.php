@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class HTMLPurifier_Lexer_Html5Lex
+ * Class HTMLPurifier_Lexer_HTML5
  *
  * Experimental HTML5-based parser using masterminds/html5 library.
  */
-class HTMLPurifier_Lexer_Html5Lex extends HTMLPurifier_Lexer_DOMLex
+class HTMLPurifier_Lexer_HTML5 extends HTMLPurifier_Lexer_DOMLex
 {
     /**
      * Lexes an HTML string into tokens.
@@ -18,7 +18,7 @@ class HTMLPurifier_Lexer_Html5Lex extends HTMLPurifier_Lexer_DOMLex
     public function tokenizeHTML($html, $config, $context)
     {
         $html = $this->normalize($html, $config, $context);
-        $html = $this->armour($html, $config);
+        $html = $this->armor($html, $config);
 
         // preprocess html. masterminds/html5 requires <html>, <head> and <body> tags.
         // <meta charset> is also essential for utf-8
@@ -45,7 +45,7 @@ class HTMLPurifier_Lexer_Html5Lex extends HTMLPurifier_Lexer_DOMLex
      * @param  HTMLPurifier_Config  $config
      * @return string
      */
-    protected function armour($html, $config)
+    protected function armor($html, $config)
     {
         if ($config->get('Core.AggressivelyFixLt')) {
             $char = '[^a-z!\/]';

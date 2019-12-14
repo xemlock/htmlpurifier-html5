@@ -31,7 +31,7 @@ class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
 
         $lexer = HTMLPurifier_Lexer::create($this->config);
 
-        $this->assertInstanceOf(HTMLPurifier_Lexer_HTML5::class, $lexer);
+        $this->assertInstanceOf('HTMLPurifier_Lexer_HTML5', $lexer);
     }
 
     /**

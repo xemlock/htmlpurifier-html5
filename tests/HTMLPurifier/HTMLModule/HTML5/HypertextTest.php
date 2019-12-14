@@ -78,7 +78,7 @@ class HTMLPurifier_HTMLModule_HTML5_HypertextTest extends BaseTestCase
             '<a></a><table><tr><td>Foo</td></tr></table>'
         );
 
-        $this->config->set('Core.LexerImpl', 'DirectLex');
+        $this->config->set('Core.LexerImpl', new HTMLPurifier_Lexer_HTML5);
         $this->assertPurification(
             '<a><table><tr><td>Foo</td></tr></table></a>'
         );

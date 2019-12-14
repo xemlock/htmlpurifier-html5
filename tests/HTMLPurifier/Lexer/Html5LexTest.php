@@ -439,32 +439,15 @@ class Html5LexTest extends BaseTestCase
      */
     public function test_tokenizeHTML_style()
     {
-        $expected = array(
-            new HTMLPurifier_Token_Start('style', array('type' => 'text/css')),
-            new HTMLPurifier_Token_Text("\ndiv {}\n"),
-            new HTMLPurifier_Token_End('style'),
-        );
-
-        if (!defined('LIBXML_VERSION')) {
-            // LIBXML_VERSION is missing in early versions of PHP
-            // prior to 1.30 of php-src/ext/libxml/libxml.c (version-wise,
-            // this translates to 5.0.x. In such cases, punt the test entirely.
-            return;
-        } elseif (LIBXML_VERSION < 20628) {
-            // libxml's behavior is wrong prior to this version, so make
-            // appropriate accommodations
-            $expected = array(
-                new HTMLPurifier_Token_Start('style', array('type' => 'text/css')),
-                new HTMLPurifier_Token_Comment("\ndiv {}\n"),
-                new HTMLPurifier_Token_End('style'),
-            );
-        }
-
         $this->assertTokenization(
             '<style type="text/css"><!--
 div {}
 --></style>',
-            $expected
+            array(
+                new HTMLPurifier_Token_Start('style', array('type' => 'text/css')),
+                new HTMLPurifier_Token_Text("<!--\ndiv {}\n-->"),
+                new HTMLPurifier_Token_End('style'),
+            )
         );
     }
 

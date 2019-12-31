@@ -1,14 +1,24 @@
 <?php
 
 /**
- * Class HTMLPurifier_Lexer_HTML5
- *
- * Experimental HTML5-based parser using masterminds/html5 library.
+ * Experimental HTML5-compliant parser using masterminds/html5 library.
  */
 class HTMLPurifier_Lexer_HTML5 extends HTMLPurifier_Lexer_DOMLex
 {
     /**
-     * Lexes an HTML string into tokens.
+     * @throws HTMLPurifier_Exception
+     * @codeCoverageIgnore
+     */
+    public function __construct()
+    {
+        if (!class_exists('\Masterminds\HTML5')) {
+            throw new HTMLPurifier_Exception('Cannot instantiate HTML5 lexer. \Masterminds\HTML5 class is not available');
+        }
+        parent::__construct();
+    }
+
+    /**
+     * Transforms an HTML string into tokens.
      *
      * @param  string                $html
      * @param  HTMLPurifier_Config   $config
@@ -20,16 +30,15 @@ class HTMLPurifier_Lexer_HTML5 extends HTMLPurifier_Lexer_DOMLex
         $html = $this->normalize($html, $config, $context);
         $html = $this->armor($html, $config);
 
-        // preprocess html. masterminds/html5 requires <html>, <head> and <body> tags.
-        // <meta charset> is also essential for utf-8
+        // masterminds/html5 requires <html>, <head> and <body> tags
         $html = $this->wrapHTML($html, $config, $context, false);
 
         // Parse the document. $dom is a DOMDocument.
         $html5 = new \Masterminds\HTML5(array('disable_html_ns' => true));
         $doc = $html5->loadHTML($html);
 
-        $body = $doc->getElementsByTagName('html')->item(0) // <html>
-                    ->getElementsByTagName('body')->item(0);            // <body>
+        $body = $doc->getElementsByTagName('html')->item(0)  // <html>
+                    ->getElementsByTagName('body')->item(0); // <body>
 
         $tokens = array();
         $this->tokenizeDOM($body, $tokens, $config);
@@ -45,7 +54,7 @@ class HTMLPurifier_Lexer_HTML5 extends HTMLPurifier_Lexer_DOMLex
      * @param  HTMLPurifier_Config  $config
      * @return string
      */
-    protected function armor($html, $config)
+    protected function armor($html, HTMLPurifier_Config $config)
     {
         if ($config->get('Core.AggressivelyFixLt')) {
             $char = '[^a-z!\/]';

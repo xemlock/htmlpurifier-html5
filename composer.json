@@ -1,7 +1,7 @@
 {
     "name": "xemlock/htmlpurifier-html5",
     "type": "library",
-    "description": "HTML5 element definitions for HTML Purifier",
+    "description": "HTML5 support for HTML Purifier",
     "keywords": [
         "HtmlPurifier",
         "html",
@@ -36,6 +36,6 @@
         "test": "phpunit --coverage-html build/coverage"
     },
     "suggest": {
-        "masterminds/html5": "Required to use HTMLPurifier_Lexer_HTML5."
+        "masterminds/html5": "Required to use HTMLPurifier_Lexer_HTML5"
     }
 }

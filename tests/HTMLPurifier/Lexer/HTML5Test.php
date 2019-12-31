@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpDocMissingThrowsInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+
 class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
 {
     /**
@@ -12,11 +15,11 @@ class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
-        $this->context = new HTMLPurifier_Context;
+        $this->context = new HTMLPurifier_Context();
     }
 
     /**
@@ -27,7 +30,7 @@ class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
      */
     public function test_create_objectLexerImpl()
     {
-        $this->config->set('Core.LexerImpl', new HTMLPurifier_Lexer_HTML5);
+        $this->config->set('Core.LexerImpl', new HTMLPurifier_Lexer_HTML5());
 
         $lexer = HTMLPurifier_Lexer::create($this->config);
 
@@ -560,7 +563,8 @@ div {}
     public function test_tokenizeHTML_ignoreIECondComment()
     {
         $this->assertTokenization(
-            '<!--[if IE]>foo<a>bar<!-- baz --><![endif]-->',
+            // typecast disables 'Bad character' inspection in PHPStorm
+            '<!--[if IE]>foo<a>bar' . (string) '<!-- baz --><![endif]-->',
             array()
         );
     }
@@ -678,7 +682,7 @@ div {}
      */
     protected function assertTokenization($input, $expect)
     {
-        $lexer = new HTMLPurifier_Lexer_HTML5;
+        $lexer = new HTMLPurifier_Lexer_HTML5();
 
         $result = $lexer->tokenizeHTML($input, $this->config, $this->context);
 

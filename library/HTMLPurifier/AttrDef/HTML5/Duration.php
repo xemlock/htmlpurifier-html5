@@ -47,7 +47,7 @@ class HTMLPurifier_AttrDef_HTML5_Duration extends HTMLPurifier_AttrDef
      * Note: duration as defined in the HTML5 spec cannot include months or years
      *
      * @param string $string
-     * @return boolean
+     * @return bool|string
      */
     protected function validateISODuration($string)
     {

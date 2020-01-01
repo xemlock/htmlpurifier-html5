@@ -18,7 +18,7 @@ class HTMLPurifier_HTMLModule_HTML5_Interactive extends HTMLPurifier_HTMLModule
     {
         // https://html.spec.whatwg.org/dev/interactive-elements.html#the-details-element
         $this->addElement('details', 'Flow', new HTMLPurifier_ChildDef_HTML5_Details(), 'Common', array(
-            'open' => 'Bool',
+            'open' => 'Bool#open',
         ));
 
         // https://html.spec.whatwg.org/dev/interactive-elements.html#the-summary-element
@@ -26,7 +26,7 @@ class HTMLPurifier_HTMLModule_HTML5_Interactive extends HTMLPurifier_HTMLModule
 
         // https://html.spec.whatwg.org/dev/interactive-elements.html#the-dialog-element
         $dialog = $this->addElement('dialog', 'Flow', 'Flow', 'Common', array(
-            'open' => 'Bool',
+            'open' => 'Bool#open',
         ));
 
         $dialog->attr_transform_pre[] = new HTMLPurifier_AttrTransform_HTML5_Dialog();

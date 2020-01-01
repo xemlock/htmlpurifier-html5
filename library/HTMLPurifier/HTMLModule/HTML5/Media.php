@@ -22,7 +22,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
 
         // https://html.spec.whatwg.org/dev/media.html#the-video-element
         $this->addElement('video', 'Flow', $mediaContent, 'Common', array(
-            'controls' => 'Bool',
+            'controls' => 'Bool#controls',
             'height'   => 'Length',
             'poster'   => 'URI',
             'preload'  => 'Enum#auto,metadata,none',
@@ -33,7 +33,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
 
         // https://html.spec.whatwg.org/dev/media.html#the-audio-element
         $this->addElement('audio', 'Flow', $mediaContent, 'Common', array(
-            'controls' => 'Bool',
+            'controls' => 'Bool#controls',
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => 'URI',
         ));
@@ -54,7 +54,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
             'src'     => 'URI',
             'srclang' => 'Text',
             'label'   => 'Text',
-            'default' => 'Bool',
+            'default' => 'Bool#default',
         ));
 
         // https://html.spec.whatwg.org/dev/embedded-content.html#the-picture-element

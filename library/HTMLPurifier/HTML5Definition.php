@@ -41,7 +41,7 @@ class HTMLPurifier_HTML5Definition
         $def->manager->attrTypes->set('Bool', new HTMLPurifier_AttrDef_HTML_Bool2());
 
         // add support for Floating point number attributes
-        $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_Float());
+        $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_HTML5_Float());
 
         $def->manager->attrTypes->set('Datetime', new HTMLPurifier_AttrDef_HTML5_Datetime());
 

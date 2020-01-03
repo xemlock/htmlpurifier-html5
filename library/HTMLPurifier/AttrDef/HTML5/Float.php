@@ -3,7 +3,7 @@
 /**
  * Validates a floating point number
  */
-class HTMLPurifier_AttrDef_Float extends HTMLPurifier_AttrDef
+class HTMLPurifier_AttrDef_HTML5_Float extends HTMLPurifier_AttrDef
 {
     /**
      * @var int|float
@@ -55,7 +55,7 @@ class HTMLPurifier_AttrDef_Float extends HTMLPurifier_AttrDef
      * @param string $number
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return string
+     * @return bool|string
      */
     public function validate($number, $config, $context)
     {
@@ -98,7 +98,7 @@ class HTMLPurifier_AttrDef_Float extends HTMLPurifier_AttrDef
      * Factory function
      *
      * @param string $string A comma-delimited list of key:value pairs. Example: "min:0,max:10".
-     * @return HTMLPurifier_AttrDef_Float
+     * @return HTMLPurifier_AttrDef_HTML5_Float
      */
     public function make($string)
     {

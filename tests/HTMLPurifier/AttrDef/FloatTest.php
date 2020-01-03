@@ -18,14 +18,14 @@ class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
         $this->context = new HTMLPurifier_Context();
     }
 
-    protected function validateAttr(HTMLPurifier_AttrDef_Float $attr, $value)
+    protected function validateAttr(HTMLPurifier_AttrDef_HTML5_Float $attr, $value)
     {
         return $attr->validate($value, $this->config, $this->context);
     }
 
     public function testValidate()
     {
-        $attr = new HTMLPurifier_AttrDef_Float();
+        $attr = new HTMLPurifier_AttrDef_HTML5_Float();
 
         // Don't use assertEquals() when comparing strings. Here is why:
         // "+1e10" == "1E10" // true
@@ -46,29 +46,29 @@ class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
 
     public function testValidateOptions()
     {
-        $attr = new HTMLPurifier_AttrDef_Float(array('min' => 10));
+        $attr = new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 10));
         $this->assertFalse($this->validateAttr($attr, '0'));
         $this->assertSame('10', $this->validateAttr($attr, '10'));
         $this->assertSame('11', $this->validateAttr($attr, '11'));
 
-        $attr = new HTMLPurifier_AttrDef_Float(array('min' => 10, 'minInclusive' => false));
+        $attr = new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 10, 'minInclusive' => false));
         $this->assertFalse($this->validateAttr($attr, '0'));
         $this->assertFalse($this->validateAttr($attr, '10'));
         $this->assertSame('11', $this->validateAttr($attr, '11'));
 
-        $attr = new HTMLPurifier_AttrDef_Float(array('max' => 20));
+        $attr = new HTMLPurifier_AttrDef_HTML5_Float(array('max' => 20));
         $this->assertSame('0', $this->validateAttr($attr, '0'));
         $this->assertSame('10', $this->validateAttr($attr, '10'));
         $this->assertSame('20', $this->validateAttr($attr, '20'));
         $this->assertFalse($this->validateAttr($attr, '21'));
 
-        $attr = new HTMLPurifier_AttrDef_Float(array('max' => 20, 'maxInclusive' => false));
+        $attr = new HTMLPurifier_AttrDef_HTML5_Float(array('max' => 20, 'maxInclusive' => false));
         $this->assertSame('0', $this->validateAttr($attr, '0'));
         $this->assertSame('10', $this->validateAttr($attr, '10'));
         $this->assertFalse($this->validateAttr($attr, '20'));
         $this->assertFalse($this->validateAttr($attr, '21'));
 
-        $attr = new HTMLPurifier_AttrDef_Float(array('min' => 10, 'max' => 20));
+        $attr = new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 10, 'max' => 20));
         $this->assertFalse($this->validateAttr($attr, '0'));
         $this->assertSame('10', $this->validateAttr($attr, '10'));
         $this->assertSame('20', $this->validateAttr($attr, '20'));
@@ -77,18 +77,18 @@ class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
 
     public function testMake()
     {
-        $factory = new HTMLPurifier_AttrDef_Float();
+        $factory = new HTMLPurifier_AttrDef_HTML5_Float();
 
         $attr = $factory->make('');
-        $this->assertEquals(new HTMLPurifier_AttrDef_Float(), $attr);
+        $this->assertEquals(new HTMLPurifier_AttrDef_HTML5_Float(), $attr);
 
         $attr = $factory->make('min:10,max:100');
-        $this->assertEquals(new HTMLPurifier_AttrDef_Float(array('min' => 10, 'max' => 100)), $attr);
+        $this->assertEquals(new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 10, 'max' => 100)), $attr);
 
         $attr = $factory->make('min:10,minInclusive:0');
-        $this->assertEquals(new HTMLPurifier_AttrDef_Float(array('min' => 10, 'minInclusive' => false)), $attr);
+        $this->assertEquals(new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 10, 'minInclusive' => false)), $attr);
 
         $attr = $factory->make('max:10,maxInclusive:1');
-        $this->assertEquals(new HTMLPurifier_AttrDef_Float(array('max' => 10, 'maxInclusive' => true)), $attr);
+        $this->assertEquals(new HTMLPurifier_AttrDef_HTML5_Float(array('max' => 10, 'maxInclusive' => true)), $attr);
     }
 }

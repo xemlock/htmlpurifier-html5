@@ -73,6 +73,14 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
             $schema->add('HTML.IframeAllowFullscreen', false, 'bool', false);
         }
 
+        if (empty($schema->info['HTML.EnableModules'])) {
+            $schema->add('HTML.EnableModules', false, 'list', true);
+        }
+
+        if (empty($schema->info['HTML.DisableModules'])) {
+            $schema->add('HTML.DisableModules', false, 'list', true);
+        }
+
         parent::__construct($schema, $parent);
 
         $this->set('HTML.Doctype', 'HTML5');
@@ -88,7 +96,7 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         if ($needSetup) {
             if ($def = parent::getDefinition($type, true, true)) {
                 /** @var HTMLPurifier_HTMLDefinition $def */
-                HTMLPurifier_HTML5Definition::setupDefinition($def);
+                HTMLPurifier_HTML5Definition::setupDefinition($def, $this);
             }
         }
         return parent::getDefinition($type, $raw, $optimized);

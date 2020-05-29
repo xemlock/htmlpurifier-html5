@@ -22,4 +22,35 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
     {
         $this->assertPurification($input, $expected);
     }
+
+    /**
+     * Assert that you can enable modules that weren't previously enabled.
+     *
+     * @return void
+     */
+    public function testEnableLegacyModule()
+    {
+        $this->config->set('HTML.EnableModules', array('Legacy'));
+
+        $this->assertPurification(
+            "<table><tr bgcolor='yellow'><td>X</td></tr></table>",
+           "<table><tr bgcolor=\"#FFFF00\"><td>X</td></tr></table>"
+        );
+    }
+
+    /**
+     * Assert that disable modules configuration option overrides the enable modules option.
+     *
+     * @return void
+     */
+    public function testDisableModule()
+    {
+        $this->config->set('HTML.EnableModules', array('Legacy'));
+        $this->config->set('HTML.DisableModules', array('Legacy'));
+
+        $this->assertPurification(
+            "<table><tr bgcolor='yellow'><td>X</td></tr></table>",
+            "<table><tr><td>X</td></tr></table>"
+        );
+    }
 }

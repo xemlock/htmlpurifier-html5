@@ -65,6 +65,21 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
 
   Whether or not to permit `allowfullscreen` attribute on `iframe` tags. It requires either [%HTML.SafeIframe](http://htmlpurifier.org/live/configdoc/plain.html#HTML.SafeIframe) or [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) to be `true`.
 
+* __HTML.EnableModules__
+
+  Version added: 0.1.12\
+  Type: [List](http://htmlpurifier.org/live/configdoc/plain.html#type-list)\
+  Default: `null`
+
+  Enable additional modules, beyond the default, for the HTML5 Doctype.
+
+* __HTML.DisableModules__
+
+  Version added: 0.1.12\
+  Type: [List](http://htmlpurifier.org/live/configdoc/plain.html#type-list)\
+  Default: `null`
+
+  Disable modules for the HTML5 Doctype.
 
 ## Supported HTML5 elements
 

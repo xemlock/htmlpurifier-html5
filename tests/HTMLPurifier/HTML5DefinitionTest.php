@@ -2,6 +2,8 @@
 
 class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
 {
+    const LEGACY_MODULE_NAME = 'Legacy';
+
     public function boolAttrInput()
     {
         return array(
@@ -30,7 +32,7 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
      */
     public function testEnableLegacyModule()
     {
-        $this->config->set('HTML.EnableModules', array('Legacy'));
+        $this->config->set('HTML.EnableModules', array(static::LEGACY_MODULE_NAME));
 
         $this->assertPurification(
             "<table><tr bgcolor='yellow'><td>X</td></tr></table>",
@@ -45,8 +47,8 @@ class HTMLPurifier_HTML5DefinitionBaseTest extends BaseTestCase
      */
     public function testDisableModule()
     {
-        $this->config->set('HTML.EnableModules', array('Legacy'));
-        $this->config->set('HTML.DisableModules', array('Legacy'));
+        $this->config->set('HTML.EnableModules', array(static::LEGACY_MODULE_NAME));
+        $this->config->set('HTML.DisableModules', array(static::LEGACY_MODULE_NAME));
 
         $this->assertPurification(
             "<table><tr bgcolor='yellow'><td>X</td></tr></table>",

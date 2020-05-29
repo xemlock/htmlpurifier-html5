@@ -10,7 +10,7 @@ class HTMLPurifier_HTML5Definition
      *
      * @var string[]
      */
-    protected $modules = array(
+    protected $defaultModules = array(
         'CommonAttributes', 'HTML5_Text', 'HTML5_Hypertext', 'HTML5_List',
         'Presentation', 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
         'StyleAttribute', 'HTML5_Media', 'HTML5_Ruby', 'Name',
@@ -35,7 +35,7 @@ class HTMLPurifier_HTML5Definition
         $def->manager->doctypes->register(
             'HTML5',
             false,
-            $instance->getModules($config),
+            $instance->getDefaultModules($config),
             array('Tidy_Transitional', 'Tidy_Proprietary'),
             array()
         );
@@ -65,15 +65,13 @@ class HTMLPurifier_HTML5Definition
      * @param HTMLPurifier_Config $config
      * @return array
      */
-    protected function getModules(HTMLPurifier_Config $config)
+    protected function getDefaultModules(HTMLPurifier_Config $config)
     {
         // Append any enabled modules.
-        $modules = array_merge($this->modules, $this->getModuleConfig($config, 'HTML.EnableModules'));
+        $modules = array_merge($this->defaultModules, $this->getModuleConfig($config, 'HTML.EnableModules'));
 
         // Remove any disabled modules.
-        $modules = array_diff($modules, $this->getModuleConfig($config, 'HTML.DisableModules'));
-
-        return $modules;
+        return array_diff($modules, $this->getModuleConfig($config, 'HTML.DisableModules'));
     }
 
     /**

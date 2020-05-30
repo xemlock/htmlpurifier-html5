@@ -1,15 +1,16 @@
 <?php
 
-class HTMLPurifier_HTML5Definition
+abstract class HTMLPurifier_HTML5Definition
 {
     /**
      * Adds HTML5 element and attributes to a provided definition object.
      *
      * @param  HTMLPurifier_HTMLDefinition $def
+     * @param  HTMLPurifier_Config $config
      * @return HTMLPurifier_HTMLDefinition
-     * @throws HTMLPurifier_Exception
+     * @internal
      */
-    public static function setupDefinition(HTMLPurifier_HTMLDefinition $def)
+    public static function setupHTMLDefinition(HTMLPurifier_HTMLDefinition $def, HTMLPurifier_Config $config)
     {
         $def->manager->doctypes->register(
             'HTML5',
@@ -24,8 +25,10 @@ class HTMLPurifier_HTML5Definition
                 // Unsafe:
                 'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
                 'HTML5_Iframe',
+                // Transitional:
+                'HTML5_Legacy',
             ),
-            array('Tidy_Transitional', 'Tidy_Proprietary'),
+            array('Tidy_HTML5'),
             array()
         );
 

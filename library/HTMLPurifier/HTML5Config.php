@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2019080701;
+    const REVISION = 2020053001;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -73,6 +73,12 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
             $schema->add('HTML.IframeAllowFullscreen', false, 'bool', false);
         }
 
+        // HTMLPurifier doesn't define %CSS.DefinitionID, but it's required for
+        // customizing CSS definition object (in the future)
+        if (empty($schema->info['CSS.DefinitionID'])) {
+            $schema->add('CSS.DefinitionID', null, 'string', true);
+        }
+
         parent::__construct($schema, $parent);
 
         $this->set('HTML.Doctype', 'HTML5');
@@ -84,11 +90,10 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
     {
         // Setting HTML.* keys removes any previously instantiated HTML
         // definition object, so set up HTML5 definition as late as possible
-        $needSetup = $type === 'HTML' && !isset($this->definitions[$type]);
-        if ($needSetup) {
+        if ($type === 'HTML' && empty($this->definitions[$type])) {
             if ($def = parent::getDefinition($type, true, true)) {
                 /** @var HTMLPurifier_HTMLDefinition $def */
-                HTMLPurifier_HTML5Definition::setupDefinition($def);
+                HTMLPurifier_HTML5Definition::setupHTMLDefinition($def, $this);
             }
         }
         return parent::getDefinition($type, $raw, $optimized);

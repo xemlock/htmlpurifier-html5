@@ -26,5 +26,8 @@ class HTMLPurifier_HTMLModule_HTML5_List extends HTMLPurifier_HTMLModule_List
         // Attributes that were deprecated in HTML4, but reintroduced in HTML5
         $ol->attr['start'] = new HTMLPurifier_AttrDef_Integer();
         $ol->attr['type'] = 'Enum#s:1,a,A,i,I';
+
+        $li = $this->info['li'];
+        $li->attr['value'] = new HTMLPurifier_AttrDef_Integer();
     }
 }

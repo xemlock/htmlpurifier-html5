@@ -23,4 +23,10 @@ class HTMLPurifier_HTMLModule_HTML5_ListTest extends BaseTestCase
             ),
         );
     }
+
+    public function testLi()
+    {
+        $this->assertPurification('<ul><li value="2">Foo</li></ul>');
+        $this->assertPurification('<ul><li value="-2">Foo</li></ul>');
+    }
 }

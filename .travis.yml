@@ -46,7 +46,7 @@ install:
         # https://github.com/ezyang/htmlpurifier/pull/225
         composer require --no-update 'ezyang/htmlpurifier:4.10.0'
       fi
-    - composer install
+    - COMPOSER_MEMORY_LIMIT=-1 composer install
 
 script:
     - mkdir -p build/logs

@@ -1,6 +1,6 @@
 <?php
 
-class HTMLPurifier_AttrTransform_ProgressTest extends PHPUnit_Framework_TestCase
+class HTMLPurifier_AttrTransform_HTML5_ProgressTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var HTMLPurifier_HTML5Config

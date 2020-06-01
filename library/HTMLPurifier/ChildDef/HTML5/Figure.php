@@ -30,7 +30,7 @@ class HTMLPurifier_ChildDef_HTML5_Figure extends HTMLPurifier_ChildDef
     }
 
     /**
-     * @param array $children
+     * @param HTMLPurifier_Node[] $children
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
      * @return array|bool

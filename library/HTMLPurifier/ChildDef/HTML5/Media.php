@@ -35,7 +35,7 @@ class HTMLPurifier_ChildDef_HTML5_Media extends HTMLPurifier_ChildDef
     }
 
     /**
-     * @param array $children
+     * @param HTMLPurifier_Node[] $children
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
      * @return array|bool
@@ -76,7 +76,7 @@ class HTMLPurifier_ChildDef_HTML5_Media extends HTMLPurifier_ChildDef
             }
         }
 
-        $currentNode = $context->get('CurrentNode');
+        $currentNode = $context->get('CurrentNode', true);
         $hasSrcAttr = $currentNode instanceof HTMLPurifier_Node_Element && isset($currentNode->attr['src']);
 
         if ($hasSrcAttr) {

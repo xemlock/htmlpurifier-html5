@@ -5,14 +5,14 @@ class HTMLPurifier_HTMLModule_HTML5_ListTest extends BaseTestCase
     /**
      * @param string $input
      * @param string $expected OPTIONAL
-     * @dataProvider olInput
+     * @dataProvider olProvider
      */
     public function testOl($input, $expected = null)
     {
         $this->assertPurification($input, $expected);
     }
 
-    public function olInput()
+    public function olProvider()
     {
         return array(
             'ol empty' => array(
@@ -28,24 +28,36 @@ class HTMLPurifier_HTMLModule_HTML5_ListTest extends BaseTestCase
                 '<ol><li>Foo<li>Bar<li>Baz</ol>',
                 '<ol><li>Foo</li><li>Bar</li><li>Baz</li></ol>',
             ),
-            'ol markup correction' => array(
+            'ol wrap text in li' => array(
+                '<ol>Foo</ol>',
+                '<ol><li>Foo</li></ol>',
+            ),
+            'ol append text to previous li' => array(
                 '<ol><li>Foo</li>Bar<li>Baz</li></ol>',
                 '<ol><li>FooBar</li><li>Baz</li></ol>',
             ),
         );
     }
 
+    public function testOlWithForbiddenLi()
+    {
+        $this->config->set('HTML.ForbiddenElements', array('li'));
+
+        $this->assertPurification('<ol><li>Foo</li></ol>', '');
+        $this->assertWarning('Cannot allow ul/ol without allowing li');
+    }
+
     /**
      * @param string $input
      * @param string $expected OPTIONAL
-     * @dataProvider ulInput
+     * @dataProvider ulProvider
      */
     public function testUl($input, $expected = null)
     {
         $this->assertPurification($input, $expected);
     }
 
-    public function ulInput()
+    public function ulProvider()
     {
         return array(
             'ul empty' => array(
@@ -58,28 +70,40 @@ class HTMLPurifier_HTMLModule_HTML5_ListTest extends BaseTestCase
                 '<ul><li>Foo<li>Bar<li>Baz</ul>',
                 '<ul><li>Foo</li><li>Bar</li><li>Baz</li></ul>',
             ),
-            'ul markup correction' => array(
+            'ul wrap text in li' => array(
+                '<ul>Foo</ul>',
+                '<ul><li>Foo</li></ul>',
+            ),
+            'ul append text to previous li' => array(
                 '<ul><li>Foo</li>Bar<li>Baz</li></ul>',
                 '<ul><li>FooBar</li><li>Baz</li></ul>',
             ),
         );
     }
 
+    public function testUlWithForbiddenLi()
+    {
+        $this->config->set('HTML.ForbiddenElements', array('li'));
+
+        $this->assertPurification('<ul><li>Foo</li></ul>', '');
+        $this->assertWarning('Cannot allow ul/ol without allowing li');
+    }
+
     /**
      * @param string $input
      * @param string $expected OPTIONAL
-     * @dataProvider dlInput
+     * @dataProvider dlProvider
      */
     public function testDl($input, $expected = null)
     {
         $this->assertPurification($input, $expected);
     }
 
-    public function dlInput()
+    public function dlProvider()
     {
-        // Test cases (with tiny adjustments) taken from:
-        // https://github.com/web-platform-tests/wpt/blob/master/conformance-checkers/tools/dl.py
         return array(
+            // Test cases (with tiny adjustments) taken from:
+            // https://github.com/web-platform-tests/wpt/blob/master/conformance-checkers/tools/dl.py
             // valid ----------------------------------------------------------
             'dl basic' => array(
                 '<dl><dt>text<dd>text</dl>',
@@ -322,17 +346,33 @@ class HTMLPurifier_HTMLModule_HTML5_ListTest extends BaseTestCase
         );
     }
 
+    public function testDlWithForbiddenDt()
+    {
+        $this->config->set('HTML.ForbiddenElements', array('dt'));
+
+        $this->assertPurification('<dl><dt>foo</dt><dd>bar</dd></dl>', '');
+        $this->assertWarning('Cannot allow dl without allowing dt');
+    }
+
+    public function testDlWithForbiddenDd()
+    {
+        $this->config->set('HTML.ForbiddenElements', array('dd'));
+
+        $this->assertPurification('<dl><dt>foo</dt><dd>bar</dd></dl>', '');
+        $this->assertWarning('Cannot allow dl without allowing dd');
+    }
+
     /**
      * @param string $input
      * @param string $expected OPTIONAL
-     * @dataProvider liInput
+     * @dataProvider liProvider
      */
     public function testLi($input, $expected = null)
     {
         $this->assertPurification($input, $expected);
     }
 
-    public function liInput()
+    public function liProvider()
     {
         return array(
             'li value positive' => array(
@@ -342,5 +382,23 @@ class HTMLPurifier_HTMLModule_HTML5_ListTest extends BaseTestCase
                 '<ul><li value="-2">Foo</li></ul>',
             ),
         );
+    }
+
+    public function testWhitespaces()
+    {
+        // depending on libxml version present whitespace handling by DOMLex
+        // lexer may differ, so for testing input with whitespaces we switch
+        // to more reliable lexer implementation
+        $this->config->set('Core.LexerImpl', 'DirectLex');
+
+        $this->assertPurification('<dl> </dl>');
+        $this->assertPurification('<dl> <dt> </dt> <dd> </dd> </dl>');
+        $this->assertPurification('<dl> <div><dt> </dt> <dd> </dd></div> </dl>');
+
+        $this->assertPurification('<ol> </ol>');
+        $this->assertPurification('<ol> <li> </li> </ol>');
+
+        $this->assertPurification('<ul> </ul>');
+        $this->assertPurification('<ul> <li> </li> </ul>');
     }
 }

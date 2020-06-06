@@ -3,6 +3,8 @@
 /**
  * Extension to {@link HTMLPurifier_HTMLModule_Text} defining HTML5 text-level
  * and grouping elements.
+ *
+ * @property HTMLPurifier_ElementDef[] $info
  */
 class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
 {
@@ -22,6 +24,12 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
     public function setup($config)
     {
         parent::setup($config);
+
+        // Replace content model of div with a dl aware definition
+        $div = $this->info['div'];
+        $div->content_model_type = null;
+        $div->content_model = null;
+        $div->child = new HTMLPurifier_ChildDef_HTML5_Div();
 
         // http://developers.whatwg.org/sections.html
         $this->addElement('section', 'Sectioning', 'Flow', 'Common');

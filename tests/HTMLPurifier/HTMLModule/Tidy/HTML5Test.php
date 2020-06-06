@@ -52,9 +52,19 @@ class HTMLPurifier_HTMLModule_Tidy_HTML5Test extends BaseTestCase
         );
     }
 
+    public function testBig()
+    {
+        $this->assertPurification('<big>Foo</big>', '<span style="font-size:larger;">Foo</span>');
+    }
+
     public function testStrike()
     {
         $this->assertPurification('<strike>Foo</strike>', '<s>Foo</s>');
+    }
+
+    public function testTt()
+    {
+        $this->assertPurification('<tt>Foo</tt>', '<code>Foo</code>');
     }
 
     public function testDir()

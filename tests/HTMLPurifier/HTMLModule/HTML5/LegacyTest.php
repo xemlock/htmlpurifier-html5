@@ -33,9 +33,19 @@ class HTMLPurifier_HTMLModule_HTML5_LegacyTest extends BaseTestCase
         $this->assertPurification('<font size="a">Foo</font>', '<font>Foo</font>');
     }
 
+    public function testBig()
+    {
+        $this->assertPurification('<big>Foo</big>');
+    }
+
     public function testStrike()
     {
         $this->assertPurification('<strike>Foo</strike>');
+    }
+
+    public function testTt()
+    {
+        $this->assertPurification('<tt>Foo</tt>');
     }
 
     public function testDir()

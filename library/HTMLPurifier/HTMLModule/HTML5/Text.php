@@ -25,12 +25,6 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
     {
         parent::setup($config);
 
-        // Replace content model of div with a dl aware definition
-        $div = $this->info['div'];
-        $div->content_model_type = null;
-        $div->content_model = null;
-        $div->child = new HTMLPurifier_ChildDef_HTML5_Div();
-
         // http://developers.whatwg.org/sections.html
         $this->addElement('section', 'Sectioning', 'Flow', 'Common');
         $this->addElement('nav', 'Sectioning', 'Flow', 'Common');
@@ -61,6 +55,13 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         // https://html.spec.whatwg.org/dev/sections.html#the-hgroup-element
         $this->addElement('hgroup', 'Heading', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
+        // https://html.spec.whatwg.org/multipage/grouping-content.html#the-div-element
+        // Replace content model of div with a dl aware definition
+        $div = $this->info['div'];
+        $div->content_model_type = null;
+        $div->content_model = null;
+        $div->child = new HTMLPurifier_ChildDef_HTML5_Div();
+
         // https://html.spec.whatwg.org/dev/grouping-content.html#the-main-element
         $this->addElement('main', 'Block', 'Flow', 'Common');
 
@@ -73,9 +74,25 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
             'cite' => 'URI',
         ));
 
+        // https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element
+        $this->addElement('hr', 'Block', 'Empty', 'Common');
+
         // http://developers.whatwg.org/text-level-semantics.html
-        $this->addElement('s', 'Inline', 'Inline', 'Common');
-        $this->addElement('u', 'Inline', 'Inline', 'Common');
+        $b = $this->addElement('b', 'Inline', 'Inline', 'Common');
+        $b->formatting = true;
+
+        $i = $this->addElement('i', 'Inline', 'Inline', 'Common');
+        $i->formatting = true;
+
+        $u = $this->addElement('u', 'Inline', 'Inline', 'Common');
+        $u->formatting = true;
+
+        $s = $this->addElement('s', 'Inline', 'Inline', 'Common');
+        $s->formatting = true;
+
+        $small = $this->addElement('small', 'Inline', 'Inline', 'Common');
+        $small->formatting = true;
+
         $this->addElement('var', 'Inline', 'Inline', 'Common');
         $this->addElement('sub', 'Inline', 'Inline', 'Common');
         $this->addElement('sup', 'Inline', 'Inline', 'Common');

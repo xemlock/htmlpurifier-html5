@@ -19,7 +19,7 @@ abstract class HTMLPurifier_HTML5Definition
             // Place common HTML5 modules at the end of the list
             array(
                 'CommonAttributes', 'HTML5_Text', 'HTML5_Hypertext', 'HTML5_List',
-                'Presentation', 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
+                'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
                 'StyleAttribute', 'HTML5_Media', 'HTML5_Ruby', 'Name',
                 'NonXMLCommonAttributes',
                 // Unsafe:

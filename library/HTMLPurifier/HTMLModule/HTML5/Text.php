@@ -19,7 +19,6 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
 
     /**
      * @param HTMLPurifier_Config $config
-     * @throws HTMLPurifier_Exception
      */
     public function setup($config)
     {
@@ -78,20 +77,18 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('hr', 'Block', 'Empty', 'Common');
 
         // http://developers.whatwg.org/text-level-semantics.html
-        $b = $this->addElement('b', 'Inline', 'Inline', 'Common');
-        $b->formatting = true;
+        // Don't set formatting to true - because the "Active Formatting Elements" algorithm
+        // (during MakeWellFormed step) may mess up the markup. See:
+        // https://github.com/ezyang/htmlpurifier/issues/258
+        $this->addElement('b', 'Inline', 'Inline', 'Common');
+        $this->addElement('i', 'Inline', 'Inline', 'Common');
+        $this->addElement('u', 'Inline', 'Inline', 'Common');
+        $this->addElement('s', 'Inline', 'Inline', 'Common');
 
-        $i = $this->addElement('i', 'Inline', 'Inline', 'Common');
-        $i->formatting = true;
-
-        $u = $this->addElement('u', 'Inline', 'Inline', 'Common');
-        $u->formatting = true;
-
-        $s = $this->addElement('s', 'Inline', 'Inline', 'Common');
-        $s->formatting = true;
-
-        $small = $this->addElement('small', 'Inline', 'Inline', 'Common');
-        $small->formatting = true;
+        $this->addElement('em', 'Inline', 'Inline', 'Common');
+        $this->addElement('small', 'Inline', 'Inline', 'Common');
+        $this->addElement('strong', 'Inline', 'Inline', 'Common');
+        $this->addElement('code', 'Inline', 'Inline', 'Common');
 
         $this->addElement('var', 'Inline', 'Inline', 'Common');
         $this->addElement('sub', 'Inline', 'Inline', 'Common');

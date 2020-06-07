@@ -97,7 +97,10 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('sub', 'Inline', 'Inline', 'Common');
         $this->addElement('sup', 'Inline', 'Inline', 'Common');
         $this->addElement('mark', 'Inline', 'Inline', 'Common');
-        $this->addElement('wbr', 'Inline', 'Empty', 'Core');
+        $this->addElement('wbr', 'Inline', 'Empty', 'Common');
+
+        // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-br-element
+        $this->addElement('br', 'Inline', 'Empty', 'Common');
 
         // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-time-element
         // https://w3c.github.io/html-reference/datatypes.html#common.data.time-datetime-def

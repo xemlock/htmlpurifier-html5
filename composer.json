@@ -32,6 +32,9 @@
     "autoload": {
         "classmap": ["library/HTMLPurifier/"]
     },
+    "autoload-dev": {
+        "classmap": ["tests/HTMLPurifier/"]
+    },
     "scripts": {
         "test": "phpunit --coverage-html build/coverage"
     },

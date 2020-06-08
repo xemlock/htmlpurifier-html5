@@ -42,6 +42,9 @@ class HTMLPurifier_HTMLModule_HTML5_Legacy extends HTMLPurifier_HTMLModule
         // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tt
         $this->addElement('tt', 'Inline', 'Inline', 'Common');
 
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/acronym
+        $this->addElement('acronym', 'Inline', 'Inline', 'Common');
+
         // Setup modifications to old elements
 
         $align = 'Enum#left,right,center,justify';

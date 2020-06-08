@@ -52,6 +52,14 @@ class HTMLPurifier_HTMLModule_Tidy_HTML5Test extends BaseTestCase
         );
     }
 
+    public function testAcronym()
+    {
+        $this->assertPurification(
+            '<p>The <acronym title="World Wide Web">WWW</acronym> is only a component of the Internet.</p>',
+            '<p>The <abbr title="World Wide Web">WWW</abbr> is only a component of the Internet.</p>'
+        );
+    }
+
     public function testBig()
     {
         $this->assertPurification('<big>Foo</big>', '<span style="font-size:larger;">Foo</span>');

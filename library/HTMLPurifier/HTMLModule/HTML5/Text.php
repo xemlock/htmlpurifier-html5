@@ -1,12 +1,9 @@
 <?php
 
 /**
- * Extension to {@link HTMLPurifier_HTMLModule_Text} defining HTML5 text-level
- * and grouping elements.
- *
- * @property HTMLPurifier_ElementDef[] $info
+ * HTML5 compliant module defining text-level, sectioning and grouping elements.
  */
-class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
+class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule
 {
     /**
      * @type string
@@ -22,8 +19,6 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
      */
     public function setup($config)
     {
-        parent::setup($config);
-
         // http://developers.whatwg.org/sections.html
         $this->addElement('section', 'Sectioning', 'Flow', 'Common');
         $this->addElement('nav', 'Sectioning', 'Flow', 'Common');
@@ -54,12 +49,29 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         // https://html.spec.whatwg.org/dev/sections.html#the-hgroup-element
         $this->addElement('hgroup', 'Heading', 'Required: h1 | h2 | h3 | h4 | h5 | h6', 'Common');
 
-        // https://html.spec.whatwg.org/multipage/grouping-content.html#the-div-element
-        // Replace content model of div with a dl aware definition
-        $div = $this->info['div'];
-        $div->content_model_type = null;
-        $div->content_model = null;
-        $div->child = new HTMLPurifier_ChildDef_HTML5_Div();
+        $this->addElement('h1', 'Heading', 'Inline', 'Common');
+        $this->addElement('h2', 'Heading', 'Inline', 'Common');
+        $this->addElement('h3', 'Heading', 'Inline', 'Common');
+        $this->addElement('h4', 'Heading', 'Inline', 'Common');
+        $this->addElement('h5', 'Heading', 'Inline', 'Common');
+        $this->addElement('h6', 'Heading', 'Inline', 'Common');
+
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-p-element
+        $p = $this->addElement('p', 'Block', 'Inline', 'Common');
+        $p->autoclose = array_flip(
+            array('address', 'blockquote', 'center', 'dir', 'div', 'dl', 'fieldset', 'ol', 'p', 'ul')
+        );
+
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-pre-element
+        // Content model: phrasing content
+        $pre = $this->addElement('pre', 'Block', 'Inline', 'Common');
+        $pre->excludes = $this->makeLookup(
+            'object',
+            'applet'
+        );
+
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-div-element
+        $this->addElement('div', 'Block', new HTMLPurifier_ChildDef_HTML5_Div(), 'Common');
 
         // https://html.spec.whatwg.org/dev/grouping-content.html#the-main-element
         $this->addElement('main', 'Block', 'Flow', 'Common');
@@ -68,12 +80,12 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('figure', 'Block', new HTMLPurifier_ChildDef_HTML5_Figure(), 'Common');
         $this->addElement('figcaption', false, 'Flow', 'Common');
 
-        // https://html.spec.whatwg.org/multipage/grouping-content.html#the-blockquote-element
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-blockquote-element
         $this->addElement('blockquote', 'Block', 'Flow', 'Common', array(
             'cite' => 'URI',
         ));
 
-        // https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element
+        // https://html.spec.whatwg.org/dev/grouping-content.html#the-hr-element
         $this->addElement('hr', 'Block', 'Empty', 'Common');
 
         // http://developers.whatwg.org/text-level-semantics.html
@@ -95,6 +107,16 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule_Text
         $this->addElement('sup', 'Inline', 'Inline', 'Common');
         $this->addElement('mark', 'Inline', 'Inline', 'Common');
         $this->addElement('wbr', 'Inline', 'Empty', 'Common');
+
+        $this->addElement('abbr', 'Inline', 'Inline', 'Common');
+        $this->addElement('cite', 'Inline', 'Inline', 'Common');
+        $this->addElement('dfn', 'Inline', 'Inline', 'Common');
+        $this->addElement('kbd', 'Inline', 'Inline', 'Common');
+        $this->addElement('q', 'Inline', 'Inline', 'Common', array('cite' => 'URI'));
+        $this->addElement('samp', 'Inline', 'Inline', 'Common');
+
+        // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-span-element
+        $this->addElement('span', 'Inline', 'Inline', 'Common');
 
         // https://html.spec.whatwg.org/dev/text-level-semantics.html#the-br-element
         $this->addElement('br', 'Inline', 'Empty', 'Common');

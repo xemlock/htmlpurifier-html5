@@ -34,16 +34,13 @@ class HTMLPurifier_HTMLModule_HTML5_Legacy extends HTMLPurifier_HTMLModule
         $this->addElement('menu', 'Block', 'Required: li', 'Common');
 
         // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strike
-        $strike = $this->addElement('strike', 'Inline', 'Inline', 'Common');
-        $strike->formatting = true;
+        $this->addElement('strike', 'Inline', 'Inline', 'Common');
 
         // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/big
-        $big = $this->addElement('big', 'Inline', 'Inline', 'Common');
-        $big->formatting = true;
+        $this->addElement('big', 'Inline', 'Inline', 'Common');
 
         // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tt
-        $tt = $this->addElement('tt', 'Inline', 'Inline', 'Common');
-        $tt->formatting = true;
+        $this->addElement('tt', 'Inline', 'Inline', 'Common');
 
         // Setup modifications to old elements
 

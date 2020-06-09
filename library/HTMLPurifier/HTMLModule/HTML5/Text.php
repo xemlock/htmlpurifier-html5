@@ -134,5 +134,7 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule
         $this->addElement('time', 'Inline', $timeContents, 'Common', array(
             'datetime' => $timeDatetime,
         ));
+
+        $this->info_injector[] = new HTMLPurifier_Injector_HTML5_DlDiv();
     }
 }

@@ -48,8 +48,6 @@ abstract class HTMLPurifier_HTML5Definition
 
         $def->manager->attrTypes->set('Datetime', new HTMLPurifier_AttrDef_HTML5_Datetime());
 
-        $def->info_injector[] = new HTMLPurifier_Injector_HTML5_DlDiv();
-
         return $def;
     }
 }

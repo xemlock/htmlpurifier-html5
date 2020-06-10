@@ -88,6 +88,7 @@ class HTMLPurifier_HTMLModule_HTML5_Legacy extends HTMLPurifier_HTMLModule
         $table = $this->addBlankElement('table');
         $table->attr['align'] = 'Enum#left,center,right';
         $table->attr['bgcolor'] = 'Color';
+        $table->attr['height'] = 'Length';
 
         $tr = $this->addBlankElement('tr');
         $tr->attr['bgcolor'] = 'Color';

@@ -26,13 +26,14 @@ class HTMLPurifier_HTMLModule_Tidy_HTML5 extends HTMLPurifier_HTMLModule_Tidy_XH
             $fixes['ol@type']
         );
 
-        $fixes['acronym'] =  new HTMLPurifier_TagTransform_Simple('abbr');
-        $fixes['font'] = new HTMLPurifier_TagTransform_Font2();
-        $fixes['big'] = new HTMLPurifier_TagTransform_Simple('span', 'font-size:larger;');
-        $fixes['strike'] = new HTMLPurifier_TagTransform_Simple('s');
-        $fixes['tt'] =  new HTMLPurifier_TagTransform_Simple('code');
+        $fixes['acronym'] = new HTMLPurifier_TagTransform_Simple('abbr');
+        $fixes['font']    = new HTMLPurifier_TagTransform_Font2();
+        $fixes['big']     = new HTMLPurifier_TagTransform_Simple('span', 'font-size:larger;');
+        $fixes['strike']  = new HTMLPurifier_TagTransform_Simple('s');
+        $fixes['tt']      = new HTMLPurifier_TagTransform_Simple('code');
 
         $fixes['iframe@frameborder'] = new HTMLPurifier_AttrTransform_HTML5_FrameBorder();
+        $fixes['table@height'] = new HTMLPurifier_AttrTransform_Length('height');
 
         return $fixes;
     }

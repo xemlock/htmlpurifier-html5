@@ -36,11 +36,11 @@ class HTMLPurifier_HTMLModule_HTML5_Text_CiteTest extends HTMLPurifier_HTMLModul
                 '<p><cite><ul><li>text</li></ul></cite></p>',
                 '<p><cite></cite></p><ul><li>text</li></ul>',
             ),
-            'cannot contain interactive if parent forbids interactive 1' => array(
+            'cite cannot contain interactive if parent forbids interactive 1' => array(
                 '<p><a><cite><a>text</a></cite></a></p>',
                 '<p><a><cite></cite></a></p>',
             ),
-            'cannot contain interactive if parent forbids interactive 2' => array(
+            'cite cannot contain interactive if parent forbids interactive 2' => array(
                 '<p><a><dfn><cite><a>text</a></cite></dfn></a></p>',
                 '<p><a><dfn><cite></cite></dfn></a></p>',
             ),

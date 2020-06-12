@@ -32,12 +32,14 @@ abstract class HTMLPurifier_HTML5Definition
             array()
         );
 
-        // override default SafeScripting module
-        // Because how the built-in SafeScripting module is enabled in ModuleManager,
-        // to override it exactly the same name must be provided (without HTML5_ prefix)
-        $safeScripting = new HTMLPurifier_HTMLModule_HTML5_SafeScripting();
-        $safeScripting->name = 'SafeScripting';
-        $def->manager->registerModule($safeScripting);
+        // Override default SafeScripting module if HTML5 doctype is used.
+        // Because of how the built-in SafeScripting module is enabled in the ModuleManager,
+        // in order to override it the same name must be provided (without HTML5_ prefix)
+        if (stripos($config->get('HTML.Doctype'), 'HTML5') !== false) {
+            $safeScripting = new HTMLPurifier_HTMLModule_HTML5_SafeScripting();
+            $safeScripting->name = 'SafeScripting';
+            $def->manager->registerModule($safeScripting);
+        }
 
         // use fixed implementation of Boolean attributes, instead of a buggy
         // one provided with 4.6.0

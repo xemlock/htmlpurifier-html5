@@ -25,7 +25,7 @@ class HTMLPurifier_HTMLModule_HTML5_Legacy extends HTMLPurifier_HTMLModule
 
         $this->addElement('dir', 'Block', 'Required: li', 'Common');
 
-        $this->addElement('font', 'Inline', 'Inline', array('Core', 'I18N'), array(
+        $this->addElement('font', 'Inline', 'Inline', 'Common', array(
             'color' => 'Color',
             'face'  => new HTMLPurifier_AttrDef_CSS_FontFamily(),
             'size'  => new HTMLPurifier_AttrDef_HTML_FontSize(),

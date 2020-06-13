@@ -65,6 +65,15 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
 
   Whether or not to permit `allowfullscreen` attribute on `iframe` tags. It requires either [%HTML.SafeIframe](http://htmlpurifier.org/live/configdoc/plain.html#HTML.SafeIframe) or [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) to be `true`.
 
+* __HTML.XHTML__
+
+  Version added: 0.1.12\
+  Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
+  Default: `false`
+
+  While deprecated in HTML 4.01 / XHTML 1.0 context, in HTML5 it used for enabling
+  support for namespaced attributes and XML-style empty elements.
+
 
 ## Supported HTML5 elements
 

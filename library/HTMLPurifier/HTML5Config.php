@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2020061201;
+    const REVISION = 2020061202;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -82,6 +82,7 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         parent::__construct($schema, $parent);
 
         $this->set('HTML.Doctype', 'HTML5');
+        $this->set('HTML.XHTML', false);
         $this->set('Attr.ID.HTML5', true);
         $this->set('Output.CommentScriptContents', false);
     }

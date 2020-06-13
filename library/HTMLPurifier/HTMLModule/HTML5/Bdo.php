@@ -30,7 +30,7 @@ class HTMLPurifier_HTMLModule_HTML5_Bdo extends HTMLPurifier_HTMLModule
             'bdo',
             'Inline',
             'Inline',
-            array('Core', 'Lang'),
+            'Common',
             array(
                 'dir' => 'Enum#ltr,rtl', // required, the 'auto' value must not be specified
             )

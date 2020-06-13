@@ -14,14 +14,14 @@ abstract class HTMLPurifier_HTML5Definition
     {
         $def->manager->doctypes->register(
             'HTML5',
-            false,
+            $config->get('HTML.XHTML'),
             // Order of modules is important - the latter ones override the former.
             // Place common HTML5 modules at the end of the list
             array(
-                'CommonAttributes', 'HTML5_Text', 'HTML5_Hypertext', 'HTML5_List',
+                'HTML5_CommonAttributes', 'HTML5_Text', 'HTML5_Hypertext', 'HTML5_List',
                 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
                 'StyleAttribute', 'HTML5_Media', 'HTML5_Ruby', 'Name',
-                'HTML5_SafeForms', 'NonXMLCommonAttributes',
+                'HTML5_SafeForms',
                 // Unsafe:
                 'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
                 'HTML5_Iframe',

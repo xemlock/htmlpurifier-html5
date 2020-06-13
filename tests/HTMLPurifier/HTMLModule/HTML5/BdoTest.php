@@ -6,7 +6,7 @@ class HTMLPurifier_HTMLModule_HTML5_BdoTest extends BaseTestCase
     {
         $this->config->set('Attr.DefaultTextDir', 'ltr');
 
-        $this->assertPurification('<bdo dir="ltr">Foo</bdo>');
+        $this->assertPurification('<bdo dir="ltr" class="class">Foo</bdo>');
         $this->assertPurification('<bdo dir="auto">Foo</bdo>', '<bdo dir="ltr">Foo</bdo>');
         $this->assertPurification('<bdo><span>Foo</span></bdo>', '<bdo dir="ltr"><span>Foo</span></bdo>');
         $this->assertPurification('<bdo><span>Foo</span></bdo>', '<bdo dir="ltr"><span>Foo</span></bdo>');
@@ -16,7 +16,7 @@ class HTMLPurifier_HTMLModule_HTML5_BdoTest extends BaseTestCase
 
     public function testBdi()
     {
-        $this->assertPurification('<bdi dir="auto">Foo</bdi>');
+        $this->assertPurification('<bdi dir="auto" class="class">Foo</bdi>');
         $this->assertPurification('<bdi><span>Foo</span></bdi>');
         $this->assertPurification('<span><bdi>Foo</bdi></span>');
         $this->assertPurification('<div><bdi>Foo</bdi></div>');

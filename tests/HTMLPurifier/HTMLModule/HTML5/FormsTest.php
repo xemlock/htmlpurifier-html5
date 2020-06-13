@@ -60,4 +60,14 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
             </form>
         ');
     }
+
+    public function testHTMLFormsConfigDirective()
+    {
+        $this->config->set('HTML.Trusted', false);
+        $this->config->set('HTML.Forms', true);
+
+        $this->assertPurification(
+            '<form action="..." method="post"><input type="text"><textarea cols="20" rows="3"></textarea></form>'
+        );
+    }
 }

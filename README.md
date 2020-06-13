@@ -57,6 +57,17 @@ $config->set('URI.SafeIframeRegexp', '%^//www\.youtube\.com/embed/%');
 
 Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifier.org/live/configdoc/plain.html), the following new directives are also supported:
 
+* __HTML.Forms__
+
+  Version added: 0.1.12\
+  Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
+  Default: `false`
+
+  Whether or not to permit form elements in the user input, regardless of
+  [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) value.
+  Please be very careful when using this functionality, as enabling forms in untrusted
+  documents may allow for phishing attacks.
+
 * __HTML.IframeAllowFullscreen__
 
   Version added: 0.1.11\

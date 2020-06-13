@@ -14,6 +14,10 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
      */
     public function setup($config)
     {
+        if (isset($config->def->info['HTML.Forms']) && $config->get('HTML.Forms')) {
+            $this->safe = true;
+        }
+
         parent::setup($config);
 
         // legend element is declared in HTML5_SafeForms module

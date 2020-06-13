@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2020061202;
+    const REVISION = 2020061401;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -71,6 +71,10 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 
         if (empty($schema->info['HTML.IframeAllowFullscreen'])) {
             $schema->add('HTML.IframeAllowFullscreen', false, 'bool', false);
+        }
+
+        if (empty($schema->info['HTML.Forms'])) {
+            $schema->add('HTML.Forms', false, 'bool', false);
         }
 
         // HTMLPurifier doesn't define %CSS.DefinitionID, but it's required for

@@ -39,7 +39,7 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributes extends HTMLPurifier_HTMLMo
         ),
         'Common' => array(
             0 => array('Core', 'I18N'),
-        )
+        ),
     );
 
     /**

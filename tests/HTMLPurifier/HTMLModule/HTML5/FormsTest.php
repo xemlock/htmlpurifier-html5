@@ -29,6 +29,9 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
             array(
                 '<form action="foo"><fieldset><legend>Foo</legend>Bar</fieldset></form>',
             ),
+            array(
+                '<dialog><form method="dialog"></form></dialog>',
+            ),
         );
     }
 

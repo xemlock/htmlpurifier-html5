@@ -67,11 +67,15 @@ class HTMLPurifier_AttrDef_HTML5_Datetime extends HTMLPurifier_AttrDef
     protected $allowedFormats = array();
 
     /**
-     * @param array $allowedFormats OPTIONAL
+     * @param string|string[] $allowedFormats OPTIONAL
      * @throws HTMLPurifier_Exception If an invalid format is provided
      */
-    public function __construct(array $allowedFormats = array())
+    public function __construct($allowedFormats = array())
     {
+        if (!is_array($allowedFormats)) {
+            $allowedFormats = array($allowedFormats);
+        }
+
         // Validate allowed formats
         $allowedFormatsLookup = array();
         foreach ($allowedFormats as $format) {

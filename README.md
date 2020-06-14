@@ -87,6 +87,12 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
   When enabled it causes `xml:lang` attribute to take precedence over `lang`,
   when both attributes are present on the same element.
 
+* __Attr.AllowedInputTypes__
+
+  Version added: 0.1.12\
+  Type: [Lookup](http://htmlpurifier.org/live/configdoc/plain.html#type-lookup)\
+  Default: `null`
+
 
 ## Supported HTML5 elements
 

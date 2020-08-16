@@ -26,4 +26,15 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributesTest extends BaseTestCase
 
         $this->assertPurification('<hr xml:lang="en">', '<hr xml:lang="en" lang="en" />');
     }
+
+    public function testTabindex()
+    {
+        $this->config->autoFinalize = false;
+
+        $this->assertPurification('<div tabindex="0">Foo</div>');
+        $this->assertPurification('<span tabindex="-1">Foo</span>');
+
+        $this->config->set('HTML.Trusted', true);
+        $this->assertPurification('<button tabindex="1">Foo</button>');
+    }
 }

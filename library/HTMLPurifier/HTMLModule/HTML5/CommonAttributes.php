@@ -15,7 +15,9 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributes extends HTMLPurifier_HTMLMo
             0 => array('Style'),
             'class' => 'Class',
             'id'    => 'ID',
-            'title' => 'CDATA',
+            'title' => 'Text',
+            // tabindex attribute is supported on all elements (global attributes)
+            'tabindex' => 'Integer',
         ),
         'Lang' => array(
             'lang' => 'LanguageCode',

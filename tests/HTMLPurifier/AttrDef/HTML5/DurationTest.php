@@ -3,7 +3,7 @@
 /**
  * @property HTMLPurifier_AttrDef_HTML5_Duration $attr
  */
-class HTMLPurifier_AttrDef_HTML5DurationTest extends AttrDefTestCase
+class HTMLPurifier_AttrDef_HTML5_DurationTest extends AttrDefTestCase
 {
     protected function setUp()
     {

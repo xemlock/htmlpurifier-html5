@@ -1,6 +1,6 @@
 <?php
 
-class HTMLPurifier_AttrDef_FloatTest extends PHPUnit_Framework_TestCase
+class HTMLPurifier_AttrDef_HTML5_FloatTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var HTMLPurifier_Context

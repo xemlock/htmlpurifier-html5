@@ -707,7 +707,7 @@ div {}
 
         $generator = new HTMLPurifier_Generator(HTMLPurifier_Config::createDefault(), new HTMLPurifier_Context);
         foreach ($tokens as $i => $token) {
-            $string .= $this->printToken($generator, $token, $i, $index == $i);
+            $string .= $this->printToken($generator, $token, $i, $index === $i);
         }
 
         $string .= '</pre>';

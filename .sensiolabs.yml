@@ -3,4 +3,4 @@ rules:
         enabled: false
     php.use_exit_function:
         enabled: true
-        ignore_files: [tools/update-config-revision.php]
+        ignore_files: [maintenance/update-config-revision.php]

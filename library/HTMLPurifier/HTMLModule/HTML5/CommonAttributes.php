@@ -18,6 +18,12 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributes extends HTMLPurifier_HTMLMo
             'title' => 'Text',
             // tabindex attribute is supported on all elements (global attributes)
             'tabindex' => 'Integer',
+            // Final spec for inputmode global attribute has been published on 15 Dec 2017
+            // https://web.archive.org/web/20171215142138/https://html.spec.whatwg.org/#input-modalities:-the-inputmode-attribute
+            // The 'none' value has been intentionally omitted from the list of
+            // allowed values, as it effectively makes the element non-editable,
+            // unless there is a script implementing a custom virtual keyboard.
+            'inputmode' => 'Enum#text,decimal,numeric,tel,search,email,url',
         ),
         'Lang' => array(
             'lang' => 'LanguageCode',

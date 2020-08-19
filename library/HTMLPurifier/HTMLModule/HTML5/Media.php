@@ -66,6 +66,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
         $img->attr = array(
             'srcset' => 'Text',
             'sizes'  => 'Text',
+            'loading' => 'Enum#lazy,eager',
         );
     }
 }

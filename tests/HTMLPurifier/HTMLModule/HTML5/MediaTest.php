@@ -2,13 +2,6 @@
 
 class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
 {
-    public function testImg()
-    {
-        $this->assertPurification(
-            '<img src="image-src.png" srcset="image-1x.png 1x, image-2x.png 2x" sizes="(min-width: 640px) 480px" alt="">'
-        );
-    }
-
     /**
      * @param string $input
      * @param string $expected OPTIONAL

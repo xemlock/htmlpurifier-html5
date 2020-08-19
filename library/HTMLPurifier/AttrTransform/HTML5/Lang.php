@@ -24,13 +24,17 @@ class HTMLPurifier_AttrTransform_HTML5_Lang extends HTMLPurifier_AttrTransform
             $attr['lang'] = $lang = $xml_lang;
         }
 
-        // If both lang and xml:lang are present, ensure they're in sync,
-        // lang having priority over xml:lang
+        // If lang and xml:lang are both present, ensure that their values are
+        // equal, with lang having priority over xml:lang, as according to the
+        // spec, lang attribute in the XML namespace is not allowed on HTML
+        // elements, and non-namespaced attribute with the literal localname
+        // 'xml:lang' has no effect on language processing.
+        // https://html.spec.whatwg.org/#the-lang-and-xml:lang-attributes
         if ($lang !== false && $xml_lang !== false && $xml_lang !== $lang) {
             $attr['xml:lang'] = $lang;
         }
 
-        // xml:lang will be stripped out unless %HTML.XHTML is true
+        // xml:lang will be stripped out later unless %HTML.XHTML is true
 
         return $attr;
     }

@@ -21,7 +21,7 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributesTest extends BaseTestCase
         // When the attribute xml:lang in no namespace is specified, the element must also have the attribute lang present with the same value.
         $this->assertPurification('<p xml:lang="en">text</p>', '<p xml:lang="en" lang="en">text</p>');
 
-        // When the attribute xml:lang in no namespace is specified, the element must also have the attribute lang present with the same value.
+        // When there is a conflict between xml:lang and lang values, lang takes precedence
         $this->assertPurification('<p lang="en" xml:lang="pl">text</p>', '<p lang="en" xml:lang="en">text</p>');
 
         $this->assertPurification('<hr xml:lang="en">', '<hr xml:lang="en" lang="en" />');

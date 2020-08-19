@@ -25,13 +25,19 @@ class HTMLPurifier_AttrTransform_HTML5_Lang extends HTMLPurifier_AttrTransform
         }
 
         // If lang and xml:lang are both present, ensure that their values are
-        // equal, with lang having priority over xml:lang, as according to the
-        // spec, lang attribute in the XML namespace is not allowed on HTML
+        // equal. The precedence depends on document mode used, determined by
+        // %HTML.XHTML config value: xml:lang has precedence in XHTML mode, and
+        // lang in HTML mode.
+        // Lang attribute in the XML namespace is not allowed on HTML
         // elements, and non-namespaced attribute with the literal localname
         // 'xml:lang' has no effect on language processing.
         // https://html.spec.whatwg.org/#the-lang-and-xml:lang-attributes
         if ($lang !== false && $xml_lang !== false && $xml_lang !== $lang) {
-            $attr['xml:lang'] = $lang;
+            if ($config->get('HTML.XHTML')) {
+                $attr['lang'] = $xml_lang;
+            } else {
+                $attr['xml:lang'] = $lang;
+            }
         }
 
         // xml:lang will be stripped out later unless %HTML.XHTML is true

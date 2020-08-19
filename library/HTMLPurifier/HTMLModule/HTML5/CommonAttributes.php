@@ -23,6 +23,9 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributes extends HTMLPurifier_HTMLMo
             // The 'none' value has been intentionally omitted from the list of
             // allowed values, as it effectively makes the element non-editable,
             // unless there is a script implementing a custom virtual keyboard.
+            // It is worth noting that https://validator.nu/ is no longer up to
+            // date with the WHATWG HTML5 spec (as of Aug 2020), and doesn't
+            // recognize inputmode as a global attribute.
             'inputmode' => 'Enum#text,decimal,numeric,tel,search,email,url',
         ),
         'Lang' => array(

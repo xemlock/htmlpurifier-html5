@@ -82,8 +82,11 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
   Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
   Default: `false`
 
-  While deprecated in HTML 4.01 / XHTML 1.0 context, in HTML5 it used for enabling
-  support for namespaced attributes and XML-style empty elements.
+  While deprecated in HTML 4.01 / XHTML 1.0 context, in HTML5 it's used for
+  enabling support for namespaced attributes and XML self-closing tags.
+
+  When enabled it causes `xml:lang` attribute to take precedence over `lang`,
+  when both attributes are present on the same element.
 
 
 ## Supported HTML5 elements

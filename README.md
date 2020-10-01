@@ -1,4 +1,4 @@
-# HTML5 Definitions for HTML Purifier
+# HTML5 Definitions for HTML Purifier - Read below to know more
 
 ![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)
 [![Build Status](https://travis-ci.org/xemlock/htmlpurifier-html5.svg?branch=master)](https://travis-ci.org/xemlock/htmlpurifier-html5)
@@ -10,7 +10,7 @@
 
 This library provides HTML5 element definitions for [HTML Purifier](https://github.com/ezyang/htmlpurifier).
 
-It is the most complete HTML5-compliant solution among all based on HTML Purifier. Apart from providing the most extensive set of element definitions, it provides tidy/sanitization rules for transforming the input into a valid HTML5 output.
+It is the most complete HTML5-compliant solution among all based on HTML Purifier. Apart from providing the most extensive set of element definition, it provides tidy/sanitization rules for transforming the input into a valid HTML5 output.
 
 
 ## Installation

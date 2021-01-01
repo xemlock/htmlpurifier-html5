@@ -2,12 +2,10 @@
 
 ![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)
 [![Build Status](https://github.com/xemlock/htmlpurifier-html5/workflows/build/badge.svg)](https://github.com/xemlock/htmlpurifier-html5/actions?query=workflow/build)
-[![Build Status](https://travis-ci.org/xemlock/htmlpurifier-html5.svg?branch=master)](https://travis-ci.org/xemlock/htmlpurifier-html5)
 [![Coverage Status](https://coveralls.io/repos/github/xemlock/htmlpurifier-html5/badge.svg?branch=master)](https://coveralls.io/github/xemlock/htmlpurifier-html5?branch=master)
 [![Latest Stable Version](https://img.shields.io/packagist/v/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 [![Total Downloads](https://img.shields.io/packagist/dt/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5/stats)
 [![License](https://img.shields.io/packagist/l/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxemlock%2Fhtmlpurifier-html5?ref=badge_shield)
 
 This library provides HTML5 element definitions for [HTML Purifier](https://github.com/ezyang/htmlpurifier).
 

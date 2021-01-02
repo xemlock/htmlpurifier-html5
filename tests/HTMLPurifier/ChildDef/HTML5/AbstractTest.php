@@ -27,12 +27,9 @@ class HTMLPurifier_ChildDef_HTML5_AbstractTest extends BaseTestCase
         );
     }
 
-    /**
-     * @expectedException HTMLPurifier_Exception
-     * @expectedExceptionMessage property is not initialized
-     */
     public function testEmptyType()
     {
+        $this->setExpectedException('HTMLPurifier_Exception', 'property is not initialized');
         new HTMLPurifier_ChildDef_HTML5_AbstractTest_Element();
     }
 }

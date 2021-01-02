@@ -489,12 +489,9 @@ class HTMLPurifier_AttrDef_HTML5_DatetimeTest extends AttrDefTestCase
         $this->assertValidate('2005-04-02 21:37', '2005-04-02T21:37');
     }
 
-    /**
-     * @expectedException HTMLPurifier_Exception
-     * @expectedExceptionMessage not a valid format
-     */
     public function testInvalidFormat()
     {
+        $this->setExpectedException('HTMLPurifier_Exception', 'not a valid format');
         new HTMLPurifier_AttrDef_HTML5_Datetime(array('Invalid'));
     }
 }

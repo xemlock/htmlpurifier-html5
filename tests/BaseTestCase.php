@@ -54,4 +54,31 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
         }
         $this->fail("Failed asserting that error of type 'E_USER_WARNING' is triggered.");
     }
+
+    /**
+     * Compatibility re-implementation of setExpectedException deprecated in PHPUnit 5.2.0
+     * and removed in 6.0.0
+     *
+     * @param string $exception
+     * @param string $message
+     * @param int    $code
+     * @return void
+     */
+    public function setExpectedException($exception, $message = '', $code = null)
+    {
+        if (method_exists(get_parent_class(__CLASS__), 'setExpectedException')) {
+            /** @noinspection PhpUndefinedMethodInspection */
+            return parent::setExpectedException($exception, $message, $code);
+        }
+
+        $this->expectException($exception);
+
+        if ($message !== null && $message !== '') {
+            $this->expectExceptionMessage($message);
+        }
+
+        if ($code !== null) {
+            $this->expectExceptionCode($code);
+        }
+    }
 }

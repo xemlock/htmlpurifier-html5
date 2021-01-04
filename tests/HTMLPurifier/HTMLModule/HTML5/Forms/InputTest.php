@@ -11,7 +11,6 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends HTMLPurifier_HTMLMod
     public function dataProvider()
     {
         return array(
-            // text
             'input no type' => array(
                 '<input>',
                 '<input type="text">',
@@ -24,26 +23,6 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends HTMLPurifier_HTMLMod
                 '<input type="text" name="isindex">',
                 '<input type="text">',
             ),
-
-            // image
-            'input image alt default' => array(
-                '<input type="image">',
-                '<input type="image" alt="image">',
-            ),
-            'input image alt from name' => array(
-                '<input type="image" name="image1">',
-                '<input type="image" name="image1" alt="image1">',
-            ),
-
-            // datetime (obsolete)
-            'input datetime' => array(
-                '<input type="datetime">',
-                '<input type="datetime-local">',
-            ),
-
-            // week
-
-            //
         );
     }
 
@@ -59,26 +38,7 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends HTMLPurifier_HTMLMod
 
     public function minMaxAttributeProvider()
     {
-        // Valid for date, month, week, time, datetime-local, number, and range
         return array(
-            // date
-            array(
-                '<input type="date" min="2005-04-02" max="2010-04-10" step="1">',
-            ),
-            array(
-                '<input type="date" min="2005-04" max="2010-04" step="1">',
-                '<input type="date" step="1">',
-            ),
-
-            // month
-            array(
-                '<input type="month" min="2005-04" max="2010-04" step="1">',
-            ),
-            array(
-                '<input type="month" min="2005" max="2010" step="1">',
-                '<input type="month" step="1">',
-            ),
-
             // week
             array(
                 '<input type="week" min="2005-W13" max="2010-W14" step="1">',
@@ -303,31 +263,4 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends HTMLPurifier_HTMLMod
             ),
         );
     }
-
-    public function testFile()
-    {}
-
-    public function testHidden()
-    {}
-
-    public function testImage()
-    {}
-
-    public function testMonth()
-    {}
-
-    public function testNumber()
-    {}
-
-    public function testPassword()
-    {}
-
-    public function testRange()
-    {}
-
-    public function testTime()
-    {}
-
-    public function testWeek()
-    {}
 }

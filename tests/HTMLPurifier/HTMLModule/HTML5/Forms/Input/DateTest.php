@@ -30,6 +30,10 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_DateTest
                 '<input type="date" accept="text/plain" alt="foo" checked dirname="foo.dir" height="10" max="10" maxlength="64" min="0" minlength="0" multiple pattern="[a-z]+" placeholder="foo" size="10" src="foo.png" width="10">',
                 '<input type="date">',
             ),
+            'input data invalid min max attributes' => array(
+                '<input type="date" min="2005-04" max="2010-04" step="1">',
+                '<input type="date" step="1">',
+            ),
         );
     }
 }

@@ -19,11 +19,11 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_ColorTest
                 '<input type="color" name="foo" value="foo">',
                 '<input type="color" name="foo">',
             ),
-            'input color invalid value 2' => array(
+            'input color invalid value 2 - hex shorthand' => array(
                 '<input type="color" name="foo" value="#f00">',
                 '<input type="color" name="foo" value="#ff0000">',
             ),
-            'input color invalid value 3' => array(
+            'input color invalid value 3 - hex with alpha' => array(
                 '<input type="color" name="foo" value="#ff000000">',
                 '<input type="color" name="foo">',
             ),

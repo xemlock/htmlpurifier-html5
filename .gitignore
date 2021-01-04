@@ -5,6 +5,7 @@ vendor/
 
 # test results
 build/
+.phpunit.result.cache
 
 # IDEs and editors
 *.swp
@@ -14,4 +15,4 @@ build/
 # system files
 .DS_Store
 Thumbs.db
-desktop.ini
+[Dd]esktop.ini

@@ -31,16 +31,7 @@ jobs:
             - name: Install dependencies
               run: |
                 echo PHP_VERSION: ${{ env.PHP_VERSION }}
-                if [[ "${{ env.PHP_VERSION }}" = 8.* ]]; then
-                  composer require --no-update phpunit/phpunit:^8.0.0
-                fi
                 composer install
-                if [[ "${{ env.PHP_VERSION }}" = 8.* ]]; then
-                  # Remove return type annotation from setUp() and tearDown(), to allow test cases
-                  # to be executed in phpunit 8.* versions
-                  sed -i -- 's/protected function \(setUp\)(): void/protected function \1()/g' vendor/phpunit/phpunit/src/Framework/TestCase.php
-                  sed -i -- 's/protected function \(tearDown\)(): void/protected function \1()/g' vendor/phpunit/phpunit/src/Framework/TestCase.php
-                fi
 
             - name: Run tests
               run: |

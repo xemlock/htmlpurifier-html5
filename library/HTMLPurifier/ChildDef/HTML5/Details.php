@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * HTML5 compliant details content model
+ *
+ * https://html.spec.whatwg.org/dev/interactive-elements.html#the-details-element
+ */
 class HTMLPurifier_ChildDef_HTML5_Details extends HTMLPurifier_ChildDef
 {
     public $type = 'details';

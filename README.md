@@ -7,7 +7,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5/stats)
 [![License](https://img.shields.io/packagist/l/xemlock/htmlpurifier-html5.svg)](https://packagist.org/packages/xemlock/htmlpurifier-html5)
 
-This library provides HTML5 element definitions for [HTML Purifier](https://github.com/ezyang/htmlpurifier).
+This library provides HTML5 element definitions for [HTML Purifier](https://github.com/ezyang/htmlpurifier),
+compliant with the [WHATWG spec](https://html.spec.whatwg.org/).
 
 It is the most complete HTML5-compliant solution among all based on HTML Purifier. Apart from providing the most extensive set of element definitions, it provides tidy/sanitization rules for transforming the input into a valid HTML5 output.
 

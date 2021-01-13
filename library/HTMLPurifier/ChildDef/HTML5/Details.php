@@ -80,6 +80,61 @@ class HTMLPurifier_ChildDef_HTML5_Details extends HTMLPurifier_ChildDef
             $summary[] = new HTMLPurifier_Node_Element('summary');
         }
 
+        /** @var HTMLPurifier_HTMLDefinition $definition */
+        $def = $config->getHTMLDefinition();
+        $ptr = 'valid';
+        $summaryChildren = array(
+            'valid' => array(),
+            'invalid' => array(),
+        );
+
+        switch ($this->_detectSummaryContext($config, $summary[0])) {
+            case 'inline':
+                foreach ($summary[0]->children as $c) {
+                    if ($c instanceof HTMLPurifier_Node_Element && !isset($def->info_content_sets['Inline'][$c->name])) {
+                        $ptr = 'invalid';
+                    }
+                    $summaryChildren[$ptr][] = $c;
+                }
+                break;
+
+            case 'heading':
+                $hasHeading = false;
+                foreach ($summary[0]->children as $c) {
+                    $isText = $c instanceof HTMLPurifier_Node_Text && !$c->is_whitespace;
+                    $isHeading = $c instanceof HTMLPurifier_Node_Element && isset($def->info_content_sets['Heading'][$c->name]);
+
+                    if ($isText || !$isHeading || $hasHeading) {
+                        $ptr = 'invalid';
+                    }
+
+                    $summaryChildren[$ptr][] = $c;
+                    $hasHeading = $hasHeading || $isHeading;
+                }
+                break;
+        }
+
+        $summary[0]->children = $summaryChildren['valid'];
+
+        if ($summaryChildren['invalid']) {
+            $others = array_merge($summaryChildren['invalid'], $others);
+        }
+
         return array_merge($spaces, $summary, $others);
+    }
+
+    protected function _detectSummaryContext(HTMLPurifier_Config $config, HTMLPurifier_Node_Element $summary)
+    {
+        /** @var HTMLPurifier_HTMLDefinition $def */
+        $def = $config->getHTMLDefinition();
+
+        foreach ($summary->children as $child) {
+            if ($child instanceof HTMLPurifier_Node_Element
+                && isset($def->info_content_sets['Heading'][$child->name])
+            ) {
+                return 'heading';
+            }
+        }
+        return 'inline';
     }
 }

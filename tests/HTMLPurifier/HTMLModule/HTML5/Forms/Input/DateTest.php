@@ -16,6 +16,7 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_DateTest
                 '<input type="date" name="foo">',
             ),
             'input date datetime value' => array(
+                // Nu HTML Checker: Bad value for attribute value on element input: The literal did not satisfy the date format.
                 '<input type="date" name="foo" value="2005-04-02 21:37">',
                 '<input type="date" name="foo" value="2005-04-02">',
             ),

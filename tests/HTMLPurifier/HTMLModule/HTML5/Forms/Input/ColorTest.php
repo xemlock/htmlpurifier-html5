@@ -16,6 +16,7 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_ColorTest
                 '<input type="color" name="foo" value="">',
             ),
             'input color invalid value 1' => array(
+                // Nu HTML Checker: Bad value for attribute value on element input: Incorrect length for color string.
                 '<input type="color" name="foo" value="foo">',
                 '<input type="color" name="foo">',
             ),

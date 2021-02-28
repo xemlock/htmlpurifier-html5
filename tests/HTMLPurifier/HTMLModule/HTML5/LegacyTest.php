@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection HtmlDeprecatedAttribute */
+/** @noinspection HtmlDeprecatedTag */
+
 class HTMLPurifier_HTMLModule_HTML5_LegacyTest extends BaseTestCase
 {
     protected function setUp()

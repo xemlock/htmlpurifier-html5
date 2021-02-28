@@ -11,7 +11,7 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_DatetimeLocalTest
                 '<input type="datetime-local">',
             ),
             'input datetime-local' => array(
-                '<input type="datetime-local" name="meeting-time" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00" step="1">',
+                '<input type="datetime-local" name="meeting-time" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00" step="1" required>',
             ),
             'input datetime-local step any' => array(
                 '<input type="datetime-local" step="any">',

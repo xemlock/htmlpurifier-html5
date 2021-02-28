@@ -23,6 +23,12 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends HTMLPurifier_HTMLMod
                 '<input type="text" name="isindex">',
                 '<input type="text">',
             ),
+            'input is structured inline' => array(
+                '<p><input type="text"></p>',
+            ),
+            'input is strictly inline' => array(
+                '<p><dfn><input type="text"></dfn></p>',
+            ),
         );
     }
 

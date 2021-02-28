@@ -32,14 +32,10 @@ class HTMLPurifier_AttrDef_HTML5_Email extends HTMLPurifier_AttrDef
         $currentToken = $context->get('CurrentToken', true);
         $multiple = $currentToken instanceof HTMLPurifier_Token_Tag && isset($currentToken->attr['multiple']);
 
-        if ($multiple) {
-            // A valid e-mail address list is a set of comma-separated tokens,
-            // where each token is itself a valid e-mail address.
-            // https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address-list
-            $parts = explode(',', $string);
-        } else {
-            $parts = array($string);
-        }
+        // A valid e-mail address list is a set of comma-separated tokens,
+        // where each token is itself a valid e-mail address.
+        // https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address-list
+        $parts = explode(',', $string);
 
         $result = array();
         foreach ($parts as $part) {
@@ -48,6 +44,11 @@ class HTMLPurifier_AttrDef_HTML5_Email extends HTMLPurifier_AttrDef
                 $result[] = $part;
             }
         }
+
+        if (!$multiple) {
+            $result = array_slice($result, 0, 1);
+        }
+
         return $result ? implode(',', $result) : false;
     }
 }

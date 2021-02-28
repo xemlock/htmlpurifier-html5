@@ -34,6 +34,10 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_EmailTest
                 '<input type="email" accept="text/plain" alt="email" checked dirname="foo.dir" height="10" max="10" min="0" src="foo.png" step="1" width="10">',
                 '<input type="email">',
             ),
+            'input email multiple emails without multiple attribute' => array(
+                '<input type="email" value="foo@example.com,bar@example.com">',
+                '<input type="email" value="foo@example.com">',
+            ),
         );
     }
 }

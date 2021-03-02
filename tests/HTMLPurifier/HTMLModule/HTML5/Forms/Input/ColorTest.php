@@ -29,6 +29,11 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_ColorTest
                 '<input type="color" name="foo">',
             ),
             'input color invalid attributes' => array(
+                // https://html.spec.whatwg.org/multipage/input.html#color-state-(type=color)
+                // The following content attributes must not be specified and do not apply to the
+                // element: accept, alt, checked, dirname, formaction, formenctype, formmethod,
+                // formnovalidate, formtarget, height, max, maxlength, min, minlength, multiple,
+                // pattern, placeholder, readonly, required, size, src, step, and width.
                 '<input type="color" accept="text/plain" alt="foo" checked dirname="foo.dir" height="10" max="10" maxlength="64" min="0" minlength="0" multiple pattern="[a-z]+" placeholder="foo" readonly required size="10" src="foo.png" step="1" width="10">',
                 '<input type="color">',
             ),

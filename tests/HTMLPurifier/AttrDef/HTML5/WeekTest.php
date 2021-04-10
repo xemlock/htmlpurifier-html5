@@ -33,7 +33,8 @@ class HTMLPurifier_AttrDef_HTML5_WeekTest extends AttrDefTestCase
             // invalid format
             array('', false),
             array('2000', false),
-            array('2000-W1', false),
+            array('2000-W1', '2000-W01'),
+            array('2000-W100', false),
 
             // semantically invalid
             array('0000-W01', false),

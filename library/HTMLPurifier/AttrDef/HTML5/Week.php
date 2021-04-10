@@ -9,7 +9,7 @@ class HTMLPurifier_AttrDef_HTML5_Week extends HTMLPurifier_AttrDef
     const REGEX = '/^
         (?P<year>\d{4,})
         -W
-        (?P<week>[0-5]\d)
+        (?P<week>\d{1,2})
     $/xi';
 
     /**
@@ -42,6 +42,6 @@ class HTMLPurifier_AttrDef_HTML5_Week extends HTMLPurifier_AttrDef
             return false;
         }
 
-        return $string;
+        return sprintf("%04d-W%02d", $year, $week);
     }
 }

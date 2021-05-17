@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2020061401;
+    const REVISION = 2021061404;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -75,6 +75,10 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 
         if (empty($schema->info['HTML.Forms'])) {
             $schema->add('HTML.Forms', false, 'bool', false);
+        }
+
+        if (empty($schema->info['HTML.SafeExternalStylesheet'])) {
+            $schema->add('HTML.SafeExternalStylesheet', array(), 'list', false);
         }
 
         // HTMLPurifier doesn't define %CSS.DefinitionID, but it's required for

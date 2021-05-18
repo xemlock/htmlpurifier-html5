@@ -4,7 +4,7 @@
  * Validates 'rel' attribute on <a> and <area> elements, as defined by the
  * HTML5 spec and the MicroFormats link type extensions tables.
  */
-class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
+class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef_HTML_Rel
 {
     /**
      * Lookup table for valid values
@@ -94,22 +94,6 @@ class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
     );
 
     /**
-     * Return lookup table for valid 'rel' values
-     *
-     * @return array
-     * @codeCoverageIgnore
-     */
-    public static function values()
-    {
-        return self::$values;
-    }
-
-    /**
-     * @var array
-     */
-    protected $allowed;
-
-    /**
      * @param string $string
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
@@ -117,32 +101,6 @@ class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
      */
     public function validate($string, $config, $context)
     {
-        if ($this->allowed === null) {
-            $allowedRel = (array) $config->get('Attr.AllowedRel');
-            if (empty($allowedRel)) {
-                $allowed = array();
-            } else {
-                $allowed = array_intersect_key($allowedRel, self::$values);
-            }
-            $this->allowed = $allowed;
-        }
-
-        $string = $this->parseCDATA($string);
-        $parts = explode(' ', $string);
-
-        $result = array();
-        foreach ($parts as $part) {
-            $part = strtolower(trim($part));
-            if (!isset($this->allowed[$part])) {
-                continue;
-            }
-            $result[$part] = true;
-        }
-
-        if (empty($result)) {
-            return false;
-        }
-
-        return implode(' ', array_keys($result));
+        return $this->validateAttribute($string, $config);
     }
 }

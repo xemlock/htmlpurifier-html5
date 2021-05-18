@@ -6,6 +6,7 @@ class HTMLPurifier_HTMLModule_HTML5_SafeExternalStylesheetsTest extends BaseTest
     {
         parent::setUp();
 
+        $this->config->set('Attr.AllowedRel', array('stylesheet', 'preload'));
         $this->config->set('HTML.SafeExternalStylesheet', array('https://localhost/foo.css'));
     }
 
@@ -75,6 +76,14 @@ class HTMLPurifier_HTMLModule_HTML5_SafeExternalStylesheetsTest extends BaseTest
         $this->assertPurification(
             '<link href="https://localhost/foo.css" rel="stylesheet" />',
             '<link href="https://localhost/foo.css" rel="stylesheet">'
+        );
+    }
+
+    public function testMultiRel()
+    {
+        $this->assertPurification(
+            '<link href="https://localhost/foo.css" rel="stylesheet preload">',
+            '<link href="https://localhost/foo.css" rel="stylesheet preload">'
         );
     }
 }

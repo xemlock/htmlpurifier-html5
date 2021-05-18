@@ -87,13 +87,14 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
   When enabled it causes `xml:lang` attribute to take precedence over `lang`,
   when both attributes are present on the same element.
 
-* __HTML.Link__
+* __URI.SafeLinkRegexp__
 
   Version added: 0.1.12\
-  Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-list)\
-  Default: `array()`
+  Type: [String](http://htmlpurifier.org/live/configdoc/plain.html#type-string)\
+  Default: `null`
 
-  Permit use of the `<link>` element on specific URLs.
+  A PCRE regular expression that will be matched against a `<link>` URI. Here are some example values:
+  `%^https?://localhost/%` - Allow localhost URIs
   Use `Attr.AllowedRel` to control permitted link types.
 
 ## Supported HTML5 elements

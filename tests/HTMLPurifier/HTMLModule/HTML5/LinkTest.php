@@ -7,7 +7,7 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
         parent::setUp();
 
         $this->config->set('Attr.AllowedRel', array('stylesheet', 'preload'));
-        $this->config->set('HTML.Link', array('https://localhost/foo.css'));
+        $this->config->set('URI.SafeLinkRegexp', '%^https?://localhost/%');
     }
 
     public function testClosingTag()
@@ -45,7 +45,7 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
     public function testInvalidUrl()
     {
         $this->assertPurification(
-            '<link href="foo" rel="stylesheet">',
+            '<link href="http://google.com/foo.css" rel="stylesheet">',
             ''
         );
     }
@@ -60,8 +60,9 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
 
     public function testWhitelistCapitalised()
     {
+        // regex is case sensitive
         $this->assertPurification(
-            '<link href="https://localhost/FOO.css" rel="stylesheet">',
+            '<link href="https://localHost/FOO.css" rel="stylesheet">',
             ''
         );
     }

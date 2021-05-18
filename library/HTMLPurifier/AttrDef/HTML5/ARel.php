@@ -122,7 +122,7 @@ class HTMLPurifier_AttrDef_HTML5_ARel extends HTMLPurifier_AttrDef
             if (empty($allowedRel)) {
                 $allowed = array();
             } else {
-                $allowed = array_intersect_key($allowedRel, self::$values);
+                $allowed = array_intersect_key($allowedRel, static::$values);
             }
             $this->allowed = $allowed;
         }

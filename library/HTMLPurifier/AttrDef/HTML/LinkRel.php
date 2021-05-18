@@ -9,7 +9,7 @@
  *
  * @note We cannot use Enum because multiple values are allowed.
  */
-class HTMLPurifier_AttrDef_HTML_LinkRel extends HTMLPurifier_AttrDef_HTML_Rel
+class HTMLPurifier_AttrDef_HTML_LinkRel extends HTMLPurifier_AttrDef_HTML5_ARel
 {
     /**
      * Lookup table for valid values
@@ -25,15 +25,4 @@ class HTMLPurifier_AttrDef_HTML_LinkRel extends HTMLPurifier_AttrDef_HTML_Rel
         'prerender' => true,
         'stylesheet' => true,
     );
-
-    /**
-     * @param string $string
-     * @param HTMLPurifier_Config $config
-     * @param HTMLPurifier_Context $context
-     * @return bool|string
-     */
-    public function validate($string, $config, $context)
-    {
-        return $this->validateAttribute($string, $config);
-    }
 }

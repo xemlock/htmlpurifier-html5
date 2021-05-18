@@ -1,13 +1,13 @@
 <?php
 
-class HTMLPurifier_HTMLModule_HTML5_SafeExternalStylesheetsTest extends BaseTestCase
+class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
         $this->config->set('Attr.AllowedRel', array('stylesheet', 'preload'));
-        $this->config->set('HTML.SafeExternalStylesheet', array('https://localhost/foo.css'));
+        $this->config->set('HTML.Link', array('https://localhost/foo.css'));
     }
 
     public function testClosingTag()

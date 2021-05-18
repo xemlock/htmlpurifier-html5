@@ -77,8 +77,8 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
             $schema->add('HTML.Forms', false, 'bool', false);
         }
 
-        if (empty($schema->info['HTML.SafeExternalStylesheet'])) {
-            $schema->add('HTML.SafeExternalStylesheet', array(), 'list', false);
+        if (empty($schema->info['HTML.Link'])) {
+            $schema->add('HTML.Link', array(), 'list', false);
         }
 
         // HTMLPurifier doesn't define %CSS.DefinitionID, but it's required for

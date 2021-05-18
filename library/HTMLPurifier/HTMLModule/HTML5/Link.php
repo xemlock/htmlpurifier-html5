@@ -3,19 +3,19 @@
 /*
  * https://html.spec.whatwg.org/dev/semantics.html#the-link-element
  */
-class HTMLPurifier_HTMLModule_HTML5_SafeExternalStylesheets extends HTMLPurifier_HTMLModule
+class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
 {
     /**
      * @type string
      */
-    public $name = 'HTML5_SafeExternalStylesheets';
+    public $name = 'HTML5_Link';
 
     /**
      * @param HTMLPurifier_Config $config
      */
     public function setup($config)
     {
-        $allowed = $config->get('HTML.SafeExternalStylesheet');
+        $allowed = $config->get('HTML.Link');
 
         // https://html.spec.whatwg.org/dev/semantics.html#the-link-element
         $this->addElement('link', 'Flow', 'Empty', null, array(

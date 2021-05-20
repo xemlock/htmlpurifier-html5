@@ -6,6 +6,7 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
     {
         parent::setUp();
 
+        $this->config->set('HTML.Link', true);
         $this->config->set('Attr.AllowedRel', array('stylesheet', 'preload'));
         $this->config->set('URI.SafeLinkRegexp', '%^https?://localhost/%');
     }
@@ -55,6 +56,16 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
         $this->assertPurification(
             '<link href="https://localhost/foo.css" rel="stylesheet">',
             '<link href="https://localhost/foo.css" rel="stylesheet">'
+        );
+    }
+
+    public function testGoodModuleDisabled()
+    {
+        $this->config->set('HTML.Link', false);
+
+        $this->assertPurification(
+            '<link href="https://localhost/foo.css" rel="stylesheet">',
+            ''
         );
     }
 

@@ -5,16 +5,19 @@
  */
 class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
 {
-    /**
-     * @type string
-     */
     public $name = 'HTML5_Link';
+
+    public $safe = false;
 
     /**
      * @param HTMLPurifier_Config $config
      */
     public function setup($config)
     {
+        if (isset($config->def->info['HTML.Link']) && $config->get('HTML.Link')) {
+            $this->safe = true;
+        }
+
         // https://html.spec.whatwg.org/dev/semantics.html#the-link-element
         $this->addElement('link', 'Flow', 'Empty', null, array(
             'rel*'  => new HTMLPurifier_AttrDef_HTML_LinkRel,

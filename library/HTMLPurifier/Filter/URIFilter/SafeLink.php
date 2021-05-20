@@ -36,6 +36,11 @@ class HTMLPurifier_URIFilter_SafeLink extends HTMLPurifier_URIFilter
      */
     public function filter(&$uri, $config, $context)
     {
+        // check if filter not applicable
+        if ($config->get('HTML.SafeLink') !== true) {
+            return true;
+        }
+
         // check if the filter should actually trigger
         if (!$context->get('EmbeddedURI', true)) {
             return true;

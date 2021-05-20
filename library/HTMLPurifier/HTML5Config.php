@@ -80,8 +80,8 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
             $schema->add('HTML.Forms', false, 'bool', false);
         }
 
-        if (empty($schema->info['HTML.Link'])) {
-            $schema->add('HTML.Link', false, 'bool', false);
+        if (empty($schema->info['HTML.SafeLink'])) {
+            $schema->add('HTML.SafeLink', false, 'bool', false);
         }
 
         if (empty($schema->info['URI.SafeLinkRegexp'])) {

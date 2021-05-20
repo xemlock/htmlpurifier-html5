@@ -14,7 +14,7 @@ class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        if (isset($config->def->info['HTML.Link']) && $config->get('HTML.Link')) {
+        if ($config->get('HTML.SafeLink')) {
             $this->safe = true;
         }
 

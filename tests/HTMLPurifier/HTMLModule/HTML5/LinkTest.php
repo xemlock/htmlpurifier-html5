@@ -7,7 +7,7 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
         parent::setUp();
 
         $this->config->set('HTML.SafeLink', true);
-        $this->config->set('Attr.AllowedRel', array('stylesheet', 'preload'));
+        $this->config->set('Attr.AllowedRel', array('stylesheet'));
         $this->config->set('URI.SafeLinkRegexp', '%^https?://localhost/%');
     }
 
@@ -96,6 +96,24 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
         $this->assertPurification(
             '<link href="https://localhost/foo.css" rel="stylesheet preload">',
             '<link href="https://localhost/foo.css" rel="stylesheet">'
+        );
+    }
+
+    public function testNullSafeLinkRegexp()
+    {
+        $this->config->set('URI.SafeLinkRegexp', null);
+
+        $this->assertPurification(
+            '<link href="https://localhost/foo.css" rel="stylesheet">',
+            ''
+        );
+    }
+
+    public function testMultipleElements()
+    {
+        $this->assertPurification(
+            '<span>Foo</span><link href="https://localhost/foo.css" rel="stylesheet">',
+            '<span>Foo</span><link href="https://localhost/foo.css" rel="stylesheet">'
         );
     }
 }

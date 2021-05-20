@@ -41,11 +41,6 @@ class HTMLPurifier_URIFilter_SafeLink extends HTMLPurifier_URIFilter
             return true;
         }
 
-        // check if the filter should actually trigger
-        if (!$context->get('EmbeddedURI', true)) {
-            return true;
-        }
-
         $token = $context->get('CurrentToken', true);
         if (!($token && $token->name == 'link')) {
             return true;

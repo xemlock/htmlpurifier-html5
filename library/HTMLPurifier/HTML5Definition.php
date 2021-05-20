@@ -24,7 +24,7 @@ abstract class HTMLPurifier_HTML5Definition
                 'HTML5_SafeForms',
                 // Unsafe:
                 'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
-                'HTML5_Iframe',
+                'HTML5_Iframe', 'HTML5_Link',
                 // Transitional:
                 'HTML5_Legacy',
             ),

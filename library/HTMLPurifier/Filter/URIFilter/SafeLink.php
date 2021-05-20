@@ -47,7 +47,7 @@ class HTMLPurifier_URIFilter_SafeLink extends HTMLPurifier_URIFilter
         }
 
         $token = $context->get('CurrentToken', true);
-        if (! ($token && $token->name == 'link')) {
+        if (!($token && $token->name == 'link')) {
             return true;
         }
 

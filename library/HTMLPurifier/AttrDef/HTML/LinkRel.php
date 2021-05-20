@@ -16,13 +16,6 @@ class HTMLPurifier_AttrDef_HTML_LinkRel extends HTMLPurifier_AttrDef_HTML5_ARel
      * @var array
      */
     protected static $values = array(
-        'dns-prefetch' => true,
-        'modulepreload' => true,
-        'pingback' => true,
-        'preconnect' => true,
-        'prefetch' => true,
-        'preload' => true,
-        'prerender' => true,
         'stylesheet' => true,
     );
 }

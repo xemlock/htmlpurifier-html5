@@ -95,7 +95,7 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
     {
         $this->assertPurification(
             '<link href="https://localhost/foo.css" rel="stylesheet preload">',
-            '<link href="https://localhost/foo.css" rel="stylesheet preload">'
+            '<link href="https://localhost/foo.css" rel="stylesheet">'
         );
     }
 }

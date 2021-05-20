@@ -20,7 +20,7 @@ class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
 
         // https://html.spec.whatwg.org/dev/semantics.html#the-link-element
         $this->addElement('link', 'Flow', 'Empty', null, array(
-            'rel*'  => new HTMLPurifier_AttrDef_HTML_LinkRel,
+            'rel*'  => new HTMLPurifier_AttrDef_HTML5_LinkRel,
             'type'  => new HTMLPurifier_AttrDef_Enum(array('text/css')),
             'href*' => new HTMLPurifier_AttrDef_URI(true),
         ));

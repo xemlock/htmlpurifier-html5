@@ -9,7 +9,7 @@
  *
  * @note We cannot use Enum because multiple values are allowed.
  */
-class HTMLPurifier_AttrDef_HTML_LinkRel extends HTMLPurifier_AttrDef_HTML5_ARel
+class HTMLPurifier_AttrDef_HTML5_LinkRel extends HTMLPurifier_AttrDef_HTML5_ARel
 {
     /**
      * Lookup table for valid values

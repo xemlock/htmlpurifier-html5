@@ -21,10 +21,10 @@ abstract class HTMLPurifier_HTML5Definition
                 'HTML5_CommonAttributes', 'HTML5_Text', 'HTML5_Hypertext', 'HTML5_List',
                 'HTML5_Edit', 'HTML5_Bdo', 'Tables', 'Image',
                 'StyleAttribute', 'HTML5_Media', 'HTML5_Ruby', 'Name',
-                'HTML5_SafeForms', 'HTML5_Link',
+                'HTML5_SafeForms',
                 // Unsafe:
                 'HTML5_Scripting', 'HTML5_Interactive', 'Object', 'HTML5_Forms',
-                'HTML5_Iframe',
+                'HTML5_Iframe', 'HTML5_Link',
                 // Transitional:
                 'HTML5_Legacy',
             ),

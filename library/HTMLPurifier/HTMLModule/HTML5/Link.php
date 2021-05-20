@@ -21,5 +21,7 @@ class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
             'type'  => new HTMLPurifier_AttrDef_Enum(array('text/css')),
             'href*' => new HTMLPurifier_AttrDef_URI(true),
         ));
+
+        $this->addElementToContentSet('link', 'Inline');
     }
 }

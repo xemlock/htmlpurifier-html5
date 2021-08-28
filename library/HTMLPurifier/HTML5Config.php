@@ -85,6 +85,18 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 
         parent::__construct($schema, $parent);
 
+        // Set up defaults for AutoFormat.RemoveEmpty.Predicate to properly handle
+        // empty video and audio elements.
+        if (!$this->plist->has('AutoFormat.RemoveEmpty.Predicate')) {
+            $this->set('AutoFormat.RemoveEmpty.Predicate', array_merge(
+                $schema->defaults['AutoFormat.RemoveEmpty.Predicate'],
+                array(
+                    'video' => array(),
+                    'audio' => array(),
+                )
+            ));
+        }
+
         $this->set('HTML.Doctype', 'HTML5');
         $this->set('HTML.XHTML', false);
         $this->set('Attr.ID.HTML5', true);

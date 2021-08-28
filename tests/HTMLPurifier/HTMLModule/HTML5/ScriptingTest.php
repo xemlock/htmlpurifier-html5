@@ -103,12 +103,12 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
     {
         $this->config->autoFinalize = false;
 
-        // PHP DOM parser fails at parsing <noscript> in <p>, which affects
-        // the default HTMLPurifier lexer (DOMLex)
-        $this->assertPurification(
-            '<p><noscript>Foo</noscript></p>',
-            '<p></p><noscript>Foo</noscript>'
-        );
+        // PHP DOM (xmldom 2.9.1) parser fails at parsing <noscript> in <p>, which affects
+        // the default HTMLPurifier lexer (DOMLex):
+        //     <p><noscript>Foo</noscript></p>
+        // is purified into:
+        //     <p></p><noscript>Foo</noscript>
+        // In more recent xmldom versions (2.9.12) this is no longer the case.
 
         // PH5P lexer properly handles <noscript> in <p> elements
         $this->config->set('Core.LexerImpl', 'PH5P');

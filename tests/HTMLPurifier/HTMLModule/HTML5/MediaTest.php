@@ -151,4 +151,17 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
             ),
         );
     }
+
+    public function testRemoveEmpty()
+    {
+        $this->config->set('AutoFormat.RemoveEmpty', true);
+
+        $this->assertPurification('<video src="video.mp4"></video>');
+        $this->assertPurification('<video><source src="video.ogv" type="video/ogg"></video>');
+
+        $this->assertPurification('<audio src="audio.mp3"></audio>');
+        $this->assertPurification('<audio><source src="audio.ogg" type="audio/ogg"></audio>');
+
+        $this->assertPurification('<img src="image.jpg" alt="">');
+    }
 }

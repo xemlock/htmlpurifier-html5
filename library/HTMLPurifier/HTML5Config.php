@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2021083002;
+    const REVISION = 2021083101;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -23,6 +23,9 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         $configObj = new self($schema);
         $configObj->set('HTML.DefinitionID', __CLASS__);
         $configObj->set('HTML.DefinitionRev', self::REVISION);
+
+        $configObj->set('URI.DefinitionID', __CLASS__);
+        $configObj->set('URI.DefinitionRev', self::REVISION);
 
         if (is_string($config)) {
             $configObj->loadIni($config);
@@ -77,6 +80,14 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
             $schema->add('HTML.Forms', false, 'bool', false);
         }
 
+        if (empty($schema->info['HTML.SafeLink'])) {
+            $schema->add('HTML.SafeLink', false, 'bool', false);
+        }
+
+        if (empty($schema->info['URI.SafeLinkRegexp'])) {
+            $schema->add('URI.SafeLinkRegexp', null, 'string', true);
+        }
+
         // HTMLPurifier doesn't define %CSS.DefinitionID, but it's required for
         // customizing CSS definition object (in the future)
         if (empty($schema->info['CSS.DefinitionID'])) {
@@ -113,6 +124,14 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
                 HTMLPurifier_HTML5Definition::setupHTMLDefinition($def, $this);
             }
         }
+
+        if ($type === 'URI' && empty($this->definitions[$type])) {
+            if ($def = parent::getDefinition($type, true, true)) {
+                /** @var HTMLPurifier_URIDefinition $def */
+                HTMLPurifier_HTML5URIDefinition::setupDefinition($def, $this);
+            }
+        }
+
         return parent::getDefinition($type, $raw, $optimized);
     }
 

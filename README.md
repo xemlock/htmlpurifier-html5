@@ -73,7 +73,32 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
   Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
   Default: `false`
 
-  Whether or not to permit `allowfullscreen` attribute on `iframe` tags. It requires either [%HTML.SafeIframe](http://htmlpurifier.org/live/configdoc/plain.html#HTML.SafeIframe) or [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) to be `true`.
+  Whether or not to permit `allowfullscreen` attribute on `iframe` tags. It requires either
+  [%HTML.SafeIframe](http://htmlpurifier.org/live/configdoc/plain.html#HTML.SafeIframe) or
+  [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) to be `true`.
+
+* __HTML.Link__
+
+  Version added: 0.1.12\
+  Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
+  Default: `false`
+
+  Permit the `link` tags in the user input, regardless of
+  [%HTML.Trusted](http://htmlpurifier.org/live/configdoc/plain.html#HTML.Trusted) value.
+  This effectively allows `link` tags without allowing other untrusted elements.
+
+  If enabled, URIs in `link` tags will not be matched against a whitelist specified
+  in %URI.SafeLinkRegexp (unless %HTML.SafeIframe is also enabled).
+
+* __HTML.SafeLink__
+
+  Version added: 0.1.12\
+  Type: [Boolean](http://htmlpurifier.org/live/configdoc/plain.html#type-bool)\
+  Default: `false`
+
+  Whether to permit `link` tags in untrusted documents. This directive must
+  be accompanied by a whitelist of permitted URIs via %URI.SafeLinkRegexp,
+  otherwise no `link` tags will be allowed.
 
 * __HTML.XHTML__
 
@@ -87,6 +112,17 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
   When enabled it causes `xml:lang` attribute to take precedence over `lang`,
   when both attributes are present on the same element.
 
+* __URI.SafeLinkRegexp__
+
+  Version added: 0.1.12\
+  Type: [String](http://htmlpurifier.org/live/configdoc/plain.html#type-string)\
+  Default: `null`
+
+  A PCRE regular expression that will be matched against a `<link>` URI. This directive
+  only has an effect if %HTML.SafeLink is enabled. Here are some example values:
+  `%^https?://localhost/%` - Allow localhost URIs
+
+  Use `Attr.AllowedRel` to control permitted link relationship types.
 
 ## Supported HTML5 elements
 

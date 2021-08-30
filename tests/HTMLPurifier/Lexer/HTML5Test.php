@@ -37,6 +37,15 @@ class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
         $this->assertInstanceOf('HTMLPurifier_Lexer_HTML5', $lexer);
     }
 
+    public function test_createFromString()
+    {
+        $this->config->set('Core.LexerImpl', 'HTML5');
+
+        $lexer = HTMLPurifier_Lexer::create($this->config);
+
+        $this->assertInstanceOf('HTMLPurifier_Lexer_HTML5', $lexer);
+    }
+
     /**
      * Tokenize an empty input.
      *

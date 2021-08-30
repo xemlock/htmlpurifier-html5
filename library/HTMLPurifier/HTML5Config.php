@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2020061401;
+    const REVISION = 2021083001;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -114,5 +114,15 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
             }
         }
         return parent::getDefinition($type, $raw, $optimized);
+    }
+
+    public function set($key, $value, $a = null)
+    {
+        // Special case for HTML5 lexer, so that it can be specified as a string,
+        // just like the other lexers ('DOMLex', 'DirectLex' and 'PH5P')
+        if ($key === 'Core.LexerImpl' && $value === 'HTML5') {
+            $value = new HTMLPurifier_Lexer_HTML5();
+        }
+        return parent::set($key, $value, $a);
     }
 }

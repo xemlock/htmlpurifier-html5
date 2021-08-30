@@ -683,55 +683,8 @@ div {}
     protected function assertTokenization($input, $expect)
     {
         $lexer = new HTMLPurifier_Lexer_HTML5();
-
         $result = $lexer->tokenizeHTML($input, $this->config, $this->context);
 
-        $t_expect = $expect;
         $this->assertEquals($expect, $result);
-
-        if ($t_expect != $result) {
-            $this->printTokens($result);
-        }
-    }
-
-    /**
-     * Print an array of HTMLPurifier_Token's to console.
-     *
-     * @param  HTMLPurifier_Token[]  $tokens
-     * @param  int                   $index
-     * @return void
-     */
-    protected function printTokens($tokens, $index = null)
-    {
-        $string = '<pre>';
-
-        $generator = new HTMLPurifier_Generator(HTMLPurifier_Config::createDefault(), new HTMLPurifier_Context);
-        foreach ($tokens as $i => $token) {
-            $string .= $this->printToken($generator, $token, $i, $index === $i);
-        }
-
-        $string .= '</pre>';
-
-        echo $string;
-    }
-
-    /**
-     * Convert a HTMLPurifier_Token to a string.
-     *
-     * @param  HTMLPurifier_Generator  $generator
-     * @param  HTMLPurifier_Token      $token
-     * @param  int                     $i
-     * @param  bool                    $isCursor
-     * @return string
-     */
-    protected function printToken($generator, $token, $i, $isCursor)
-    {
-        $string = "";
-        if ($isCursor) $string .= '[<strong>';
-        $string .= "<sup>$i</sup>";
-        $string .= $generator->escape($generator->generateFromToken($token));
-        if ($isCursor) $string .= '</strong>]';
-
-        return $string;
     }
 }

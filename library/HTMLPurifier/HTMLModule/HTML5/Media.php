@@ -24,9 +24,9 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
         $this->addElement('video', 'Flow', $mediaContent, 'Common', array(
             'controls' => 'Bool#controls',
             'height'   => 'Length',
-            'poster'   => 'URI',
+            'poster'   => new HTMLPurifier_AttrDef_URI(true),
             'preload'  => 'Enum#auto,metadata,none',
-            'src'      => 'URI',
+            'src'      => new HTMLPurifier_AttrDef_URI(true),
             'width'    => 'Length',
         ));
         $this->addElementToContentSet('video', 'Inline');
@@ -35,7 +35,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
         $this->addElement('audio', 'Flow', $mediaContent, 'Common', array(
             'controls' => 'Bool#controls',
             'preload'  => 'Enum#auto,metadata,none',
-            'src'      => 'URI',
+            'src'      => new HTMLPurifier_AttrDef_URI(true),
         ));
         $this->addElementToContentSet('audio', 'Inline');
 
@@ -43,7 +43,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
         $this->addElement('source', false, 'Empty', 'Common', array(
             'media'  => 'Text',
             'sizes'  => 'Text',
-            'src'    => 'URI',
+            'src'    => new HTMLPurifier_AttrDef_URI(true),
             'srcset' => 'Text',
             'type'   => 'Text',
         ));
@@ -51,7 +51,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
         // https://html.spec.whatwg.org/dev/media.html#the-track-element
         $this->addElement('track', false, 'Empty', 'Common', array(
             'kind'    => 'Enum#captions,chapters,descriptions,metadata,subtitles',
-            'src'     => 'URI',
+            'src'     => new HTMLPurifier_AttrDef_URI(true),
             'srclang' => 'Text',
             'label'   => 'Text',
             'default' => 'Bool#default',

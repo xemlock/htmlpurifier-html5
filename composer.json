@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": ">=5.2",
+        "php": ">=5.3",
         "ezyang/htmlpurifier": "^4.8"
     },
     "require-dev": {

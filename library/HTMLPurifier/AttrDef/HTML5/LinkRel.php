@@ -1,21 +1,22 @@
 <?php
 
-/*
+/**
+ * Validates 'rel' attribute on <link> elements, as defined by the HTML5 spec.
+ *
  * Keywords that are body-ok affect whether link elements are allowed in the body.
- * The body-ok keywords are dns-prefetch, modulepreload, pingback, preconnect, prefetch, preload, prerender,
- * and stylesheet.
- *
- * https://html.spec.whatwg.org/multipage/links.html#body-ok
- *
- * @note We cannot use Enum because multiple values are allowed.
+ * @see https://html.spec.whatwg.org/multipage/links.html#body-ok
+ * @see https://html.spec.whatwg.org/multipage/links.html#linkTypes
  */
-class HTMLPurifier_AttrDef_HTML5_LinkRel extends HTMLPurifier_AttrDef_HTML5_ARel
+class HTMLPurifier_AttrDef_HTML5_LinkRel extends HTMLPurifier_AttrDef_HTML5_Rel
 {
-    /**
-     * Lookup table for valid values
-     * @var array
-     */
     protected static $values = array(
+        'dns-prefetch' => true,
+        'modulepreload' => true,
+        'pingback' => true,
+        'preconnect' => true,
+        'prefetch' => true,
+        'preload' => true,
+        'prerender' => true,
         'stylesheet' => true,
     );
 }

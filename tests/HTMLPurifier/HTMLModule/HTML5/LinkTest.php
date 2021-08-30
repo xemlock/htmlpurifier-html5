@@ -116,4 +116,54 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
             '<span>Foo</span><link href="https://localhost/foo.css" rel="stylesheet">'
         );
     }
+
+    public function testEmptyAllowedRel()
+    {
+        $this->config->set('Attr.AllowedRel', array());
+
+        $this->assertPurification(
+            '<link href="https://localhost/foo.css" rel="stylesheet">',
+            ''
+        );
+    }
+
+    public function testInvalidRel()
+    {
+        $this->config->set('Attr.AllowedRel', array('alternate', 'stylesheet'));
+
+        // 'alternate' is not allowed in links in body
+        // https://html.spec.whatwg.org/multipage/links.html#linkTypes
+        $this->assertPurification(
+            '<link href="https://localhost/foo.css" rel="alternate stylesheet">',
+            '<link href="https://localhost/foo.css" rel="stylesheet">'
+        );
+    }
+
+    public function testDisableExternalResources()
+    {
+        $this->config->set('URI.DisableResources', true);
+
+        $this->assertPurification(
+            '<link href="https://localhost/foo.css" rel="stylesheet">',
+            ''
+        );
+    }
+
+    public function testEnableWithHtmlTrustedConfig()
+    {
+        $this->config->set('HTML.Link', false);
+        $this->config->set('HTML.SafeLink', false);
+        $this->config->set('HTML.Trusted', true);
+
+        $this->assertPurification('<link href="http://google.com/foo.css" rel="stylesheet">');
+    }
+
+    public function testEnableWithHtmlLinkConfig()
+    {
+        $this->config->set('HTML.Link', true);
+        $this->config->set('HTML.SafeLink', false);
+        $this->config->set('HTML.Trusted', true);
+
+        $this->assertPurification('<link href="http://google.com/foo.css" rel="stylesheet">');
+    }
 }

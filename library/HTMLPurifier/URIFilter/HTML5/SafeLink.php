@@ -1,11 +1,11 @@
 <?php
 
-class HTMLPurifier_URIFilter_SafeLink extends HTMLPurifier_URIFilter
+class HTMLPurifier_URIFilter_HTML5_SafeLink extends HTMLPurifier_URIFilter
 {
     /**
      * @type string
      */
-    public $name = 'SafeLink';
+    public $name = 'HTML5_SafeLink';
 
     /**
      * @type bool
@@ -24,7 +24,6 @@ class HTMLPurifier_URIFilter_SafeLink extends HTMLPurifier_URIFilter
     public function prepare($config)
     {
         $this->regexp = $config->get('URI.SafeLinkRegexp');
-
         return true;
     }
 
@@ -37,7 +36,7 @@ class HTMLPurifier_URIFilter_SafeLink extends HTMLPurifier_URIFilter
     public function filter(&$uri, $config, $context)
     {
         // check if filter not applicable
-        if ($config->get('HTML.SafeLink') !== true) {
+        if (!$config->get('HTML.SafeLink')) {
             return true;
         }
 

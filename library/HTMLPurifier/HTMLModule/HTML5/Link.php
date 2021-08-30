@@ -5,8 +5,14 @@
  */
 class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
 {
+    /**
+     * @type string
+     */
     public $name = 'HTML5_Link';
 
+    /**
+     * @type bool
+     */
     public $safe = false;
 
     /**
@@ -14,17 +20,16 @@ class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        if ($config->get('HTML.SafeLink')) {
+        if ($config->get('HTML.Link') || $config->get('HTML.SafeLink')) {
             $this->safe = true;
         }
 
         // https://html.spec.whatwg.org/dev/semantics.html#the-link-element
         $this->addElement('link', 'Flow', 'Empty', null, array(
-            'rel*'  => new HTMLPurifier_AttrDef_HTML5_LinkRel,
-            'type'  => new HTMLPurifier_AttrDef_Enum(array('text/css')),
+            'rel*'  => new HTMLPurifier_AttrDef_HTML5_LinkRel(),
             'href*' => new HTMLPurifier_AttrDef_URI(true),
+            'type'  => 'Text',
         ));
-
         $this->addElementToContentSet('link', 'Inline');
     }
 }

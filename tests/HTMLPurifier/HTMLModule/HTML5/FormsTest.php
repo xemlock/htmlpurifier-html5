@@ -70,4 +70,13 @@ class HTMLPurifier_HTMLModule_HTML5_FormsTest extends BaseTestCase
             '<form action="..." method="post"><input type="text"><textarea cols="20" rows="3"></textarea></form>'
         );
     }
+
+    public function testFormRel()
+    {
+        $this->config->set('HTML.Forms', true);
+        $this->config->set('Attr.AllowedRel', array('external'));
+
+        $this->assertPurification('<form action="foo" rel="external">Foo</form>');
+        $this->assertPurification('<form action="foo" rel="search">Foo</form>', '<form action="foo">Foo</form>');
+    }
 }

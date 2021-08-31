@@ -38,6 +38,7 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
                 'method'  => 'Enum#get,post',
                 'enctype' => 'Enum#application/x-www-form-urlencoded,multipart/form-data,text/plain',
                 'target'  => new HTMLPurifier_AttrDef_HTML_FrameTarget(),
+                'rel'     => new HTMLPurifier_AttrDef_HTML5_FormRel(),
             )
         );
         $form->excludes = array('form' => true);

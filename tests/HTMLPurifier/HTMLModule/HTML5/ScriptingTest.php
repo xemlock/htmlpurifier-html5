@@ -44,6 +44,9 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
         $this->assertPurification(
             '<span><script>document.write("Foo")</script></span>'
         );
+        $this->assertPurification(
+            '<h1><script>document.write("Foo")</script></h1>'
+        );
     }
 
     public function testUnsupportedAttributes()

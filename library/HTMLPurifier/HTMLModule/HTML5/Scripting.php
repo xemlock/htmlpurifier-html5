@@ -30,7 +30,7 @@ class HTMLPurifier_HTMLModule_HTML5_Scripting extends HTMLPurifier_HTMLModule
         $this->addElementToContentSet('noscript', 'Inline');
 
         $scriptContents = new HTMLPurifier_ChildDef_HTML5_Script();
-        $script = $this->addElement('script', 'Flow', $scriptContents, null, array(
+        $script = $this->addElement('script', 'Inline', $scriptContents, null, array(
             'src' => new HTMLPurifier_AttrDef_URI(true),
             'type' => new HTMLPurifier_AttrDef_Enum(array(
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#textjavascript
@@ -43,7 +43,6 @@ class HTMLPurifier_HTMLModule_HTML5_Scripting extends HTMLPurifier_HTMLModule
             // Deprecated: https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
             'charset' => 'Enum#utf-8',
         ));
-        $this->addElementToContentSet('script', 'Inline');
 
         $script->attr_transform_pre[] = new HTMLPurifier_AttrTransform_HTML5_Script();
     }

@@ -38,6 +38,7 @@ class HTMLPurifier_HTMLModule_HTML5_Scripting extends HTMLPurifier_HTMLModule
             )),
             'async' => new HTMLPurifier_AttrDef_HTML_Bool2(),
             'defer' => new HTMLPurifier_AttrDef_HTML_Bool2(),
+            'crossorigin' => 'Enum#anonymous',
             // If present, its value must be an ASCII case-insensitive match for "utf-8"
             // Deprecated: https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
             'charset' => 'Enum#utf-8',

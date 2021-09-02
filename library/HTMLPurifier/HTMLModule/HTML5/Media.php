@@ -28,6 +28,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => new HTMLPurifier_AttrDef_URI(true),
             'width'    => 'Length',
+            'crossorigin' => 'Enum#anonymous',
         ));
         $this->addElementToContentSet('video', 'Inline');
 
@@ -36,6 +37,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
             'controls' => 'Bool#controls',
             'preload'  => 'Enum#auto,metadata,none',
             'src'      => new HTMLPurifier_AttrDef_URI(true),
+            'crossorigin' => 'Enum#anonymous',
         ));
         $this->addElementToContentSet('audio', 'Inline');
 
@@ -67,6 +69,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
             'srcset' => 'Text',
             'sizes'  => 'Text',
             'loading' => 'Enum#lazy,eager',
+            'crossorigin' => 'Enum#anonymous',
         );
     }
 }

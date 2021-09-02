@@ -37,6 +37,7 @@ class HTMLPurifier_HTMLModule_HTML5_SafeScripting extends HTMLPurifier_HTMLModul
                 )),
                 'async' => new HTMLPurifier_AttrDef_HTML_Bool2(),
                 'defer' => new HTMLPurifier_AttrDef_HTML_Bool2(),
+                'crossorigin' => 'Enum#anonymous',
                 'charset' => 'Enum#utf-8',
             )
         );

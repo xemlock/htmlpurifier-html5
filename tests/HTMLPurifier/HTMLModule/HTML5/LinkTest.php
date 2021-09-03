@@ -166,4 +166,9 @@ class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
 
         $this->assertPurification('<link href="http://google.com/foo.css" rel="stylesheet">');
     }
+
+    public function testIntegrity()
+    {
+        $this->assertPurification('<link href="http://localhost/foo.css" rel="stylesheet" integrity="sha256-ymsp1QFcwiJbIgAoSOkMtqe4GFczZH1KjXLq6y5f+QY=">');
+    }
 }

@@ -9,54 +9,6 @@ class HTMLPurifier_HTMLModule_HTML5_ScriptingTest extends BaseTestCase
         $this->config->set('HTML.Trusted', true);
     }
 
-    public function testDefaultRemoval()
-    {
-        $this->config->set('HTML.Trusted', false);
-        $this->assertPurification(
-            '<script type="text/javascript">foo();</script>',
-            ''
-        );
-    }
-
-    public function testPreserve()
-    {
-        $this->assertPurification(
-            '<script type="text/javascript">foo();</script>'
-        );
-    }
-
-    public function testAllAttributes()
-    {
-        $this->assertPurification(
-            '<script defer src="test.js" type="text/javascript" charset="utf-8" async></script>'
-        );
-        $this->assertPurification(
-            '<script defer src="" type="text/javascript">PCDATA</script>',
-            '<script defer type="text/javascript">PCDATA</script>'
-        );
-        $this->assertPurification(
-            '<script defer src="script.js" type="text/javascript">PCDATA</script>',
-            '<script defer src="script.js" type="text/javascript"></script>'
-        );
-        $this->assertPurification(
-            '<p><script>document.write("Foo")</script></p>'
-        );
-        $this->assertPurification(
-            '<span><script>document.write("Foo")</script></span>'
-        );
-        $this->assertPurification(
-            '<h1><script>document.write("Foo")</script></h1>'
-        );
-    }
-
-    public function testUnsupportedAttributes()
-    {
-        $this->assertPurification(
-            '<script type="text/javascript" crossorigin="use-credentials">PCDATA</script>',
-            '<script type="text/javascript">PCDATA</script>'
-        );
-    }
-
     /**
      * @param string $input
      * @param string $expectedOutput OPTIONAL

@@ -39,8 +39,10 @@ class HTMLPurifier_HTMLModule_HTML5_Scripting extends HTMLPurifier_HTMLModule
             'async' => new HTMLPurifier_AttrDef_HTML_Bool2(),
             'defer' => new HTMLPurifier_AttrDef_HTML_Bool2(),
             'crossorigin' => 'Enum#anonymous',
-            // If present, its value must be an ASCII case-insensitive match for "utf-8"
-            // Deprecated: https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
+            'integrity' => new HTMLPurifier_AttrDef_HTML5_IntegrityMetadata(),
+            // If present, charset value must be an ASCII case-insensitive match for "utf-8"
+            // https://web.archive.org/web/20171005001148/https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
+            // Deprecated, removed from the spec on 6 Oct 2017
             'charset' => 'Enum#utf-8',
         ));
 

@@ -30,6 +30,7 @@ class HTMLPurifier_HTMLModule_HTML5_Link extends HTMLPurifier_HTMLModule
             'href*' => new HTMLPurifier_AttrDef_URI(true),
             'type'  => 'Text',
             'crossorigin' => 'Enum#anonymous',
+            'integrity' => new HTMLPurifier_AttrDef_HTML5_IntegrityMetadata(),
         ));
         $this->addElementToContentSet('link', 'Inline');
     }

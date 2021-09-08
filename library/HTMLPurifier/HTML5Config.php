@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2021090301;
+    const REVISION = 2021090801;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -142,6 +142,6 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
         if ($key === 'Core.LexerImpl' && $value === 'HTML5') {
             $value = new HTMLPurifier_Lexer_HTML5();
         }
-        return parent::set($key, $value, $a);
+        parent::set($key, $value, $a);
     }
 }

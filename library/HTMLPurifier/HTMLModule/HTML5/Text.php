@@ -135,6 +135,12 @@ class HTMLPurifier_HTMLModule_HTML5_Text extends HTMLPurifier_HTMLModule
             'datetime' => $timeDatetime,
         ));
 
+        // https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-data-element
+        $data = $this->addElement('data', 'Inline', 'Inline', 'Common', array(
+            'value' => 'Text',
+        ));
+        $data->attr_transform_post[] = new HTMLPurifier_AttrTransform_HTML5_Data();
+
         $this->info_injector[] = new HTMLPurifier_Injector_HTML5_DlDiv();
     }
 }

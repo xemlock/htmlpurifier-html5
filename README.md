@@ -130,7 +130,7 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
 Aside from HTML elements supported originally by HTML Purifier, this library
 adds support for the following HTML5 elements:
 
-`<article>`, `<aside>`, `<audio>`, `<bdi>`, `<details>`, `<dialog>`, `<figcaption>`, `<figure>`, `<footer>`, `<header>`, `<hgroup>`, `<main>`, `<mark>`, `<nav>`, `<picture>`, `<progress>`, `<section>`, `<source>`, `<summary>`, `<time>`, `<track>`, `<video>`, `<wbr>`
+`<article>`, `<aside>`, `<audio>`, `<bdi>`, `<data>`, `<details>`, `<dialog>`, `<figcaption>`, `<figure>`, `<footer>`, `<header>`, `<hgroup>`, `<main>`, `<mark>`, `<nav>`, `<picture>`, `<progress>`, `<section>`, `<source>`, `<summary>`, `<time>`, `<track>`, `<video>`, `<wbr>`
 
 as well as HTML5 attributes added to existing HTML elements, such as:
 

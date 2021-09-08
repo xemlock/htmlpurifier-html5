@@ -15,7 +15,7 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributes extends HTMLPurifier_HTMLMo
             0 => array('Style'),
             'class' => 'Class',
             'id'    => 'ID',
-            'title' => 'Text',
+            'title' => 'CDATA',
             // tabindex attribute is supported on all elements (global attributes)
             'tabindex' => 'Integer',
             // Final spec for inputmode global attribute has been published on 15 Dec 2017

@@ -4,16 +4,14 @@
  * Transforms FONT tags to the proper form (SPAN with CSS styling)
  *
  * This is a replacement implementation for {@link HTMLPurifier_TagTransform_Font},
- * because the original one uses relative font sizes, which should be computed
- * relative to document (in rem units), and not relative to parent element (percent).
+ * because the original one wrongly computes font size increments relative to parent
+ * element (via percent), instead of using increments relative to the document.
  *
  * In the example below both strings have the same font size:
  * <pre>
  * <font size="4"><font size="+2">Foo</font></font>
  * <font size="+2">Foo</font>
  * </pre>
- *
- * Also font-family names other than generic is wrapped in quotes.
  */
 class HTMLPurifier_TagTransform_Font2 extends HTMLPurifier_TagTransform
 {

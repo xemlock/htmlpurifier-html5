@@ -1,8 +1,8 @@
 <?php
 
-class HTMLPurifier_HTMLModule_HTML5_TablesTest extends BaseTestCase
+class HTMLPurifier_HTMLModule_HTML5_TablesTest extends HTMLPurifier_HTMLModule_HTML5_AbstractTest
 {
-    public function data()
+    public function dataProvider()
     {
         return array(
             array('<table></table>'),
@@ -13,15 +13,5 @@ class HTMLPurifier_HTMLModule_HTML5_TablesTest extends BaseTestCase
             array('<table><thead><tr><th>foo</th></tr></thead><tbody><tr><th>foo</th></tr></tbody></table>'),
             array('<table><tr><th>foo</th></tr><tr><td>foo</td></tr></table>'),
         );
-    }
-
-    /**
-     * @param string $input
-     * @param string|null $expected OPTIONAL
-     * @dataProvider data
-     */
-    public function testHeaderFooter($input, $expected = null)
-    {
-        $this->assertPurification($input, $expected);
     }
 }

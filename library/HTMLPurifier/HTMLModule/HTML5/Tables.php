@@ -26,7 +26,7 @@ class HTMLPurifier_HTMLModule_HTML5_Tables extends HTMLPurifier_HTMLModule
         $this->addElement('th', false, 'Flow', 'Common', array(
             'colspan' => 'Number',
             'rowspan' => 'Number',
-            // 'headers' => 'IDREF', // IDREF not implemented, cannot allow
+            // 'headers' => 'IDREFS', // IDREFS not implemented, cannot allow
             'scope' => 'Enum#row,col,rowgroup,colgroup',
             'abbr' => 'Text',
         ));
@@ -34,7 +34,7 @@ class HTMLPurifier_HTMLModule_HTML5_Tables extends HTMLPurifier_HTMLModule
         $this->addElement('td', false, 'Flow', 'Common', array(
             'colspan' => 'Number',
             'rowspan' => 'Number',
-            // 'headers' => 'IDREF', // IDREF not implemented, cannot allow
+            // 'headers' => 'IDREFS', // IDREFS not implemented, cannot allow
         ));
 
         $this->addElement('col', false, 'Empty', 'Common', array(

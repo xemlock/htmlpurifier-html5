@@ -1,11 +1,12 @@
 <?php
 
 /**
- * HTML5 compliant definition for <table> contents.
+ * HTML5 compliant definition for table contents.
  *
- * Content model: In this order: optionally a caption element, followed by zero or more colgroup elements,
- * followed optionally by a thead element, followed by either zero or more tbody elements or one or more
- * tr elements, followed optionally by a tfoot element.
+ * Content model: In this order: optionally a caption element, followed by zero or more
+ * colgroup elements, followed optionally by a thead element, followed by either zero
+ * or more tbody elements or one or more tr elements, followed optionally by a tfoot
+ * element.
  *
  * @see https://html.spec.whatwg.org/multipage/tables.html#the-table-element
  */
@@ -129,9 +130,9 @@ class HTMLPurifier_ChildDef_HTML5_Table extends HTMLPurifier_ChildDef
                     break;
 
                 case '#PCDATA':
-                    // How is whitespace handled? We treat is as sticky to the *end* of the
-                    // previous element. So all the nonsense we have worked on is to keep
-                    // things together.
+                    // How is whitespace handled? We treat is as sticky to the *end* of
+                    // the previous element. So all the nonsense we have worked on is to
+                    // keep things together.
                     if (!empty($node->is_whitespace)) {
                         $ws_accum[] = $node;
                     }

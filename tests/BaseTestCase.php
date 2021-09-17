@@ -8,6 +8,16 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
     protected $config;
 
     /**
+     * @var HTMLPurifier_Context
+     */
+    protected $context;
+
+    /**
+     * @var HTMLPurifier
+     */
+    protected $purifier;
+
+    /**
      * @var array
      */
     private $errors;
@@ -16,6 +26,10 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
     {
         $this->config = HTMLPurifier_HTML5Config::create(null);
         $this->config->set('Cache.DefinitionImpl', null);
+
+        $this->context = new HTMLPurifier_Context();
+
+        $this->purifier = new HTMLPurifier($this->config);
 
         $this->errors = array();
         set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE | E_USER_WARNING);
@@ -36,8 +50,7 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
      */
     public function assertPurification($input, $expect = null)
     {
-        $purifier = new HTMLPurifier($this->config);
-        $output = $purifier->purify($input);
+        $output = $this->purifier->purify($input);
 
         $this->assertSame($expect !== null ? $expect : $input, $output);
     }
@@ -63,12 +76,14 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
      * @param string $message
      * @param int    $code
      * @return void
+     * @noinspection PhpUndefinedMethodInspection
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     public function setExpectedException($exception, $message = '', $code = null)
     {
         if (method_exists(get_parent_class(__CLASS__), 'setExpectedException')) {
-            /** @noinspection PhpUndefinedMethodInspection */
-            return parent::setExpectedException($exception, $message, $code);
+            parent::setExpectedException($exception, $message, $code);
+            return;
         }
 
         $this->expectException($exception);

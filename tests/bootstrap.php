@@ -13,9 +13,6 @@ if (!class_exists('PHPUnit_Framework_TestCase') && class_exists('PHPUnit\Framewo
     class_alias('PHPUnit\Framework\TestCase', 'PHPUnit_Framework_TestCase');
 }
 
-require_once __DIR__ . '/BaseTestCase.php';
-require_once __DIR__ . '/AttrDefTestCase.php';
-
 echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";
 echo "libxml version:       ", constant('LIBXML_DOTTED_VERSION'), "\n";
 echo "PHP memory limit:     ", ini_get('memory_limit'), "\n";
@@ -25,3 +22,7 @@ if (getenv('TRAVIS_PHP_VERSION')) {
     // Fixes /home/travis/.travis/functions: line 109:  4773 Segmentation fault (core dumped)
     gc_disable();
 }
+
+require_once __DIR__ . '/BaseTestCase.php';
+require_once __DIR__ . '/AttrDefTestCase.php';
+require_once __DIR__ . '/ChildDefTestCase.php';

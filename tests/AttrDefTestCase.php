@@ -3,21 +3,9 @@
 abstract class AttrDefTestCase extends BaseTestCase
 {
     /**
-     * @var HTMLPurifier_Context
-     */
-    protected $context;
-
-    /**
      * @var HTMLPurifier_AttrDef
      */
     protected $attr;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->context = new HTMLPurifier_Context();
-    }
 
     /**
      * @param string $input

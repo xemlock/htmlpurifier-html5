@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2021091701;
+    const REVISION = 2021091901;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -78,6 +78,10 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 
         if (empty($schema->info['HTML.Forms'])) {
             $schema->add('HTML.Forms', false, 'bool', false);
+        }
+
+        if (empty($schema->info['HTML.Link'])) {
+            $schema->add('HTML.Link', false, 'bool', false);
         }
 
         if (empty($schema->info['HTML.SafeLink'])) {

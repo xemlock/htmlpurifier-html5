@@ -22,6 +22,11 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
      */
     private $errors;
 
+    /**
+     * @var bool
+     */
+    protected $convertWarningsToExceptions = false;
+
     protected function setUp()
     {
         $this->config = HTMLPurifier_HTML5Config::create(null);
@@ -41,6 +46,10 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
      */
     public function errorHandler($errno, $message)
     {
+        if ($this->convertWarningsToExceptions) {
+            throw new RuntimeException(sprintf('[%s] %s', $errno, $message));
+        }
+
         $this->errors[] = compact('errno', 'message');
     }
 

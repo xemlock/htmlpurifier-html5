@@ -35,13 +35,22 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE | E_USER_WARNING);
     }
 
+    protected function tearDown()
+    {
+        foreach ($this->errors as $error) {
+            throw new PHPUnit_Framework_Error_Error($error['message'], $error['errno'], $error['file'], $error['line']);
+        }
+    }
+
     /**
      * @param int $errno
      * @param string $message
+     * @param string $file
+     * @param int $line
      */
-    public function errorHandler($errno, $message)
+    public function errorHandler($errno, $message, $file, $line)
     {
-        $this->errors[] = compact('errno', 'message');
+        $this->errors[] = compact('errno', 'message', 'file', 'line');
     }
 
     /**
@@ -60,8 +69,9 @@ class BaseTestCase extends PHPUnit_Framework_TestCase
      */
     public function assertWarning($message)
     {
-        foreach ($this->errors as $error) {
-            if ($error['message'] === $message && $error['errno'] === E_USER_WARNING) {
+        foreach ($this->errors as $key => $error) {
+            if ($error['message'] === $message && ($error['errno'] === E_USER_WARNING || $error['errno'] === E_WARNING)) {
+                unset($this->errors[$key]);
                 return;
             }
         }

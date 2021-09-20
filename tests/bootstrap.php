@@ -13,6 +13,11 @@ if (!class_exists('PHPUnit_Framework_TestCase') && class_exists('PHPUnit\Framewo
     class_alias('PHPUnit\Framework\TestCase', 'PHPUnit_Framework_TestCase');
 }
 
+if (!class_exists('PHPUnit_Framework_Error_Error') && class_exists('PHPUnit\Framework\Error\Error')) {
+    /** @noinspection PhpIgnoredClassAliasDeclaration */
+    class_alias('PHPUnit\Framework\Error\Error', 'PHPUnit_Framework_Error_Error');
+}
+
 echo "HTMLPurifier version: ", HTMLPurifier::VERSION, "\n";
 echo "libxml version:       ", constant('LIBXML_DOTTED_VERSION'), "\n";
 echo "PHP version:          ", PHP_VERSION, "\n";

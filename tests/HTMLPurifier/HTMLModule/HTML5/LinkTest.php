@@ -2,8 +2,6 @@
 
 class HTMLPurifier_HTMLModule_HTML5_LinkTest extends BaseTestCase
 {
-    protected $convertWarningsToExceptions = true;
-
     protected function setUp()
     {
         parent::setUp();

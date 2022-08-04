@@ -17,7 +17,9 @@ class HTMLPurifier_HTMLModule_HTML5_Tables extends HTMLPurifier_HTMLModule
      */
     public function setup($config)
     {
-        $this->addElement('caption', false, 'Inline', 'Common');
+        // https://html.spec.whatwg.org/multipage/tables.html#the-caption-element
+        $caption = $this->addElement('caption', false, 'Flow', 'Common');
+        $caption->excludes = $this->makeLookup('table');
 
         $this->addElement('table', 'Block', new HTMLPurifier_ChildDef_HTML5_Table(), 'Common');
 

@@ -50,7 +50,6 @@ jobs:
                 COMPOSER_PROCESS_TIMEOUT=0 composer test -- --coverage-clover build/logs/clover.xml
 
             - name: Upload coverage results to Coveralls
-              if: ${{ false }}
               env:
                 COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |

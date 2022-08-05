@@ -38,6 +38,7 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributesTest extends BaseTestCase
 
         $this->config->set('HTML.Trusted', true);
         $this->assertPurification('<button tabindex="1">Foo</button>');
+        $this->assertPurification('<input type="text" tabindex="1">');
     }
 
     public function testInputmode()

@@ -59,7 +59,7 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
 * __Attr.AllowedInputTypes__
 
   Version added: 0.1.12\
-  Type: [Lookup](http://htmlpurifier.org/live/configdoc/plain.html#type-lookup)\
+  Type: [Lookup](http://htmlpurifier.org/live/configdoc/plain.html#type-lookup) (or null)\
   Default: `null`
 
   List of allowed input types, chosen from the types defined in the spec. By default, the setting is `null`, meaning there is no restriction on allowed types. Empty array means that no input types are allowed, effectively removing `input` elements from the purified output.

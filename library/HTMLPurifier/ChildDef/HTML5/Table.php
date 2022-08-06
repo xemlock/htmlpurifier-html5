@@ -48,7 +48,7 @@ class HTMLPurifier_ChildDef_HTML5_Table extends HTMLPurifier_ChildDef
             return $children;
         }
 
-        // Only one of these elements is allowed in a table
+        // At most one of each of these elements is allowed in a table
         $caption = array();
         $thead = array();
         $tfoot = array();

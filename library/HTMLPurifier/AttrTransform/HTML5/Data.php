@@ -18,7 +18,7 @@ class HTMLPurifier_AttrTransform_HTML5_Data extends HTMLPurifier_AttrTransform
      */
     public function transform($attr, $config, $context)
     {
-        // The value attribute must not be specified on data elements.
+        // The value attribute must be specified on data elements.
         // https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-data-element
         $attr['value'] = isset($attr['value']) ? $attr['value'] : '';
 

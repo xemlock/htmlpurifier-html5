@@ -42,5 +42,27 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
             )
         );
         $form->excludes = array('form' => true);
+
+        $input = $this->addElement(
+            'input',
+            'Formctrl',
+            'Empty',
+            'Common',
+            array(
+                'accept' => 'ContentTypes',
+                'accesskey' => 'Character',
+                'alt' => 'Text',
+                'checked' => 'Bool#checked',
+                'disabled' => 'Bool#disabled',
+                'maxlength' => 'Pixels',
+                'name' => 'Text',
+                'readonly' => 'Bool#readonly',
+                'size' => 'Pixels',
+                'src' => 'URI#embedded',
+                'type*' => new HTMLPurifier_AttrDef_HTML5_InputType(),
+                'value' => 'Text',
+            )
+        );
+        $input->attr_transform_post[] = new HTMLPurifier_AttrTransform_HTML5_Input();
     }
 }

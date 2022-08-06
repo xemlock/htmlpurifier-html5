@@ -2,7 +2,7 @@
 
 class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 {
-    const REVISION = 2022080501;
+    const REVISION = 2022080601;
 
     /**
      * @param  string|array|HTMLPurifier_Config $config
@@ -90,6 +90,10 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 
         if (empty($schema->info['URI.SafeLinkRegexp'])) {
             $schema->add('URI.SafeLinkRegexp', null, 'string', true);
+        }
+
+        if (empty($schema->info['Attr.AllowedInputTypes'])) {
+            $schema->add('Attr.AllowedInputTypes', null, 'lookup', true);
         }
 
         // HTMLPurifier doesn't define %CSS.DefinitionID, but it's required for

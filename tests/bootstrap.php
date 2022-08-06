@@ -31,4 +31,5 @@ if (getenv('TRAVIS_PHP_VERSION')) {
 
 require_once __DIR__ . '/BaseTestCase.php';
 require_once __DIR__ . '/AttrDefTestCase.php';
+require_once __DIR__ . '/AttrTransformTestCase.php';
 require_once __DIR__ . '/ChildDefTestCase.php';

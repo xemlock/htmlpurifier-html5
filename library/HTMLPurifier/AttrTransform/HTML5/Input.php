@@ -80,6 +80,12 @@ class HTMLPurifier_AttrTransform_HTML5_Input extends HTMLPurifier_AttrTransform
             : null;
 
         // Check if current allowedInputTypes value is based on the latest value from config.
+        // Comparing with '===' shouldn't be a performance bottleneck, because the
+        // value retrieved from the config is never changed after being stored.
+        // PHP's copy-on-write mechanism prevents making unnecessary array copies,
+        // allowing this particular array comparison to be made in O(1) time, when
+        // the corresponding value in config hasn't changed, and in O(n) time after
+        // each change.
         if ($this->allowedInputTypes !== null && $this->allowedInputTypesFromConfig === $allowedInputTypesFromConfig) {
             return;
         }

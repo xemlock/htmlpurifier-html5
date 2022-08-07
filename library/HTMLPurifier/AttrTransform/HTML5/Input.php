@@ -217,79 +217,17 @@ class HTMLPurifier_AttrTransform_HTML5_Input extends HTMLPurifier_AttrTransform
     );
 
     /**
-     * Lookup for input types allowed in current configuration
-     * @var array
-     */
-    protected $allowedInputTypes;
-
-    protected $allowedInputTypesFromConfig;
-
-    /**
-     * @var HTMLPurifier_AttrDef_HTML5_InputType
-     */
-    protected $inputType;
-
-    public function __construct()
-    {
-        $this->inputType = new HTMLPurifier_AttrDef_HTML5_InputType();
-    }
-
-    protected function setupAllowedInputTypes(HTMLPurifier_Config $config)
-    {
-        $allowedInputTypesFromConfig = isset($config->def->info['Attr.AllowedInputTypes'])
-            ? $config->get('Attr.AllowedInputTypes')
-            : null;
-
-        // Check if current allowedInputTypes value is based on the latest value from config.
-        // Comparing with '===' shouldn't be a performance bottleneck, because the
-        // value retrieved from the config is never changed after being stored.
-        // PHP's copy-on-write mechanism prevents making unnecessary array copies,
-        // allowing this particular array comparison to be made in O(1) time, when
-        // the corresponding value in config hasn't changed, and in O(n) time after
-        // each change.
-        if ($this->allowedInputTypes !== null && $this->allowedInputTypesFromConfig === $allowedInputTypesFromConfig) {
-            return;
-        }
-
-        if (is_array($allowedInputTypesFromConfig)) {
-            $allowedInputTypes = array_intersect_key(
-                $allowedInputTypesFromConfig,
-                HTMLPurifier_AttrDef_HTML5_InputType::values()
-            );
-        } else {
-            $allowedInputTypes = HTMLPurifier_AttrDef_HTML5_InputType::values();
-        }
-
-        $this->allowedInputTypes = $allowedInputTypes;
-        $this->allowedInputTypesFromConfig = $allowedInputTypesFromConfig;
-    }
-
-    /**
      * @param array $attr
      * @param HTMLPurifier_Config $config
      * @param HTMLPurifier_Context $context
-     * @return array|bool
+     * @return array
      */
     public function transform($attr, $config, $context)
     {
-        if (isset($attr['type'])) {
-            $t = $this->inputType->validate($attr['type'], $config, $context);
+        if (empty($attr['type'])) {
+            $t = 'text';
         } else {
-            $t = 'text';
-        }
-
-        // If an unrecognized input type is provided, use 'text' value instead
-        // and remove the 'type' attribute
-        if ($t === false) {
-            unset($attr['type']);
-            $t = 'text';
-        }
-
-        // If type doesn't pass %Attr.AllowedInputTypes validation, remove the element
-        // from the output
-        $this->setupAllowedInputTypes($config);
-        if (!isset($this->allowedInputTypes[$t])) {
-            return false;
+            $t = strtolower($attr['type']);
         }
 
         // Remove attributes not allowed for detected input type

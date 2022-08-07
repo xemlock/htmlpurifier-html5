@@ -96,44 +96,17 @@ class HTMLPurifier_AttrTransform_HTML5_InputTest extends AttrTransformTestCase
         ));
     }
 
-    public function testTextInputTypeNotAllowed()
+    public function testImageAlt()
     {
-        $this->config->set('Attr.AllowedInputTypes', array('password'));
-
-        $this->assertResult(array('type' => 'text'), false);
-        $this->assertResult(array('type' => 'password'));
-    }
-
-    public function testNullAllowedInputTypes()
-    {
-        $this->config->set('Attr.AllowedInputTypes', null);
-
-        $this->assertResult(array('type' => 'text'));
-        $this->assertResult(array('type' => 'password'));
-    }
-
-    public function testEmptyAllowedInputTypes()
-    {
-        $this->config->set('Attr.AllowedInputTypes', array());
-
-        $this->assertResult(array('type' => 'text'), false);
-        $this->assertResult(array('type' => 'password'), false);
-    }
-
-    public function testInvalidAllowedInputTypes()
-    {
-        $this->config->set('Attr.AllowedInputTypes', array('foo'));
-
-        // 'foo' type is converted to 'text', and 'text' type is not allowed
-        $this->assertResult(array('type' => 'foo'), false);
-        $this->assertResult(array('type' => 'text'), false);
-        $this->assertResult(array('type' => 'password'), false);
-    }
-
-    public function testInvalidOrEmptyInputType()
-    {
-        $this->assertResult(array('type' => 'foo'), array());
-        $this->assertResult(array('type' => ''), array());
-        $this->assertResult(array(), array());
+        $this->assertResult(array(
+            'type' => 'image',
+            'alt' => 'foo',
+        ));
+        $this->assertResult(array(
+            'type' => 'image',
+        ), array(
+            'type' => 'image',
+            'alt' => 'image',
+        ));
     }
 }

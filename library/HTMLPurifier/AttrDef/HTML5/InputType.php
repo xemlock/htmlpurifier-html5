@@ -21,11 +21,38 @@ class HTMLPurifier_AttrDef_HTML5_InputType extends HTMLPurifier_AttrDef
     );
 
     /**
-     * @return array
+     * Lookup for input types allowed in current configuration
+     * @var array
      */
-    public static function values()
+    protected $allowed;
+
+    protected $allowedFromConfig;
+
+    protected function setupAllowed(HTMLPurifier_Config $config)
     {
-        return self::$values;
+        $allowedFromConfig = isset($config->def->info['Attr.AllowedInputTypes'])
+            ? $config->get('Attr.AllowedInputTypes')
+            : null;
+
+        // Check if current allowed value is based on the latest value from config.
+        // Comparing with '===' shouldn't be a performance bottleneck, because the
+        // value retrieved from the config is never changed after being stored.
+        // PHP's copy-on-write mechanism prevents making unnecessary array copies,
+        // allowing this particular array comparison to be made in O(1) time, when
+        // the corresponding value in config hasn't changed, and in O(n) time after
+        // each change.
+        if ($this->allowed !== null && $this->allowedFromConfig === $allowedFromConfig) {
+            return;
+        }
+
+        if (is_array($allowedFromConfig)) {
+            $allowed = array_intersect_key($allowedFromConfig, self::$values);
+        } else {
+            $allowed = self::$values;
+        }
+
+        $this->allowed = $allowed;
+        $this->allowedFromConfig = $allowedFromConfig;
     }
 
     /**
@@ -36,9 +63,14 @@ class HTMLPurifier_AttrDef_HTML5_InputType extends HTMLPurifier_AttrDef
      */
     public function validate($string, $config, $context)
     {
+        $this->setupAllowed($config);
         $value = strtolower($this->parseCDATA($string));
 
         if (!isset(self::$values[$value])) {
+            return false;
+        }
+
+        if (!isset($this->allowed[$value])) {
             return false;
         }
 

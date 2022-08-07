@@ -62,7 +62,7 @@ Apart from HTML Purifier's built-in [configuration directives](http://htmlpurifi
   Type: [Lookup](http://htmlpurifier.org/live/configdoc/plain.html#type-lookup) (or null)\
   Default: `null`
 
-  List of allowed input types, chosen from the types defined in the spec. By default, the setting is `null`, meaning there is no restriction on allowed types. Empty array means that no input types are allowed, effectively removing `input` elements from the purified output.
+  List of allowed input types, chosen from the types defined in the spec. By default, the setting is `null`, meaning there is no restriction on allowed types. Empty array means that no explicit `type` attributes are allowed, effectively making all inputs a text inputs.
 
 * __HTML.Forms__
 

@@ -23,6 +23,10 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_ButtonTest
             'input button no value' => array(
                 '<input type="button" name="foo">',
             ),
+            'input button invalid attributes' => array(
+                '<input type="button" accept="text/plain" alt="foo" dirname="foo.dir" height="10" max="10" maxlength="64" min="0" minlength="0" multiple pattern="[a-z]+" placeholder="foo" readonly required size="10" src="foo.png" step="1" width="10">',
+                '<input type="button">',
+            ),
         );
     }
 }

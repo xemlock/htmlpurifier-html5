@@ -1,11 +1,29 @@
 <?php
 
-class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends BaseTestCase
+class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest
+    extends HTMLPurifier_HTMLModule_HTML5_Forms_BaseTest
 {
-    protected function setUp()
+    public function dataProvider()
     {
-        parent::setUp();
-        $this->config->set('HTML.Forms', true);
+        return array(
+            'input no type' => array(
+                '<input>',
+            ),
+            'input empty type' => array(
+                '<input type="">',
+                '<input>',
+            ),
+            'input invalid type' => array(
+                '<input type="foo">',
+                '<input>',
+            ),
+            'input is structured inline' => array(
+                '<p><input type="text"></p>',
+            ),
+            'input is strictly inline' => array(
+                '<p><dfn><input type="text"></dfn></p>',
+            ),
+        );
     }
 
     public function testAllowedInputTypes()
@@ -13,31 +31,27 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_InputTest extends BaseTestCase
         $this->config->autoFinalize = false;
 
         $this->config->set('Attr.AllowedInputTypes', null);
-        $this->assertPurification('<input type="text">');
+        $this->assertPurification(
+            '<input><input type="text"><input type="foo">',
+            '<input><input type="text"><input>'
+        );
 
         $this->config->set('Attr.AllowedInputTypes', array());
-        $this->assertPurification('<input type="text">', '');
+        $this->assertPurification(
+            '<input><input type="text"><input type="foo">',
+            '<input><input><input>'
+        );
 
         $this->config->set('Attr.AllowedInputTypes', array('password'));
         $this->assertPurification(
-            '<input type="text"><input type="password">',
-            '<input type="password">'
+            '<input type="text"><input type="password"><input type="foo">',
+            '<input><input type="password"><input>'
         );
 
-        // input type is obligatory in XHTML1.0
-        // $this->config->set('Attr.AllowedInputTypes', null);
-        // $this->assertPurification(
-        //    '<input><input type="foo">',
-        //    '<input><input>'
-        // );
-
-        $this->config->set('Attr.AllowedInputTypes', array('password'));
-        $this->assertPurification('<input><input type="text">', '');
+        $this->config->set('Attr.AllowedInputTypes', array('foo'));
+        $this->assertPurification(
+            '<input type="text"><input type="password"><input type="foo">',
+            '<input><input><input>'
+        );
     }
-
-    // public function testEmptyType()
-    // {
-    //    $this->assertPurification('<input>');
-    //    $this->assertPurification('<input type="">', '<input>');
-    // }
 }

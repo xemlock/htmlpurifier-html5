@@ -15,6 +15,10 @@ class HTMLPurifier_HTMLModule_HTML5_Forms_Input_ResetTest
             'input reset no value' => array(
                 '<input type="reset" name="foo">',
             ),
+            'input reset invalid attributes' => array(
+                '<input type="reset" accept="text/plain" alt="foo" checked dirname="foo.dir" height="10" max="10" maxlength="64" min="0" minlength="0" multiple pattern="[a-z]+" placeholder="foo" readonly required size="10" src="foo.png" step="1" width="10">',
+                '<input type="reset">',
+            ),
         );
     }
 }

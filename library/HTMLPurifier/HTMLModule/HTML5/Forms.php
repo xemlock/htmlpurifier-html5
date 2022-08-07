@@ -43,6 +43,7 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
         );
         $form->excludes = array('form' => true);
 
+        $max = $config->get('HTML.MaxImgLength');
         $input = $this->addElement(
             'input',
             'Formctrl',
@@ -53,14 +54,30 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
                 'accesskey' => 'Character',
                 'alt' => 'Text',
                 'checked' => 'Bool#checked',
+                'dirname' => 'Text',
                 'disabled' => 'Bool#disabled',
+                // 'form' => 'IDREF', // IDREF not implemented, cannot allow
+                'height' => 'Pixels#' . $max,
+                // 'list' => 'IDREF', // IDREF not implemented, cannot allow
+                'max' => 'Text',
                 'maxlength' => 'Pixels',
+                'min' => 'Text',
+                'minlength' => 'Pixels',
+                'multiple' => 'Bool#multiple',
                 'name' => 'Text',
+                'pattern' => 'Text',
+                'placeholder' => 'Text',
                 'readonly' => 'Bool#readonly',
+                'required' => 'Bool#required',
                 'size' => 'Pixels',
                 'src' => 'URI#embedded',
-                'type*' => new HTMLPurifier_AttrDef_HTML5_InputType(),
+                'step' => new HTMLPurifier_AttrDef_CSS_Composite(array(
+                    new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 0, 'minInclusive' => false)),
+                    new HTMLPurifier_AttrDef_Enum(array('any')),
+                )),
+                'type' => new HTMLPurifier_AttrDef_HTML5_InputType(),
                 'value' => 'Text',
+                'width' => 'Pixels#' . $max,
             )
         );
         $input->attr_transform_post[] = new HTMLPurifier_AttrTransform_HTML5_Input();

@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 $configFile = __DIR__ . '/../library/HTMLPurifier/HTML5Config.php';

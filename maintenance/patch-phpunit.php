@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 $ROOT_DIR = realpath(__DIR__ . '/..');

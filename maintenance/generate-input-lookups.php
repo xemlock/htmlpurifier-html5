@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 $LIB_DIR = __DIR__ . '/../library/';
@@ -43,7 +43,7 @@ foreach ($thead->getElementsByTagName('th') as $th) {
         array_map(
             function ($state) use ($inputTypesByState) {
                 $state = trim($state);
-                return isset($inputTypesByState[$state]) ? $inputTypesByState[$state] : null;
+                return isset($inputTypesByState[$state]) ? $inputTypesByState[$state] : '';
             },
             explode(',', $th->textContent)
         ),

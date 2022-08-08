@@ -53,6 +53,8 @@ abstract class HTMLPurifier_HTML5Definition
 
         $def->manager->attrTypes->set('Datetime', new HTMLPurifier_AttrDef_HTML5_Datetime());
 
+        $def->manager->attrTypes->set('KeyLabelList', new HTMLPurifier_AttrDef_HTML5_KeyLabelList());
+
         return $def;
     }
 }

@@ -51,7 +51,6 @@ class HTMLPurifier_HTMLModule_HTML5_Forms extends HTMLPurifier_HTMLModule_Forms
             'Common',
             array(
                 'accept' => 'ContentTypes',
-                'accesskey' => 'Character',
                 'alt' => 'Text',
                 'checked' => 'Bool#checked',
                 'dirname' => 'Text',

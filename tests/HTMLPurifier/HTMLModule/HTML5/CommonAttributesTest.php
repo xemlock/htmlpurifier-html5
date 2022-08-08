@@ -64,4 +64,40 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributesTest extends BaseTestCase
         $this->assertPurification('<input type="text" inputmode="none" value="foo">', '<input type="text" value="foo">');
         $this->assertPurification('<input type="text" inputmode="foo" value="foo">', '<input type="text" value="foo">');
     }
+
+    public function testAccesskey()
+    {
+        $this->config->set('HTML.Forms', true);
+
+        // Example from: https://html.spec.whatwg.org/multipage/interaction.html#the-accesskey-attribute
+        $this->assertPurification('
+            <nav>
+                <p>
+                    <a title="Consortium Activities" accesskey="A" href="/Consortium/activities">Activities</a> |
+                    <a title="Technical Reports and Recommendations" accesskey="T" href="/TR/">Technical Reports</a> |
+                    <a title="Alphabetical Site Index" accesskey="S" href="/Consortium/siteindex">Site Index</a> |
+                    <a title="About This Site" accesskey="B" href="/Consortium/">About Consortium</a> |
+                    <a title="Contact Consortium" accesskey="C" href="/Consortium/contact">Contact</a>
+                </p>
+            </nav>
+        ');
+
+        $this->assertPurification('
+            <form action="/search">
+                <label>Search: <input type="text" name="q" accesskey="s 0"></label>
+                <input type="submit">
+            </form>
+        ');
+
+        // HTML entities
+        $this->assertPurification(
+            '<p accesskey="&amp; &hellip; &#x221E;"></p>',
+            '<p accesskey="&amp; … ∞"></p>'
+        );
+
+        // Multibyte (single codepoint) characters
+        $this->assertPurification('<a accesskey="π"></a>'); // 2-byte
+        $this->assertPurification('<b accesskey="コ"></b>'); // 3-byte
+        $this->assertPurification('<i accesskey="🤩"></i>'); // 4-byte
+    }
 }

@@ -239,7 +239,7 @@ class HTMLPurifier_AttrTransform_HTML5_Input extends HTMLPurifier_AttrTransform
 
         // Non-empty 'alt' attribute is required for 'image' input
         if ($t === 'image' && !isset($attr['alt'])) {
-            $alt = trim($config->get('Attr.DefaultImageAlt'));
+            $alt = trim((string) $config->get('Attr.DefaultImageAlt'));
             if ($alt === '') {
                 $name = isset($attr['name']) ? trim($attr['name']) : '';
                 $alt = $name !== '' ? $name : 'image';

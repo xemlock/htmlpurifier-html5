@@ -46,8 +46,8 @@ class HTMLPurifier_HTMLModule_HTML5_SafeForms extends HTMLPurifier_HTMLModule
             'Inline',
             'Common',
             array(
-                'value' => 'Float#min:0',
-                'max' => 'Float#min:0',
+                'value' => new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 0)),
+                'max' => new HTMLPurifier_AttrDef_HTML5_Float(array('min' => 0)),
             )
         );
         $progress->excludes = array('progress' => true);

@@ -19,7 +19,10 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributes extends HTMLPurifier_HTMLMo
                 'id'    => 'ID',
                 'title' => 'CDATA',
                 // tabindex attribute is supported on all elements (global attributes)
-                'tabindex' => 'Integer',
+                // Built-in 'Number' type can't be used here, as it only allows positive integers.
+                // Any integer is a valid tabindex value, also negative values are not dangerous
+                // per se, although their presence may affect a11y.
+                'tabindex' => new HTMLPurifier_AttrDef_Integer(),
                 // Final spec for inputmode global attribute has been published on 15 Dec 2017
                 // https://web.archive.org/web/20171215142138/https://html.spec.whatwg.org/#input-modalities:-the-inputmode-attribute
                 // The 'none' value has been intentionally omitted from the list of

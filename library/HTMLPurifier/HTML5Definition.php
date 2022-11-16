@@ -45,14 +45,6 @@ abstract class HTMLPurifier_HTML5Definition
         // one provided with 4.6.0
         $def->manager->attrTypes->set('Bool', new HTMLPurifier_AttrDef_HTML_Bool2());
 
-        // Add missing definition for Integer, required by tabindex
-        $def->manager->attrTypes->set('Integer', new HTMLPurifier_AttrDef_Integer());
-
-        // Add support for Floating point number attributes
-        $def->manager->attrTypes->set('Float', new HTMLPurifier_AttrDef_HTML5_Float());
-
-        $def->manager->attrTypes->set('Datetime', new HTMLPurifier_AttrDef_HTML5_Datetime());
-
         return $def;
     }
 }

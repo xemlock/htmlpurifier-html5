@@ -64,4 +64,17 @@ class HTMLPurifier_HTMLModule_HTML5_CommonAttributesTest extends BaseTestCase
         $this->assertPurification('<input type="text" inputmode="none" value="foo">', '<input type="text" value="foo">');
         $this->assertPurification('<input type="text" inputmode="foo" value="foo">', '<input type="text" value="foo">');
     }
+
+    public function testContentEditableAttribute()
+    {
+        $this->config->autoFinalize = false;
+
+        $this->assertPurification('<div contenteditable="false"></div>');
+        $this->assertPurification('<div contenteditable></div>', '<div></div>');
+
+        $this->config->set('HTML.Trusted', true);
+        $this->assertPurification('<div contenteditable="false"></div>');
+        $this->assertPurification('<div contenteditable="true"></div>');
+        $this->assertPurification('<div contenteditable></div>', '<div contenteditable=""></div>');
+    }
 }

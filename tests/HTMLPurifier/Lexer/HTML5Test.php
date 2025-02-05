@@ -206,6 +206,28 @@ class HTMLPurifier_Lexer_HTML5Test extends BaseTestCase
     }
 
     /**
+     * Conditional comments are not supported by HTMLPurifier since 4.18.0, but we
+     * should make sure they don't break the lexer.
+     */
+    public function test_tokenizeHTML_conditionalComments()
+    {
+        $this->assertTokenization(
+            '<!--[if mso]>A<![endif]-->B<!--[if !mso]><!---->C<!-- <![endif]-->',
+            version_compare(HTMLPurifier::VERSION, '4.18.0', '>=')
+                ? array(
+                    new HTMLPurifier_Token_Comment('[if mso]>A<![endif]'),
+                    new HTMLPurifier_Token_Text('B'),
+                    new HTMLPurifier_Token_Comment('[if !mso]><!--'),
+                    new HTMLPurifier_Token_Text('C'),
+                    new HTMLPurifier_Token_Comment(' <![endif]'),
+                )
+                : array(
+                    new HTMLPurifier_Token_Text('B'),
+                )
+        );
+    }
+
+    /**
      * Tokenize an unterminated tag.
      *
      * @return void
@@ -574,7 +596,12 @@ div {}
         $this->assertTokenization(
             // typecast disables 'Bad character' inspection in PHPStorm
             '<!--[if IE]>foo<a>bar' . (string) '<!-- baz --><![endif]-->',
-            array()
+            version_compare(HTMLPurifier::VERSION, '4.18.0', '>=')
+                ? array(
+                    new HTMLPurifier_Token_Comment('[if IE]>foo<a>bar<!-- baz '),
+                    new HTMLPurifier_Token_Comment('<![endif]-->'),
+                )
+                : array()
         );
     }
 
@@ -637,9 +664,15 @@ div {}
     {
         $this->assertTokenization(
             '<!--[if gte mso 9]>a<![endif]-->b<!--[if gte mso 9]>c<![endif]-->',
-            array(
-                new HTMLPurifier_Token_Text("b")
-            )
+            version_compare(HTMLPurifier::VERSION, '4.18.0', '>=')
+                ? array(
+                    new HTMLPurifier_Token_Comment('[if gte mso 9]>a<![endif]'),
+                    new HTMLPurifier_Token_Text('b'),
+                    new HTMLPurifier_Token_Comment('[if gte mso 9]>c<![endif]'),
+                )
+                : array(
+                    new HTMLPurifier_Token_Text('b'),
+                )
         );
     }
 

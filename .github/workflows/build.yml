@@ -43,6 +43,7 @@ jobs:
             - name: Install dependencies
               run: |
                 echo PHP_VERSION: ${{ env.PHP_VERSION }}
+                composer require --no-update ezyang/htmlpurifier:\<=4.17.0
                 composer install
 
             - name: Run tests
@@ -57,3 +58,4 @@ jobs:
                 if [ -f "build/logs/clover.xml" ] && [ -f "vendor/bin/php-coveralls" ]; then
                   php vendor/bin/php-coveralls -v;
                 fi
+              continue-on-error: true

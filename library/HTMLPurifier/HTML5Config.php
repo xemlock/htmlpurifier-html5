@@ -60,9 +60,9 @@ class HTMLPurifier_HTML5Config extends HTMLPurifier_Config
 
     /**
      * @param HTMLPurifier_ConfigSchema $schema
-     * @param HTMLPurifier_PropertyList $parent OPTIONAL
+     * @param HTMLPurifier_PropertyList|null $parent OPTIONAL
      */
-    public function __construct(HTMLPurifier_ConfigSchema $schema, HTMLPurifier_PropertyList $parent = null)
+    public function __construct(HTMLPurifier_ConfigSchema $schema, $parent = null)
     {
         // ensure 'HTML5' is among allowed 'HTML.Doctype' values
         $doctypeConfig = $schema->info['HTML.Doctype'];

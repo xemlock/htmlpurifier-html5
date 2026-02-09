@@ -13,10 +13,10 @@ if (file_exists($TESTCASE_PATH)) {
 
     if ($contents !== $patchedContents) {
         file_put_contents($TESTCASE_PATH, $patchedContents);
-        echo "Patched file ${TESTCASE_RELPATH}\n";
+        echo "Patched file {$TESTCASE_RELPATH}\n";
     } else {
         echo "No changes made\n";
     }
 } else {
-    echo "File not found: ${TESTCASE_RELPATH}\n";
+    echo "File not found: {$TESTCASE_RELPATH}\n";
 }

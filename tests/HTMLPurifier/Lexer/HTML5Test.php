@@ -715,6 +715,26 @@ div {}
         );
     }
 
+    public function testCoreAggressivelyFixLtEmojis()
+    {
+        $this->assertTokenization('<b><3</b>', array(
+            new HTMLPurifier_Token_Start('b'),
+            new HTMLPurifier_Token_Text('<3'),
+            new HTMLPurifier_Token_End('b')
+        ));
+    }
+
+    public function testCoreAggressivelyFixLtComments()
+    {
+        $this->assertTokenization(
+            '<!-- Nested <!-- Not to be included --> comment -->',
+            array(
+                new HTMLPurifier_Token_Comment(' Nested <!-- Not to be included '),
+                new HTMLPurifier_Token_Text(' comment -->')
+            )
+        );
+    }
+
     /**
      * Assert tokenization generates an expected output.
      *

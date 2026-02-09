@@ -57,6 +57,11 @@ class HTMLPurifier_Lexer_HTML5 extends HTMLPurifier_Lexer_DOMLex
     protected function armor($html, HTMLPurifier_Config $config)
     {
         if ($config->get('Core.AggressivelyFixLt')) {
+            // Since HTMLPurifier 4.19.0, see: https://github.com/ezyang/htmlpurifier/pull/440
+            if (method_exists(get_parent_class($this), 'aggressivelyFixLt')) {
+                return $this->aggressivelyFixLt($html);
+            }
+
             $char = '[^a-z!\/]';
             $comment = "/<!--(.*?)(-->|\z)/is";
             $html = preg_replace_callback($comment, array($this, 'callbackArmorCommentEntities'), $html);

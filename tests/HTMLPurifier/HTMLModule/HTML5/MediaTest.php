@@ -24,6 +24,10 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
                 '<picture><source src="image.webp" type="image/webp"><img src="image.png" alt=""></picture>',
             ),
             array(
+                '<picture><source src="image.webp" srcset="a.webp 2x" type="image/webp"><img src="image.png" srcset="a.png 2x" alt=""></picture>',
+                '<picture><source src="image.webp" srcset="a.webp 2x" type="image/webp"><img src="image.png" srcset="a.png 2x" alt=""></picture>',
+            ),
+            array(
                 // Text not allowed in element picture
                 '<picture>Text before<img src="image.png" alt=""></picture>',
                 '<picture><img src="image.png" alt=""></picture>',
@@ -60,6 +64,11 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
             array(
                 // <picture> is a phrasing content element
                 '<span><picture><img src="image.png" alt=""></picture></span>',
+            ),
+            array(
+                // Invalid srcset contents
+                '<picture><source src="image.webp" srcset="a.webp 2b" type="image/webp"><img src="image.png" srcset="a.png 2c" alt=""></picture>',
+                '<picture><source src="image.webp" type="image/webp"><img src="image.png" alt=""></picture>',
             ),
         );
     }
@@ -163,5 +172,34 @@ class HTMLPurifier_HTMLModule_HTML5_MediaTest extends BaseTestCase
         $this->assertPurification('<audio><source src="audio.ogg" type="audio/ogg"></audio>');
 
         $this->assertPurification('<img src="image.jpg" alt="">');
+    }
+
+    /**
+     * @param string $input
+     * @param string $expected OPTIONAL
+     * @dataProvider imgDataProvider
+     */
+    public function imgTest($input, $expected = null)
+    {
+        $this->assertPurification($input, $expected);
+    }
+
+    public function imgDataProvider()
+    {
+        return array(
+            array(
+                '<img srcset="image.png, a.png 2w, b.png 50x" src="image.png" alt="image">',
+                '<img srcset="image.png, a.png 2w, b.png 50x" src="image.png" alt="image">',
+            ),
+            // Invalid descriptor
+            array(
+                '<img srcset="image.png 5p," src="image.png" alt="image">',
+                '<img src="image.png" alt="image">',
+            ),
+            array(
+                '<img srcset="image.png 2x, cat.png 5p" src="image.png" alt="image">',
+                '<img srcset="image.png 2x" src="image.png" alt="image">',
+            ),
+        );
     }
 }

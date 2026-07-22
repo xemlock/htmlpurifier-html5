@@ -46,7 +46,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
             'media'  => 'Text',
             'sizes'  => 'Text',
             'src'    => new HTMLPurifier_AttrDef_URI(true),
-            'srcset' => 'Text',
+            'srcset' => new HTMLPurifier_AttrDef_HTML5_Srcset(),
             'type'   => 'Text',
         ));
 
@@ -66,7 +66,7 @@ class HTMLPurifier_HTMLModule_HTML5_Media extends HTMLPurifier_HTMLModule
         // https://html.spec.whatwg.org/dev/embedded-content.html#the-img-element
         $img = $this->addBlankElement('img');
         $img->attr = array(
-            'srcset' => 'Text',
+            'srcset' => new HTMLPurifier_AttrDef_HTML5_Srcset(),
             'sizes'  => 'Text',
             'loading' => 'Enum#lazy,eager',
             'crossorigin' => 'Enum#anonymous',
